@@ -1,0 +1,10 @@
+timestamp_local,outdoor_controller_c,l1_supply_c,l1_setpoint_c,l2_supply_c,meter_mwh,time_known,note
+2026-10-05,11,31,,25,,no,date only; time not recorded
+2026-10-05,12,29,,,,no,date only; time not recorded
+2026-10-06,9,33,32,26,63.693,no,date approximate (Oct 6 or 7); setpoint from L1 Menovesi breakdown screen (curve value); corrections read zero
+2026-10-07T09:50,9,33,,26,63.713,yes,time = photo sent; within minutes of reading
+2026-10-08T09:33,4,37,,28,63.766,yes,time = photo sent
+2026-10-10T14:35,5,36,,27,63.897,yes,time = photo sent
+2026-10-11T13:20,6,35,,28,63.977,yes,time = photo sent
+2026-10-12T09:24,5,36,,27,64.041,yes,time = photo sent
+2026-10-12T12:51,6,35,,27,64.051,yes,time = photo sent

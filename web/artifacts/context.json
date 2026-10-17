@@ -1,0 +1,216 @@
+{
+ "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "labels_file": "config/menu_labels.md",
+ "programs": [
+  {
+   "id": "C1",
+   "target": "L1",
+   "from_text": "Curve value; Max limit; Min limit",
+   "expr": "clip(base_c + slope * T_out, min_c, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "max_c": "temp_c",
+    "min_c": "temp_c"
+   },
+   "mechanism": "Weather curve for L1 with both maximum and minimum supply-water limits.",
+   "refute": "The fitted max_c is above every supply the curve reaches, or min_c is below every supply the curve reaches.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.399,
+   "bic": -62.69,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.336,
+   "delta_bic_vs_blind_best": 39.2,
+   "theta": {
+    "base_c": 55.49613952636719,
+    "slope": 1.2549943923950195,
+    "max_c": 22.874801635742188,
+    "min_c": -26.676361083984375
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C2",
+   "target": "L1",
+   "from_text": "Autumn drying (a correction term)",
+   "expr": "clip(where(month() >= dry_start, base_c + slope * T_out + dry_add, base_c + slope * T_out), min_c, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "dry_add": "temp_c",
+    "dry_start": "month_n",
+    "max_c": "temp_c",
+    "min_c": "temp_c"
+   },
+   "mechanism": "Weather curve plus an autumn-only additive supply-temperature correction, still bounded by max and min limits.",
+   "refute": "The fitted dry_add is indistinguishable from zero, or the autumn window does not improve held-out room temperature.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.338,
+   "bic": -75.96,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.336,
+   "delta_bic_vs_blind_best": 25.93,
+   "theta": {
+    "base_c": 48.585914611816406,
+    "slope": -3.6540679931640625,
+    "dry_add": -9.000349044799805,
+    "dry_start": 8.88209342956543,
+    "max_c": 32.21156311035156,
+    "min_c": 25.906513214111328
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C3",
+   "target": "L1",
+   "from_text": "Outdoor temperature delay (a correction term)",
+   "expr": "clip(base_c + slope * lag(T_out, delay_h), min_c, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "delay_h": "hours",
+    "max_c": "temp_c",
+    "min_c": "temp_c"
+   },
+   "mechanism": "Weather curve driven by delayed outdoor temperature, with max and min supply limits.",
+   "refute": "The fitted delay_h is at the lower bound or the delayed curve does not improve held-out prediction over the undelayed curve.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.332,
+   "bic": -82.53,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.336,
+   "delta_bic_vs_blind_best": 19.36,
+   "theta": {
+    "base_c": 35.111785888671875,
+    "slope": -0.6875653266906738,
+    "delay_h": 19.145273208618164,
+    "max_c": 34.18852233886719,
+    "min_c": -29.022480010986328
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C4",
+   "target": "L1",
+   "from_text": "Max limit",
+   "expr": "min(base_c + slope * T_out, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "max_c": "temp_c"
+   },
+   "mechanism": "Weather curve capped at a maximum supply-water temperature.",
+   "refute": "The fitted cap is above every supply the curve reaches.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.398,
+   "bic": -67.15,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.336,
+   "delta_bic_vs_blind_best": 34.74,
+   "theta": {
+    "base_c": 37.96974182128906,
+    "slope": 3.929445266723633,
+    "max_c": 22.323925018310547
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C5",
+   "target": "L1",
+   "from_text": "Min limit",
+   "expr": "max(base_c + slope * T_out, min_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "min_c": "temp_c"
+   },
+   "mechanism": "Weather curve floored at a minimum supply-water temperature.",
+   "refute": "The fitted floor is below every supply the curve reaches.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.344,
+   "bic": -86.33,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.336,
+   "delta_bic_vs_blind_best": 15.56,
+   "theta": {
+    "base_c": -9.442481994628906,
+    "slope": -1.6270370483398438,
+    "min_c": 24.14019012451172
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C6",
+   "target": "L2",
+   "from_text": "Two heating circuits, L1 and L2, one outdoor sensor",
+   "expr": "clip(base_c + slope * T_out, min_c, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "max_c": "temp_c",
+    "min_c": "temp_c"
+   },
+   "mechanism": "L2 weather curve using the shared outdoor sensor, with max and min supply limits.",
+   "refute": "L2 supply is better explained by no control or by a curve independent of the shared outdoor sensor.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.854,
+   "bic": 21.04,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.71,
+   "delta_bic_vs_blind_best": 26.16,
+   "theta": {
+    "base_c": 49.97235107421875,
+    "slope": -4.044918537139893,
+    "max_c": 21.414623260498047,
+    "min_c": 22.494125366210938
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C7",
+   "target": "L2",
+   "from_text": "Floor heating. Kitchen also gets warm air rising from downstairs through the open space and balcony.",
+   "expr": "clip(base_c + slope * T_out + gain * (T_room - T_out), min_c, max_c)",
+   "params": {
+    "base_c": "temp_c",
+    "slope": "slope",
+    "gain": "gain",
+    "max_c": "temp_c",
+    "min_c": "temp_c"
+   },
+   "mechanism": "L2 weather curve plus room-temperature feedback correction to counter the kitchen warm-air gain, bounded by max and min limits.",
+   "refute": "The fitted gain is indistinguishable from zero, or room feedback worsens held-out kitchen temperature.",
+   "source": "site context (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+   "rmse_held_c": 0.92,
+   "bic": 29.49,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.71,
+   "delta_bic_vs_blind_best": 34.61,
+   "theta": {
+    "base_c": 41.63502502441406,
+    "slope": 0.14881181716918945,
+    "gain": 8.838383674621582,
+    "max_c": 22.947586059570312,
+    "min_c": 10.594413757324219
+   },
+   "verdict": "worse than the blind best"
+  }
+ ],
+ "not_expressible": [
+  {
+   "from_text": "The TV room radiator has an analog thermostatic valve, almost closed.",
+   "why": "This is a local radiator valve action, not a supply-water setpoint law for the L1 loop; the language returns controller supply temperature, not valve position or room-level thermostatic modulation."
+  },
+  {
+   "from_text": "Most have no thermostatic valve.",
+   "why": "The absence of local thermostatic valves is plant context explaining why loop supply matters, but it is not itself a controller mechanism expressible as a supply-temperature program."
+  },
+  {
+   "from_text": "Indirect district heating substation; domestic hot water outside this controller.",
+   "why": "These describe plant topology and scope, not a heating-circuit supply setpoint mechanism in the given signal language."
+  }
+ ],
+ "repaired": 0,
+ "note": "Separate arm. The blind run never sees site context. Labels only, no values."
+}

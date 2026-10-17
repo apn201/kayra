@@ -1,0 +1,7 @@
+{
+  "outputDirectory": "web",
+  "buildCommand": "",
+  "functions": {
+    "api/state.py": { "includeFiles": "web/artifacts/replay.json" }
+  }
+}

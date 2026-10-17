@@ -1,0 +1,7 @@
+# Fitter. On AMD: use the ROCm torch from the rocm/pytorch image, install the rest with --no-deps,
+# and check torch.__version__ still ends in +rocm after every install.
+numpy>=2.0
+torch>=2.6
+certifi
+# tools/pull_ha.py only
+websocket-client

@@ -1,0 +1,1 @@
+{"id":"S4","name":"PI control on room temperature","params":{"kp":"gain","sp":"temp_c","ti":"hours"},"expr":"T_room + kp * (sp - T_room) + integral(sp - T_room, ti)","gives_away":"room holds setpoint regardless of outdoor; offsets removed over hours"}

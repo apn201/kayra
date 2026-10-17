@@ -1,0 +1,1 @@
+{"id":"S5","name":"On/off thermostat with hysteresis","params":{"level":"temp_c","lo":"temp_c","hi":"temp_c"},"expr":"where(hysteresis(T_room, lo, hi), level, OFF)","gives_away":"sawtooth, cycle period depends on load"}

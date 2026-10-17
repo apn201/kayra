@@ -1,0 +1,34 @@
+{
+  "_what": "STAND-IN for the language model while the AMD endpoint is down. Hand-written by the developer on 2026-10-17, from general controls knowledge plus the residual report of the real-data seed run. NOT model output. Used only for the real-data demo, never in the synthetic benchmark. Every program goes through the same validator and fitter as model output; every value is found by the search.",
+  "rounds": [
+    [
+      {"id": "P1", "params": {"lv": "temp_c", "sl": "slope", "tau": "hours"},
+       "expr": "lv + sl * ema(T_out, tau)",
+       "mechanism": "weather curve on a filtered outdoor temperature (outdoor delay)",
+       "targets": "residual correlated with outdoor: room reacts later than a curve on raw outdoor predicts",
+       "refute": "fitted time constant pinned at its lower bound, or no gain over S1"},
+      {"id": "P2", "params": {"lv": "temp_c", "sl": "slope", "lo": "temp_c", "hi": "temp_c"},
+       "expr": "where(hysteresis(T_out, lo, hi), lv + sl * T_out, OFF)",
+       "mechanism": "weather curve with a summer cutoff that has hysteresis on outdoor",
+       "targets": "residual by outdoor band changes sign around the warm end",
+       "refute": "lo and hi collapse together, or worse than S3"},
+      {"id": "P3", "params": {"lv": "temp_c", "sl": "slope", "mx": "temp_c"},
+       "expr": "min(lv + sl * T_out, mx)",
+       "mechanism": "weather curve saturating at a maximum supply limit",
+       "targets": "under-prediction on the coldest windows",
+       "refute": "cap fitted above every supply the curve reaches in the observed range"},
+      {"id": "P4", "params": {"lv": "temp_c", "sl": "slope", "kp": "gain", "sp": "temp_c", "tau": "hours"},
+       "expr": "lv + sl * ema(T_out, tau) + kp * (sp - ema(T_room, tau))",
+       "mechanism": "filtered weather curve with slow room compensation",
+       "targets": "the PI structure ranking well in the TV room: test whether slow room feedback alone explains it",
+       "refute": "kp fitted near zero"}
+    ],
+    [
+      {"id": "P5", "params": {"lv": "temp_c", "sl": "slope", "tau": "hours", "co": "temp_c"},
+       "expr": "where(ema(T_out, tau) < co, lv + sl * ema(T_out, tau), OFF)",
+       "mechanism": "filtered weather curve with cutoff on the same filtered outdoor",
+       "targets": "combine outdoor delay and summer cutoff",
+       "refute": "no gain over P1 or S3"}
+    ]
+  ]
+}

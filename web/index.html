@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Käyrä</title>
+<meta name="description" content="Identify an undocumented controller from the process data a site already logs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=Share+Tech+Mono&display=swap">
+<link rel="stylesheet" href="panel.css?v=7">
+</head>
+<body>
+<div class="face">
+  <header class="status" aria-label="Status">
+    <div class="brand">Käyrä<small>controller identification</small></div>
+    <div class="field"><b>Data</b><span id="st-data">-</span></div>
+    <div class="field"><b>Fitter</b><span id="st-amd">-</span></div>
+    <div class="field"><b>Model</b><span id="st-llm">-</span></div>
+    <div class="field"><b>Last reading</b><span id="st-age">-</span></div>
+    <div class="field"><b>Mode</b><span id="st-mode">HA-ONLY</span></div>
+  </header>
+
+  <main id="screen" class="lcd" aria-live="polite"><p class="lede">Loading artifacts…</p></main>
+
+  <nav class="keys" role="tablist" aria-label="Screens">
+    <button role="tab" data-s="home">Curve</button>
+    <button role="tab" data-s="live">Live</button>
+    <button role="tab" data-s="ai">AI</button>
+    <button role="tab" data-s="doc">Document</button>
+    <span class="sep">Advanced</span>
+    <button role="tab" class="adv" data-s="box">In the box</button>
+    <button role="tab" class="adv" data-s="notebook">Notebook</button>
+    <button role="tab" class="adv" data-s="curve">Spot readings</button>
+    <button role="tab" class="adv" data-s="model">Model</button>
+    <button role="tab" class="adv" data-s="bench">Benchmark</button>
+    <button role="tab" class="adv" data-s="alert">Alert</button>
+    <button role="tab" class="adv" data-s="replace">Replacement</button>
+  </nav>
+
+  <footer>
+    Outdoor: FMI open data, Kouvola Utti, CC BY 4.0. Rooms: Home Assistant. Every number on this panel was computed by the fitter or set by you on the sliders;
+    none came from the language model. <span id="gen"></span>
+  </footer>
+</div>
+<script src="panel.js?v=7"></script>
+</body>
+</html>

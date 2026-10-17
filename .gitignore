@@ -1,0 +1,33 @@
+# --- secrets: never commit -------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- runtime ---------------------------------------------------------------------
+artifacts/*.log
+*.tmp
+
+# --- Python ----------------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# --- OS / editors / sync ---------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+.dropbox
+.dropbox.attr
+.claude/
+
+# live hours logged by the server (local runtime state)
+data/live/
+
+# private planning history, not part of the public repo
+kayra-handover.md
+kayra.md
+KAYRA_BUILD.md

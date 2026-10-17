@@ -1,0 +1,1 @@
+{"id":"S2","name":"Weather curve with min/max clamps","params":{"level":"temp_c","slope":"slope","lo":"temp_c","hi":"temp_c"},"expr":"clip(level + slope * T_out, lo, hi)","gives_away":"as S1, bends at the ends"}

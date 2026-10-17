@@ -1,0 +1,1 @@
+{"id":"S6","name":"Weather curve plus proportional room feedback","params":{"level":"temp_c","slope":"slope","kp":"gain","sp":"temp_c"},"expr":"level + slope * T_out + kp * (sp - T_room)","gives_away":"partial disturbance rejection (thermostatic valves on a curve)"}

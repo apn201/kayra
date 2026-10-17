@@ -1,0 +1,1 @@
+{"id":"S1","name":"Weather curve, linear","params":{"level":"temp_c","slope":"slope"},"expr":"level + slope * T_out","gives_away":"steady-state dependence on outdoor; disturbances not rejected"}

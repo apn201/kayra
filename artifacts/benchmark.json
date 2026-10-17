@@ -1,0 +1,47 @@
+{
+ "meta": {
+  "generated_utc": "2026-10-17T15:52:08Z"
+ },
+ "what": "identical catalogue search, fireplace room, all windows",
+ "runs": [
+  {
+   "device": "cpu",
+   "threads": 1,
+   "hardware": {
+    "device": "cpu",
+    "torch": "2.14.1+cpu",
+    "hip": null,
+    "cuda": null,
+    "threads": 1,
+    "cpu": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel"
+   },
+   "programs": 8,
+   "candidates": 163840,
+   "windows": 168,
+   "wall_s": 55.36,
+   "candidates_per_s": 2959.5,
+   "room_hours_simulated_per_s": 35797915
+  },
+  {
+   "device": "cpu",
+   "threads": 6,
+   "hardware": {
+    "device": "cpu",
+    "torch": "2.14.1+cpu",
+    "hip": null,
+    "cuda": null,
+    "threads": 6,
+    "cpu": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel"
+   },
+   "programs": 8,
+   "candidates": 163840,
+   "windows": 168,
+   "wall_s": 35.29,
+   "candidates_per_s": 4642.4,
+   "room_hours_simulated_per_s": 56154327
+  }
+ ],
+ "gpu": {
+  "status": "NOT MEASURED - no GPU on this machine. Run `python -m kayra.run bench` on the AMD Developer Cloud droplet to fill this in. No estimate is given."
+ }
+}

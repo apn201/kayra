@@ -1,0 +1,4568 @@
+{
+ "meta": {
+  "generated_utc": "2026-10-17T15:50:36Z",
+  "device": {
+   "device": "cpu",
+   "torch": "2.14.1+cpu",
+   "hip": null,
+   "cuda": null,
+   "threads": 6,
+   "cpu": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel"
+  },
+  "budget": {
+   "candidates_per_iter": 2048,
+   "iters": 8,
+   "rounds": 3
+  },
+  "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+ },
+ "label": "SYNTHETIC - real outdoor history and fitted real building, hidden test controllers",
+ "building": {
+  "a": 0.002112864051014185,
+  "h": 0.003,
+  "g0": 0.015865564346313477,
+  "g1": 0.06968293339014053,
+  "phi": 11.011144638061523
+ },
+ "cases": [
+  {
+   "id": "H1",
+   "hidden": "curve on 12-hour filtered outdoor, summer cutoff",
+   "checklist": [
+    "ema"
+   ],
+   "room_range_c": [
+    22.7,
+    27.1
+   ],
+   "arms": {
+    "A": {
+     "best": "S3",
+     "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+     "rmse_held_c": 0.135,
+     "right_mechanism": true,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.123,
+       "rmse_held_c": 0.135,
+       "bic": -461.17,
+       "evals": 24576,
+       "wall_s": 5.26,
+       "delta_bic": 0.0,
+       "prob": 0.9927,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.134,
+       "rmse_held_c": 0.141,
+       "bic": -450.23,
+       "evals": 24576,
+       "wall_s": 4.63,
+       "delta_bic": 10.94,
+       "prob": 0.0042,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.138,
+       "rmse_held_c": 0.141,
+       "bic": -449.61,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 11.56,
+       "prob": 0.0031,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.14,
+       "rmse_held_c": 0.155,
+       "bic": -436.58,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 24.59,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.14,
+       "rmse_held_c": 0.153,
+       "bic": -424.24,
+       "evals": 24576,
+       "wall_s": 5.8,
+       "delta_bic": 36.93,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.244,
+       "rmse_held_c": 0.203,
+       "bic": -362.52,
+       "evals": 24576,
+       "wall_s": 4.97,
+       "delta_bic": 98.65,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "S3",
+     "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+     "rmse_held_c": 0.135,
+     "right_mechanism": true,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.123,
+       "rmse_held_c": 0.135,
+       "bic": -461.17,
+       "evals": 24576,
+       "wall_s": 5.26,
+       "delta_bic": 0.0,
+       "prob": 0.9927,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.134,
+       "rmse_held_c": 0.141,
+       "bic": -450.23,
+       "evals": 24576,
+       "wall_s": 4.63,
+       "delta_bic": 10.94,
+       "prob": 0.0042,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.138,
+       "rmse_held_c": 0.141,
+       "bic": -449.61,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 11.56,
+       "prob": 0.0031,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.14,
+       "rmse_held_c": 0.155,
+       "bic": -436.58,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 24.59,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "B13",
+       "name": "grammar edit: filter_outdoor on S3",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.125,
+       "rmse_held_c": 0.149,
+       "bic": -431.75,
+       "evals": 24576,
+       "wall_s": 5.68,
+       "delta_bic": 29.42,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "B16",
+       "name": "grammar edit: room_i on S3",
+       "source": "baseline-grammar",
+       "k": 11,
+       "rmse_fit_c": 0.137,
+       "rmse_held_c": 0.149,
+       "bic": -426.19,
+       "evals": 24576,
+       "wall_s": 6.66,
+       "delta_bic": 34.98,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.135,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.141,
+       "delta_bic": 10.94,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.141,
+       "delta_bic": 11.56,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.155,
+       "delta_bic": 24.59,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.153,
+       "delta_bic": 36.93,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.203,
+       "delta_bic": 98.65,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.205,
+       "delta_bic": 100.1,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.219,
+       "delta_bic": 102.87,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, clip(level + slope * T_out, lo, hi), clip(level + slope * T_out, lo, hi) - dr1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S2",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.157,
+       "delta_bic": 47.25,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "min(where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF), mx1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S3",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.156,
+       "delta_bic": 40.73,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S3",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.152,
+       "delta_bic": 39.48,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S3",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.15,
+       "delta_bic": 35.58,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * ema(T_out, tau1), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S3",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.149,
+       "delta_bic": 29.42,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "clip(level + slope * ema(T_out, tau1), lo, hi)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S2",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.171,
+       "delta_bic": 64.32,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "clip(level + slope * T_out, lo, hi) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: room_i on S2",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.153,
+       "delta_bic": 41.14,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: room_i on S3",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.149,
+       "delta_bic": 34.98,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S3",
+     "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+     "rmse_held_c": 0.135,
+     "right_mechanism": true,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.123,
+       "rmse_held_c": 0.135,
+       "bic": -461.17,
+       "evals": 24576,
+       "wall_s": 5.26,
+       "delta_bic": 0.0,
+       "prob": 0.9927,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.134,
+       "rmse_held_c": 0.141,
+       "bic": -450.23,
+       "evals": 24576,
+       "wall_s": 4.63,
+       "delta_bic": 10.94,
+       "prob": 0.0042,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.138,
+       "rmse_held_c": 0.141,
+       "bic": -449.61,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 11.56,
+       "prob": 0.0031,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.14,
+       "rmse_held_c": 0.155,
+       "bic": -436.58,
+       "evals": 24576,
+       "wall_s": 4.08,
+       "delta_bic": 24.59,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.14,
+       "rmse_held_c": 0.153,
+       "bic": -424.24,
+       "evals": 24576,
+       "wall_s": 5.8,
+       "delta_bic": 36.93,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.244,
+       "rmse_held_c": 0.203,
+       "bic": -362.52,
+       "evals": 24576,
+       "wall_s": 4.97,
+       "delta_bic": 98.65,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.135,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.141,
+       "delta_bic": 10.94,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.141,
+       "delta_bic": 11.56,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.155,
+       "delta_bic": 24.59,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.153,
+       "delta_bic": 36.93,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.203,
+       "delta_bic": 98.65,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.205,
+       "delta_bic": 100.1,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.219,
+       "delta_bic": 102.87,
+       "verdict": "seed"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  },
+  {
+   "id": "H2",
+   "hidden": "curve with weekday night setback",
+   "checklist": [
+    "hour_of_day",
+    "weekday"
+   ],
+   "room_range_c": [
+    22.5,
+    26.6
+   ],
+   "arms": {
+    "A": {
+     "best": "S4",
+     "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+     "rmse_held_c": 0.155,
+     "right_mechanism": false,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.155,
+       "bic": -430.31,
+       "evals": 24576,
+       "wall_s": 4.77,
+       "delta_bic": 0.0,
+       "prob": 0.8618,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.162,
+       "bic": -425.39,
+       "evals": 24576,
+       "wall_s": 3.82,
+       "delta_bic": 4.92,
+       "prob": 0.0736,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.159,
+       "bic": -424.99,
+       "evals": 24576,
+       "wall_s": 4.87,
+       "delta_bic": 5.32,
+       "prob": 0.0603,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.159,
+       "bic": -419.59,
+       "evals": 24576,
+       "wall_s": 4.13,
+       "delta_bic": 10.72,
+       "prob": 0.0041,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.163,
+       "bic": -413.52,
+       "evals": 24576,
+       "wall_s": 5.29,
+       "delta_bic": 16.79,
+       "prob": 0.0002,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.143,
+       "rmse_held_c": 0.166,
+       "bic": -409.43,
+       "evals": 24576,
+       "wall_s": 4.82,
+       "delta_bic": 20.88,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "B11",
+     "expr": "min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1)",
+     "rmse_held_c": 0.15,
+     "right_mechanism": false,
+     "fits": 491520,
+     "ranked": [
+      {
+       "id": "B11",
+       "name": "grammar edit: cap on S4",
+       "source": "baseline-grammar",
+       "k": 9,
+       "rmse_fit_c": 0.183,
+       "rmse_held_c": 0.15,
+       "bic": -434.37,
+       "evals": 24576,
+       "wall_s": 4.5,
+       "delta_bic": 0.0,
+       "prob": 0.8545,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.155,
+       "bic": -430.31,
+       "evals": 24576,
+       "wall_s": 4.77,
+       "delta_bic": 4.06,
+       "prob": 0.1122,
+       "tie_with_best": false
+      },
+      {
+       "id": "B19",
+       "name": "grammar edit: outdoor_hysteresis on S4",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.179,
+       "rmse_held_c": 0.153,
+       "bic": -425.47,
+       "evals": 24576,
+       "wall_s": 5.76,
+       "delta_bic": 8.9,
+       "prob": 0.01,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.162,
+       "bic": -425.39,
+       "evals": 24576,
+       "wall_s": 3.82,
+       "delta_bic": 8.98,
+       "prob": 0.0096,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.159,
+       "bic": -424.99,
+       "evals": 24576,
+       "wall_s": 4.87,
+       "delta_bic": 9.38,
+       "prob": 0.0078,
+       "tie_with_best": false
+      },
+      {
+       "id": "B16",
+       "name": "grammar edit: room_i on S4",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.153,
+       "bic": -424.11,
+       "evals": 24576,
+       "wall_s": 5.03,
+       "delta_bic": 10.26,
+       "prob": 0.0051,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.155,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.162,
+       "delta_bic": 4.92,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.159,
+       "delta_bic": 5.32,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.159,
+       "delta_bic": 10.72,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.163,
+       "delta_bic": 16.79,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.166,
+       "delta_bic": 20.88,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.168,
+       "delta_bic": 28.42,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.197,
+       "delta_bic": 45.15,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out, level + slope * T_out - dr1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.167,
+       "delta_bic": 26.28,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "where((hour_of_day() >= on1) | (hour_of_day() < off1), level + slope * T_out - dr1, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "on1": "clock_h",
+        "off1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: night_setback on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.163,
+       "delta_bic": 25.58,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.15,
+       "delta_bic": 0.0,
+       "verdict": "new best"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "min(level + slope * T_out, mx1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "mx1": "temp_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: cap+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.163,
+       "delta_bic": 26.06,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1), OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on B11",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.2,
+       "delta_bic": 82.03,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1), OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on B11",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.173,
+       "delta_bic": 45.25,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1) + kp1 * (sp1 - T_room)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "kp1": "gain",
+        "sp1": "temp_c"
+       },
+       "mechanism": "grammar edit: filter_outdoor+ on B11",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.154,
+       "delta_bic": 16.93,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: room_i on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.153,
+       "delta_bic": 10.26,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "B17",
+       "source": "baseline-grammar",
+       "expr": "min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: room_i on B11",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.155,
+       "delta_bic": 18.46,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "B18",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, T_room + kp * (sp - T_room) + integral(sp - T_room, ti), OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.182,
+       "delta_bic": 52.78,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "B19",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), T_room + kp * (sp - T_room) + integral(sp - T_room, ti), OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.153,
+       "delta_bic": 8.9,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "B20",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_room, lo1, hi1), min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1), OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: thermostat on B11",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.164,
+       "delta_bic": 31.78,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S4",
+     "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+     "rmse_held_c": 0.155,
+     "right_mechanism": false,
+     "fits": 294912,
+     "ranked": [
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.155,
+       "bic": -430.31,
+       "evals": 24576,
+       "wall_s": 4.77,
+       "delta_bic": 0.0,
+       "prob": 0.7616,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.1",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.151,
+       "rmse_held_c": 0.155,
+       "bic": -426.52,
+       "evals": 24576,
+       "wall_s": 4.66,
+       "delta_bic": 3.79,
+       "prob": 0.1145,
+       "tie_with_best": false
+      },
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.162,
+       "bic": -425.39,
+       "evals": 24576,
+       "wall_s": 3.82,
+       "delta_bic": 4.92,
+       "prob": 0.0651,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.181,
+       "rmse_held_c": 0.159,
+       "bic": -424.99,
+       "evals": 24576,
+       "wall_s": 4.87,
+       "delta_bic": 5.32,
+       "prob": 0.0533,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.159,
+       "bic": -419.59,
+       "evals": 24576,
+       "wall_s": 4.13,
+       "delta_bic": 10.72,
+       "prob": 0.0036,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.2",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 11,
+       "rmse_fit_c": 0.179,
+       "rmse_held_c": 0.155,
+       "bic": -417.4,
+       "evals": 24576,
+       "wall_s": 7.43,
+       "delta_bic": 12.91,
+       "prob": 0.0012,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.155,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.162,
+       "delta_bic": 4.92,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.159,
+       "delta_bic": 5.32,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.159,
+       "delta_bic": 10.72,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.163,
+       "delta_bic": 16.79,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.166,
+       "delta_bic": 20.88,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.168,
+       "delta_bic": 28.42,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.197,
+       "delta_bic": 45.15,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "T_room + kp * (where((weekday() == d1) | (weekday() == d2), sp - drop, sp) - T_room) + integral(where((weekday() == d1) | (weekday() == d2), sp - drop, sp) - T_room, ti)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "drop": "delta_c",
+        "d1": "clock_h",
+        "d2": "clock_h"
+       },
+       "mechanism": "PI room control with a weekly occupancy setpoint schedule that lowers the request on selected weekdays",
+       "targets": "weekend-minus-weekday residual and weekday-specific bias",
+       "refute": "If the selected weekdays do not align with the residual weekend pattern or the weekly drop does not improve held-out error, a weekly schedule is not supported.",
+       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * T_out",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "slope": "slope"
+       },
+       "mechanism": "PI room control with an outdoor-reset feedforward term added to the supply-temperature request",
+       "targets": "outdoor-band and cold-month residual asymmetry left by the room-error PI",
+       "refute": "If the fitted outdoor slope is near zero or held-out error does not improve in cold and mild outdoor bands, the reset feedforward is not supported.",
+       "rmse_held_c": 0.155,
+       "delta_bic": 3.79,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "T_room + kp * (where((hour_of_day() >= n_on) & (hour_of_day() < n_off), sp - drop, sp) - T_room) + integral(where((hour_of_day() >= n_on) & (hour_of_day() < n_off), sp - drop, sp) - T_room, ti)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h"
+       },
+       "mechanism": "PI room control whose setpoint follows a daily occupancy setback window, lowering the request during the scheduled block",
+       "targets": "diurnal residual with warmer night and cooler daytime supply than the fixed-setpoint PI",
+       "refute": "If the fitted setback window is empty or the diurnal residual pattern remains after the schedule, a daily setpoint schedule is not the cause.",
+       "rmse_held_c": 0.155,
+       "delta_bic": 12.91,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "clip(T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * T_out, lo, hi)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c"
+       },
+       "mechanism": "PI room control with outdoor reset whose supply request is limited by boiler or loop minimum and maximum supply-temperature clamps",
+       "targets": "cold-outdoor residual saturation and month bias at the extremes",
+       "refute": "If fitted clamps are inactive over the held-out range or clipping does not reduce extreme-outdoor residuals, saturation is not the explanation.",
+       "rmse_held_c": 0.156,
+       "delta_bic": 14.57,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "T_room + kp * (where(weekday() >= d_we, sp - drop, sp) - T_room) + integral(where(weekday() >= d_we, sp - drop, sp) - T_room, ti)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "drop": "delta_c",
+        "d_we": "clock_h"
+       },
+       "mechanism": "A weekly occupancy schedule lowers the room setpoint on weekends, so the controller asks for less supply heat then.",
+       "targets": "weekend_minus_weekday and the negative Sunday/Saturday residuals",
+       "refute": "If the fitted drop is near zero or the weekend residual does not shrink relative to S4.",
+       "rmse_held_c": 0.161,
+       "delta_bic": 19.2,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  },
+  {
+   "id": "H3",
+   "hidden": "PI on room temperature with output saturation",
+   "checklist": [
+    "integral",
+    "min|clip"
+   ],
+   "room_range_c": [
+    17.6,
+    25.6
+   ],
+   "arms": {
+    "A": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.137,
+     "right_mechanism": false,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.196,
+       "rmse_held_c": 0.137,
+       "bic": -466.61,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 0.0,
+       "prob": 0.8982,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.135,
+       "bic": -461.1,
+       "evals": 24576,
+       "wall_s": 4.81,
+       "delta_bic": 5.51,
+       "prob": 0.0571,
+       "tie_with_best": false
+      },
+      {
+       "id": "S0",
+       "name": "No control (free-floating)",
+       "source": "catalogue",
+       "k": 5,
+       "rmse_fit_c": 0.246,
+       "rmse_held_c": 0.146,
+       "bic": -460.37,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 6.24,
+       "prob": 0.0397,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.205,
+       "rmse_held_c": 0.138,
+       "bic": -456.1,
+       "evals": 24576,
+       "wall_s": 4.61,
+       "delta_bic": 10.51,
+       "prob": 0.0047,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.243,
+       "rmse_held_c": 0.144,
+       "bic": -450.22,
+       "evals": 24576,
+       "wall_s": 4.53,
+       "delta_bic": 16.39,
+       "prob": 0.0002,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.242,
+       "rmse_held_c": 0.146,
+       "bic": -445.35,
+       "evals": 24576,
+       "wall_s": 4.94,
+       "delta_bic": 21.26,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.137,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.196,
+       "rmse_held_c": 0.137,
+       "bic": -466.61,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 0.0,
+       "prob": 0.8217,
+       "tie_with_best": false
+      },
+      {
+       "id": "B10",
+       "name": "grammar edit: cap on S1",
+       "source": "baseline-grammar",
+       "k": 8,
+       "rmse_fit_c": 0.196,
+       "rmse_held_c": 0.137,
+       "bic": -462.03,
+       "evals": 24576,
+       "wall_s": 4.26,
+       "delta_bic": 4.58,
+       "prob": 0.0832,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.135,
+       "bic": -461.1,
+       "evals": 24576,
+       "wall_s": 4.81,
+       "delta_bic": 5.51,
+       "prob": 0.0523,
+       "tie_with_best": false
+      },
+      {
+       "id": "S0",
+       "name": "No control (free-floating)",
+       "source": "catalogue",
+       "k": 5,
+       "rmse_fit_c": 0.246,
+       "rmse_held_c": 0.146,
+       "bic": -460.37,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 6.24,
+       "prob": 0.0363,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.205,
+       "rmse_held_c": 0.138,
+       "bic": -456.1,
+       "evals": 24576,
+       "wall_s": 4.61,
+       "delta_bic": 10.51,
+       "prob": 0.0043,
+       "tie_with_best": false
+      },
+      {
+       "id": "B15",
+       "name": "grammar edit: night_setback on S1",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.197,
+       "rmse_held_c": 0.136,
+       "bic": -454.57,
+       "evals": 24576,
+       "wall_s": 5.71,
+       "delta_bic": 12.04,
+       "prob": 0.002,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.137,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.135,
+       "delta_bic": 5.51,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.146,
+       "delta_bic": 6.24,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.138,
+       "delta_bic": 10.51,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.144,
+       "delta_bic": 16.39,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.146,
+       "delta_bic": 21.26,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.142,
+       "delta_bic": 22.89,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.159,
+       "delta_bic": 46.93,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - dr1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S6",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.14,
+       "delta_bic": 24.67,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "min(level + slope * T_out, mx1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.137,
+       "delta_bic": 4.58,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.152,
+       "delta_bic": 35.37,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.152,
+       "delta_bic": 35.8,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.158,
+       "delta_bic": 39.61,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1) + kp1 * (sp1 - T_room)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "kp1": "gain",
+        "sp1": "temp_c"
+       },
+       "mechanism": "grammar edit: filter_outdoor+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.154,
+       "delta_bic": 44.27,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "where((hour_of_day() >= on1) | (hour_of_day() < off1), level + slope * T_out - dr1, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "on1": "clock_h",
+        "off1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: night_setback on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.136,
+       "delta_bic": 12.04,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out, level + slope * T_out - dr1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "wk1": "clock_h",
+        "dr1": "delta_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: weekday_gate+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.139,
+       "delta_bic": 23.09,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.137,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.196,
+       "rmse_held_c": 0.137,
+       "bic": -466.61,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 0.0,
+       "prob": 0.875,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.135,
+       "bic": -461.1,
+       "evals": 24576,
+       "wall_s": 4.81,
+       "delta_bic": 5.51,
+       "prob": 0.0557,
+       "tie_with_best": false
+      },
+      {
+       "id": "S0",
+       "name": "No control (free-floating)",
+       "source": "catalogue",
+       "k": 5,
+       "rmse_fit_c": 0.246,
+       "rmse_held_c": 0.146,
+       "bic": -460.37,
+       "evals": 24576,
+       "wall_s": 3.74,
+       "delta_bic": 6.24,
+       "prob": 0.0386,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.3",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.196,
+       "rmse_held_c": 0.136,
+       "bic": -459.23,
+       "evals": 24576,
+       "wall_s": 5.0,
+       "delta_bic": 7.38,
+       "prob": 0.0218,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.205,
+       "rmse_held_c": 0.138,
+       "bic": -456.1,
+       "evals": 24576,
+       "wall_s": 4.61,
+       "delta_bic": 10.51,
+       "prob": 0.0046,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.1",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.186,
+       "rmse_held_c": 0.139,
+       "bic": -454.27,
+       "evals": 24576,
+       "wall_s": 5.2,
+       "delta_bic": 12.34,
+       "prob": 0.0018,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.137,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.135,
+       "delta_bic": 5.51,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.146,
+       "delta_bic": 6.24,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.138,
+       "delta_bic": 10.51,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.144,
+       "delta_bic": 16.39,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.146,
+       "delta_bic": 21.26,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.142,
+       "delta_bic": 22.89,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.159,
+       "delta_bic": 46.93,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_out < t_break, level + slope * T_out + boost, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "t_break": "temp_c",
+        "boost": "delta_c"
+       },
+       "mechanism": "Outdoor-reset curve with a cold-weather boost or steeper low-end segment, as frost protection or cold-snap pickup; raises supply only below an outdoor breakpoint.",
+       "targets": "positive residual in very cold and cold outdoor bands",
+       "refute": "If fitted boost is negligible, breakpoint sits outside the cold bands, or cold-band residual remains positive.",
+       "rmse_held_c": 0.139,
+       "delta_bic": 12.34,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((hour_of_day() >= n_start) & (hour_of_day() < n_end), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "n_start": "clock_h",
+        "n_end": "clock_h"
+       },
+       "mechanism": "Clock-based daytime setback or solar-gain compensation: controller lowers the supply-temperature request during a midday window, independent of outdoor reset.",
+       "targets": "negative residual concentrated in midday hours",
+       "refute": "If fitted window is not midday, drop is negligible, or hour-of-day residual pattern persists.",
+       "rmse_held_c": 0.141,
+       "delta_bic": 21.18,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_out > t_hi, level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "t_hi": "temp_c",
+        "drop": "delta_c"
+       },
+       "mechanism": "Warm-weather high-limit or summer changeover that does not turn heat fully off but reduces the supply-temperature request above a warm outdoor threshold.",
+       "targets": "negative residual in warm outdoor band and late-spring overprediction",
+       "refute": "If threshold falls outside the warm band, drop is negligible, or warm-band residual does not improve.",
+       "rmse_held_c": 0.136,
+       "delta_bic": 7.38,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((month() >= m_spring) & (month() <= m_spring), level + slope * T_out - spring_drop, where((month() >= m_fall) & (month() <= m_fall), level + slope * T_out + fall_boost, level + slope * T_out))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "spring_drop": "delta_c",
+        "fall_boost": "delta_c",
+        "m_spring": "month_n",
+        "m_fall": "month_n"
+       },
+       "mechanism": "Calendar-based seasonal trim in the building automation system: a spring setback before summer changeover and a fall boost when heating resumes, giving asymmetric shoulder-season behavior.",
+       "targets": "large negative residual in late spring and positive residual in early fall",
+       "refute": "If fitted spring month is not late spring, fall month is not early fall, or either trim is negligible.",
+       "rmse_held_c": 0.138,
+       "delta_bic": 20.72,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours"
+       },
+       "mechanism": "weather-compensated supply temperature with a room-temperature proportional-plus-integral trim, as in an outdoor-reset controller with room feedback",
+       "targets": "midday negative residual shape and outdoor-band curvature through room-temperature feedback",
+       "refute": "if the fitted room gain and integral time are negligible, or if held-out error does not improve over the plain outdoor-reset and room-proportional forms, or if the midday residual shape remains",
+       "rmse_held_c": 0.145,
+       "delta_bic": 27.72,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_out < t_lo, level + slope * T_out + boost, where(T_out > t_hi, level + slope * T_out - drop, level + slope * T_out))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "t_lo": "temp_c",
+        "t_hi": "temp_c",
+        "boost": "delta_c",
+        "drop": "delta_c"
+       },
+       "mechanism": "dual-slope weather compensation: extra cold-weather boost below a low outdoor breakpoint and reduced supply above a warm-weather high limit",
+       "targets": "positive residual in the cold outdoor band and negative residual in the warm outdoor band",
+       "refute": "if the fitted boost or drop is negligible, or if the breakpoints collapse, or if held-out error is not better than the separate cold-boost and warm-drop forms",
+       "rmse_held_c": 0.135,
+       "delta_bic": 15.58,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(ema(T_out, tau) > cutoff, level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau": "hours",
+        "cutoff": "temp_c",
+        "drop": "delta_c"
+       },
+       "mechanism": "high-limit outdoor-reset reduction driven by filtered outdoor temperature, so warm spells and shoulder-season warming lower the supply curve without fully switching heat off",
+       "targets": "shoulder-month negative residual and warm outdoor-band overprediction",
+       "refute": "if the filter time or cutoff is not identifiable, or if the fitted drop is negligible, or if a full-off high-limit form explains the residual better",
+       "rmse_held_c": 0.153,
+       "delta_bic": 42.01,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((month() >= m_change) & (month() <= m_change), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "m_change": "month_n",
+        "drop": "delta_c"
+       },
+       "mechanism": "seasonal changeover or reduced heating-curve level during a shoulder month, as in a controller with a calendar-based summer/winter changeover",
+       "targets": "large negative residual concentrated in a shoulder month",
+       "refute": "if the fitted changeover month is not the shoulder month with the residual, or if the drop is negligible, or if a multi-month seasonal range explains the residual better",
+       "rmse_held_c": 0.139,
+       "delta_bic": 12.35,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  },
+  {
+   "id": "H4",
+   "hidden": "curve with cutoff hysteresis on outdoor",
+   "checklist": [
+    "hysteresis"
+   ],
+   "room_range_c": [
+    22.7,
+    26.1
+   ],
+   "arms": {
+    "A": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.135,
+     "right_mechanism": false,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.135,
+       "bic": -469.92,
+       "evals": 24576,
+       "wall_s": 3.95,
+       "delta_bic": 0.0,
+       "prob": 0.9993,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.144,
+       "rmse_held_c": 0.138,
+       "bic": -454.9,
+       "evals": 24576,
+       "wall_s": 4.13,
+       "delta_bic": 15.02,
+       "prob": 0.0005,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.137,
+       "rmse_held_c": 0.14,
+       "bic": -451.86,
+       "evals": 24576,
+       "wall_s": 5.27,
+       "delta_bic": 18.06,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.223,
+       "rmse_held_c": 0.146,
+       "bic": -446.81,
+       "evals": 24576,
+       "wall_s": 5.38,
+       "delta_bic": 23.11,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.142,
+       "rmse_held_c": 0.145,
+       "bic": -443.8,
+       "evals": 24576,
+       "wall_s": 4.64,
+       "delta_bic": 26.12,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.143,
+       "rmse_held_c": 0.143,
+       "bic": -441.03,
+       "evals": 24576,
+       "wall_s": 5.95,
+       "delta_bic": 28.89,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.135,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.135,
+       "bic": -469.92,
+       "evals": 24576,
+       "wall_s": 3.95,
+       "delta_bic": 0.0,
+       "prob": 0.9965,
+       "tie_with_best": false
+      },
+      {
+       "id": "B12",
+       "name": "grammar edit: outdoor_hysteresis on S1",
+       "source": "baseline-grammar",
+       "k": 9,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.137,
+       "bic": -457.91,
+       "evals": 24576,
+       "wall_s": 5.3,
+       "delta_bic": 12.01,
+       "prob": 0.0025,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.144,
+       "rmse_held_c": 0.138,
+       "bic": -454.9,
+       "evals": 24576,
+       "wall_s": 4.13,
+       "delta_bic": 15.02,
+       "prob": 0.0005,
+       "tie_with_best": false
+      },
+      {
+       "id": "B16",
+       "name": "grammar edit: weekday_gate+ on S1",
+       "source": "baseline-grammar",
+       "k": 11,
+       "rmse_fit_c": 0.135,
+       "rmse_held_c": 0.133,
+       "bic": -454.25,
+       "evals": 24576,
+       "wall_s": 5.71,
+       "delta_bic": 15.67,
+       "prob": 0.0004,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.137,
+       "rmse_held_c": 0.14,
+       "bic": -451.86,
+       "evals": 24576,
+       "wall_s": 5.27,
+       "delta_bic": 18.06,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.223,
+       "rmse_held_c": 0.146,
+       "bic": -446.81,
+       "evals": 24576,
+       "wall_s": 5.38,
+       "delta_bic": 23.11,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.135,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.138,
+       "delta_bic": 15.02,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.14,
+       "delta_bic": 18.06,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.146,
+       "delta_bic": 23.11,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.145,
+       "delta_bic": 26.12,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.143,
+       "delta_bic": 28.89,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.182,
+       "delta_bic": 65.32,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.177,
+       "delta_bic": 72.42,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - dr1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S6",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.142,
+       "delta_bic": 30.7,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "min(level + slope * T_out, mx1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.149,
+       "delta_bic": 29.06,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.148,
+       "delta_bic": 31.43,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.137,
+       "delta_bic": 12.01,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.161,
+       "delta_bic": 49.02,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1) + kp1 * (sp1 - T_room)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "kp1": "gain",
+        "sp1": "temp_c"
+       },
+       "mechanism": "grammar edit: filter_outdoor+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.153,
+       "delta_bic": 45.34,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "where((hour_of_day() >= on1) | (hour_of_day() < off1), level + slope * T_out - dr1, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "on1": "clock_h",
+        "off1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: night_setback on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.141,
+       "delta_bic": 23.88,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out, level + slope * T_out - dr1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "wk1": "clock_h",
+        "dr1": "delta_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: weekday_gate+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.133,
+       "delta_bic": 15.67,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.135,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.135,
+       "bic": -469.92,
+       "evals": 24576,
+       "wall_s": 3.95,
+       "delta_bic": 0.0,
+       "prob": 0.5994,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.4",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 11,
+       "rmse_fit_c": 0.123,
+       "rmse_held_c": 0.126,
+       "bic": -468.45,
+       "evals": 24576,
+       "wall_s": 6.54,
+       "delta_bic": 1.47,
+       "prob": 0.2874,
+       "tie_with_best": true
+      },
+      {
+       "id": "M1.2",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.128,
+       "rmse_held_c": 0.132,
+       "bic": -466.21,
+       "evals": 24576,
+       "wall_s": 4.6,
+       "delta_bic": 3.71,
+       "prob": 0.0938,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.2",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 10,
+       "rmse_fit_c": 0.129,
+       "rmse_held_c": 0.132,
+       "bic": -462.42,
+       "evals": 24576,
+       "wall_s": 5.75,
+       "delta_bic": 7.5,
+       "prob": 0.0141,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.3",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.135,
+       "bic": -460.24,
+       "evals": 24576,
+       "wall_s": 4.82,
+       "delta_bic": 9.68,
+       "prob": 0.0047,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.144,
+       "rmse_held_c": 0.138,
+       "bic": -454.9,
+       "evals": 24576,
+       "wall_s": 4.13,
+       "delta_bic": 15.02,
+       "prob": 0.0003,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.135,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.138,
+       "delta_bic": 15.02,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.14,
+       "delta_bic": 18.06,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.146,
+       "delta_bic": 23.11,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.145,
+       "delta_bic": 26.12,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.143,
+       "delta_bic": 28.89,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.182,
+       "delta_bic": 65.32,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.177,
+       "delta_bic": 72.42,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((hour_of_day() >= start) & (hour_of_day() < end), level - drop + slope * T_out, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "start": "clock_h",
+        "end": "clock_h"
+       },
+       "mechanism": "A midday unoccupied setback lowers the supply-water setpoint during a scheduled window, separate from any night setback.",
+       "targets": "mean_by_local_hour negative midday and afternoon",
+       "refute": "If the fitted window has no meaningful width or the drop is negligible, or if held-out error does not improve and the midday residual is unchanged.",
+       "rmse_held_c": 0.147,
+       "delta_bic": 34.77,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(weekday() >= wknd, level - drop + slope * T_out, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "wknd": "clock_h"
+       },
+       "mechanism": "A weekday/weekend occupancy schedule applies a lower supply-water setpoint on weekend days.",
+       "targets": "mean_by_weekday Sunday and Monday negative, Friday positive, weekend_minus_weekday",
+       "refute": "If the fitted weekday threshold does not separate weekend days, or the drop is negligible, or weekday residuals do not improve.",
+       "rmse_held_c": 0.132,
+       "delta_bic": 3.71,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_out > T_break, level + slope * T_out + slope_warm * (T_out - T_break), level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "slope_warm": "slope",
+        "T_break": "temp_c"
+       },
+       "mechanism": "The weather-compensation curve changes slope above a mild-weather breakpoint, as in a heating curve with a high-outdoor-temperature reset or changeover.",
+       "targets": "mean_by_outdoor_band warm outdoor negative",
+       "refute": "If the fitted breakpoint is outside a plausible mild-weather range, or the warm-slope term is negligible, or the warm outdoor band residual is not reduced.",
+       "rmse_held_c": 0.135,
+       "delta_bic": 9.68,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((month() >= m_start) & (month() <= m_end), level + slope * T_out + bias, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "bias": "delta_c",
+        "m_start": "month_n",
+        "m_end": "month_n"
+       },
+       "mechanism": "A seasonal changeover or heating-season offset shifts the supply-water curve during a month window, reflecting boiler changeover or seasonal schedule logic.",
+       "targets": "mean_by_month October negative",
+       "refute": "If the fitted month window does not include the large negative month, or the bias is negligible, or the monthly residual is not reduced.",
+       "rmse_held_c": 0.143,
+       "delta_bic": 27.34,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((weekday() == d_first) | (weekday() == d_second), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "d_first": "clock_h",
+        "d_second": "clock_h"
+       },
+       "mechanism": "Seven-day programmable schedule with two low-setpoint days: the controller uses a lower supply curve on the two days the fitter selects, rather than a simple weekend/weekday split.",
+       "targets": "weekday residual with low Sunday and Monday means",
+       "refute": "If the two selected days are not distinct, the drop is negligible, or held-out error does not improve over the plain curve.",
+       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_room > sp, level + slope * T_out - kp * (T_room - sp), level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c"
+       },
+       "mechanism": "Heating-only proportional room feedback: supply reset is trimmed when the room is above setpoint, but not boosted when below, as in a controller with a one-sided room-temperature correction.",
+       "targets": "midday and afternoon negative residual, warm outdoor band",
+       "refute": "If the fitted gain is negligible, the setpoint sits outside the room range, or held-out error does not improve over the plain outdoor curve.",
+       "rmse_held_c": 0.139,
+       "delta_bic": 16.95,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(ema(T_out, tau) > cutoff, level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "cutoff": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "Warm-weather supply reset: when filtered outdoor air is mild, the controller lowers the supply-temperature curve instead of shutting heat off, a common warm-weather shutdown/reset behavior.",
+       "targets": "warm outdoor band negative residual and October negative residual",
+       "refute": "If the fitted cutoff is outside the observed outdoor range, the drop is negligible, or the held-out error is worse than the plain curve.",
+       "rmse_held_c": 0.132,
+       "delta_bic": 7.5,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((hour_of_day() >= start) & (hour_of_day() < end) & (T_out > T_sun), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "start": "clock_h",
+        "end": "clock_h",
+        "T_sun": "temp_c"
+       },
+       "mechanism": "Daytime solar-gain compensation: during a midday window and only when outdoor air is mild, the controller trims the supply temperature to avoid overheating from solar gains.",
+       "targets": "midday negative residual and warm outdoor band",
+       "refute": "If the fitted window is empty or covers the whole day, the outdoor threshold is outside the observed range, the drop is negligible, or held-out error is worse.",
+       "rmse_held_c": 0.126,
+       "delta_bic": 1.47,
+       "verdict": "survives (within noise of best)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1r",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(((weekday() >= d_first) & (weekday() <= d_first)) | ((weekday() >= d_second) & (weekday() <= d_second)), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "d_first": "clock_h",
+        "d_second": "clock_h"
+       },
+       "mechanism": "two specific days of the week carry a setback (e.g. a weekend/holiday schedule that drops supply on the first and last day of the week), modelled as an equality test on weekday() built from paired inequalities (repaired after validator rejection)",
+       "targets": "weekday-shaped residual: mean_by_weekday shows two low days (Monday and Sunday) below the rest",
+       "refute": "if the fitted d_first and d_second collapse to the same day, or the drop is within the noise band, or held-out RMSE does not improve over S1",
+       "rmse_held_c": 0.143,
+       "delta_bic": 27.61,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  },
+  {
+   "id": "H5",
+   "hidden": "STACK: weather curve plus a PI trim on the room that partly fights it",
+   "checklist": [
+    "T_room",
+    "integral"
+   ],
+   "room_range_c": [
+    17.3,
+    25.7
+   ],
+   "arms": {
+    "A": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.127,
+     "right_mechanism": false,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.182,
+       "rmse_held_c": 0.127,
+       "bic": -485.47,
+       "evals": 24576,
+       "wall_s": 3.86,
+       "delta_bic": 0.0,
+       "prob": 0.9803,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.202,
+       "rmse_held_c": 0.126,
+       "bic": -477.65,
+       "evals": 24576,
+       "wall_s": 4.04,
+       "delta_bic": 7.82,
+       "prob": 0.0196,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.183,
+       "rmse_held_c": 0.132,
+       "bic": -466.78,
+       "evals": 24576,
+       "wall_s": 4.57,
+       "delta_bic": 18.69,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.187,
+       "rmse_held_c": 0.135,
+       "bic": -456.41,
+       "evals": 24576,
+       "wall_s": 5.97,
+       "delta_bic": 29.06,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.191,
+       "rmse_held_c": 0.141,
+       "bic": -450.71,
+       "evals": 24576,
+       "wall_s": 5.46,
+       "delta_bic": 34.76,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S0",
+       "name": "No control (free-floating)",
+       "source": "catalogue",
+       "k": 5,
+       "rmse_fit_c": 0.224,
+       "rmse_held_c": 0.152,
+       "bic": -450.09,
+       "evals": 24576,
+       "wall_s": 4.57,
+       "delta_bic": 35.38,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.127,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.182,
+       "rmse_held_c": 0.127,
+       "bic": -485.47,
+       "evals": 24576,
+       "wall_s": 3.86,
+       "delta_bic": 0.0,
+       "prob": 0.9779,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.202,
+       "rmse_held_c": 0.126,
+       "bic": -477.65,
+       "evals": 24576,
+       "wall_s": 4.04,
+       "delta_bic": 7.82,
+       "prob": 0.0196,
+       "tie_with_best": false
+      },
+      {
+       "id": "B12",
+       "name": "grammar edit: outdoor_hysteresis on S1",
+       "source": "baseline-grammar",
+       "k": 9,
+       "rmse_fit_c": 0.18,
+       "rmse_held_c": 0.129,
+       "bic": -472.79,
+       "evals": 24576,
+       "wall_s": 5.51,
+       "delta_bic": 12.68,
+       "prob": 0.0017,
+       "tie_with_best": false
+      },
+      {
+       "id": "B11",
+       "name": "grammar edit: cutoff on S1",
+       "source": "baseline-grammar",
+       "k": 9,
+       "rmse_fit_c": 0.179,
+       "rmse_held_c": 0.13,
+       "bic": -469.95,
+       "evals": 24576,
+       "wall_s": 5.63,
+       "delta_bic": 15.52,
+       "prob": 0.0004,
+       "tie_with_best": false
+      },
+      {
+       "id": "B10",
+       "name": "grammar edit: cap on S1",
+       "source": "baseline-grammar",
+       "k": 8,
+       "rmse_fit_c": 0.182,
+       "rmse_held_c": 0.134,
+       "bic": -468.68,
+       "evals": 24576,
+       "wall_s": 4.38,
+       "delta_bic": 16.79,
+       "prob": 0.0002,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.183,
+       "rmse_held_c": 0.132,
+       "bic": -466.78,
+       "evals": 24576,
+       "wall_s": 4.57,
+       "delta_bic": 18.69,
+       "prob": 0.0001,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.127,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.126,
+       "delta_bic": 7.82,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.132,
+       "delta_bic": 18.69,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.135,
+       "delta_bic": 29.06,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.141,
+       "delta_bic": 34.76,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.152,
+       "delta_bic": 35.38,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.152,
+       "delta_bic": 49.66,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.153,
+       "delta_bic": 50.79,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - dr1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S6",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.13,
+       "delta_bic": 25.1,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "min(level + slope * T_out, mx1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.134,
+       "delta_bic": 16.79,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.13,
+       "delta_bic": 15.52,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.129,
+       "delta_bic": 12.68,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.136,
+       "delta_bic": 20.54,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1) + kp1 * (sp1 - T_room)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "kp1": "gain",
+        "sp1": "temp_c"
+       },
+       "mechanism": "grammar edit: filter_outdoor+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.154,
+       "delta_bic": 61.76,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "where((hour_of_day() >= on1) | (hour_of_day() < off1), level + slope * T_out - dr1, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "on1": "clock_h",
+        "off1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: night_setback on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.134,
+       "delta_bic": 26.46,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, level + slope * T_out, level + slope * T_out - dr1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "wk1": "clock_h",
+        "dr1": "delta_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: weekday_gate+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.13,
+       "delta_bic": 24.61,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.127,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.182,
+       "rmse_held_c": 0.127,
+       "bic": -485.47,
+       "evals": 24576,
+       "wall_s": 3.86,
+       "delta_bic": 0.0,
+       "prob": 0.9314,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.3",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.178,
+       "rmse_held_c": 0.125,
+       "bic": -479.61,
+       "evals": 24576,
+       "wall_s": 4.99,
+       "delta_bic": 5.86,
+       "prob": 0.0497,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.202,
+       "rmse_held_c": 0.126,
+       "bic": -477.65,
+       "evals": 24576,
+       "wall_s": 4.04,
+       "delta_bic": 7.82,
+       "prob": 0.0187,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.3",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 10,
+       "rmse_fit_c": 0.179,
+       "rmse_held_c": 0.129,
+       "bic": -467.95,
+       "evals": 24576,
+       "wall_s": 4.74,
+       "delta_bic": 17.52,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.183,
+       "rmse_held_c": 0.132,
+       "bic": -466.78,
+       "evals": 24576,
+       "wall_s": 4.57,
+       "delta_bic": 18.69,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.2",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 11,
+       "rmse_fit_c": 0.186,
+       "rmse_held_c": 0.132,
+       "bic": -457.44,
+       "evals": 24576,
+       "wall_s": 5.82,
+       "delta_bic": 28.03,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.127,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.126,
+       "delta_bic": 7.82,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.132,
+       "delta_bic": 18.69,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.135,
+       "delta_bic": 29.06,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.141,
+       "delta_bic": 34.76,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.152,
+       "delta_bic": 35.38,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.152,
+       "delta_bic": 49.66,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.153,
+       "delta_bic": 50.79,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(month() >= m_start, autumn_boost, where(month() <= m_end, -spring_drop, 0))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "m_start": "month_n",
+        "m_end": "month_n",
+        "autumn_boost": "delta_c",
+        "spring_drop": "delta_c"
+       },
+       "mechanism": "a seasonal changeover / frost-protection offset in the reset schedule: the controller adds a fixed offset to the supply setpoint in autumn and subtracts one in spring, independent of outdoor temperature",
+       "targets": "the monotone month drift in the residual: negative in spring (Apr-May), near zero mid-summer, strongly positive Sep-Oct",
+       "refute": "if the fitted month boundaries fall outside the heating season, or if both offsets fit to near zero, or if adding the offset does not reduce the month-band residual spread",
+       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(T_out < T_knee, k_cold * (T_knee - T_out), 0)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "T_knee": "temp_c",
+        "k_cold": "slope"
+       },
+       "mechanism": "a piecewise-linear reset curve with a knee: below a design outdoor temperature the controller uses a steeper slope (cold-weather boost), above the knee a shallower slope",
+       "targets": "the outdoor-band residual: positive below 5 C, near zero mid-band, negative above 20 C (a curve steeper than a single straight line at the cold end)",
+       "refute": "if T_knee lands outside the plausible design range, or if k_cold is near zero, or if the cold-band and warm-band residuals are not both reduced",
+       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where((hour_of_day() >= h_on) & (hour_of_day() < h_off), boost, -drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "h_on": "clock_h",
+        "h_off": "clock_h",
+        "boost": "delta_c",
+        "drop": "delta_c"
+       },
+       "mechanism": "an occupancy schedule: a morning warm-up boost window raises the supply setpoint, and outside that window the controller applies an afternoon/evening setback offset",
+       "targets": "the hour-of-day residual: positive 05-10, negative 15-20, near zero overnight",
+       "refute": "if h_on/h_off do not bracket the morning hours, or if boost and drop do not have opposite signs, or if the hour-of-day residual profile is unchanged",
+       "rmse_held_c": 0.139,
+       "delta_bic": 41.78,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(weekday() < n_wd, wd_boost, -we_drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "n_wd": "clock_h",
+        "wd_boost": "delta_c",
+        "we_drop": "delta_c"
+       },
+       "mechanism": "a weekday/weekend occupancy offset: the controller holds a higher supply setpoint on working days and a lower one at weekends",
+       "targets": "the weekday-vs-weekend residual: weekdays positive (Mon-Fri), weekend negative",
+       "refute": "if n_wd does not land near the weekday/weekend boundary, or if the offsets are near zero, or if the weekend_minus_weekday residual does not shrink",
+       "rmse_held_c": 0.129,
+       "delta_bic": 17.52,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(month() >= m_start, autumn_boost, where(month() <= m_end, -spring_drop, spring_drop - spring_drop))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "m_start": "month_n",
+        "m_end": "month_n",
+        "autumn_boost": "delta_c",
+        "spring_drop": "delta_c"
+       },
+       "mechanism": "seasonal schedule offset: a fixed boost applied to the supply setpoint during autumn months and a fixed reduction during spring months, with no offset in the neutral season (repaired after validator rejection)",
+       "targets": "the month-shaped residual (positive in autumn, negative in spring) left by the pure outdoor-linear fit",
+       "refute": "if the fitted m_start and m_end collapse onto each other or the boosts fit to zero, the seasonal offset is not real",
+       "rmse_held_c": 0.144,
+       "delta_bic": 51.14,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2r",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(T_out < T_knee, k_cold * (T_knee - T_out), T_knee - T_knee)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "T_knee": "temp_c",
+        "k_cold": "slope"
+       },
+       "mechanism": "cold-weather reset curve with a knee: below the knee the supply is raised by an extra slope proportional to how far outdoor falls below the knee, above the knee the plain linear curve applies (repaired after validator rejection)",
+       "targets": "the residual's curvature vs outdoor temperature (positive bias in the cold band, negative in the warm band) that a single straight line cannot capture",
+       "refute": "if k_cold fits to zero, or the knee lands outside the observed outdoor range, the piecewise reset is not supported",
+       "rmse_held_c": 0.14,
+       "delta_bic": 33.36,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + ki * integral(sp - T_room, ti)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "ki": "gain",
+        "ti": "hours"
+       },
+       "mechanism": "Weather-compensated supply curve with proportional and integral room-temperature feedback; the integral trims persistent seasonal error from solar and internal gains.",
+       "targets": "seasonal monthly bias: spring underprediction and autumn overprediction, plus humidity-correlated residual",
+       "refute": "If the integral gain is negligible or held-out error does not beat proportional room feedback, the seasonal bias is not integral room reset.",
+       "rmse_held_c": 0.152,
+       "delta_bic": 63.74,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(hour_of_day() < h_morning, boost, where(hour_of_day() > h_evening, -drop, boost - boost))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "h_morning": "clock_h",
+        "boost": "delta_c",
+        "h_evening": "clock_h",
+        "drop": "delta_c"
+       },
+       "mechanism": "Optimized-start morning warm-up raises supply before occupancy; evening setback lowers it after occupancy.",
+       "targets": "hourly residual: positive early-morning and negative late-afternoon/evening",
+       "refute": "If fitted morning and evening clock hours collapse to the same value or held-out error is not better than the plain weather curve, the hourly pattern is not an occupancy schedule.",
+       "rmse_held_c": 0.132,
+       "delta_bic": 28.03,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + where(T_out > T_warm, k_warm * (T_warm - T_out), T_warm - T_warm)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "T_warm": "temp_c",
+        "k_warm": "slope"
+       },
+       "mechanism": "Heating curve flattens above a warm-weather knee, as low-load boiler reset schedules often do to avoid overshoot.",
+       "targets": "outdoor-band residual: negative at warm outdoor temperatures and positive in the mid band",
+       "refute": "If the fitted knee lies outside the warm outdoor band or the extra slope is negligible, the warm-band residual is not a curve knee.",
+       "rmse_held_c": 0.125,
+       "delta_bic": 5.86,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + where(month() >= m_start, slope_autumn, slope_spring) * T_out",
+       "params": {
+        "level": "temp_c",
+        "slope_autumn": "slope",
+        "slope_spring": "slope",
+        "m_start": "month_n"
+       },
+       "mechanism": "Seasonal changeover in the weather-compensation slope, as used for winter and summer reset schedules.",
+       "targets": "monthly residual pattern: spring negative and autumn positive at similar outdoor temperatures",
+       "refute": "If the fitted slopes are indistinguishable or the changeover month falls outside the spring-autumn transition, the monthly residual is not a seasonal slope change.",
+       "rmse_held_c": 0.161,
+       "delta_bic": 69.33,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  },
+  {
+   "id": "H6",
+   "hidden": "STACK: weather curve gated by an on/off room thermostat",
+   "checklist": [
+    "hysteresis",
+    "T_room"
+   ],
+   "room_range_c": [
+    21.5,
+    25.6
+   ],
+   "arms": {
+    "A": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.167,
+     "right_mechanism": false,
+     "fits": 196608,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.167,
+       "bic": -416.96,
+       "evals": 24576,
+       "wall_s": 3.83,
+       "delta_bic": 0.0,
+       "prob": 0.9592,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.204,
+       "rmse_held_c": 0.168,
+       "bic": -410.46,
+       "evals": 24576,
+       "wall_s": 4.9,
+       "delta_bic": 6.5,
+       "prob": 0.0372,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.225,
+       "rmse_held_c": 0.171,
+       "bic": -405.7,
+       "evals": 24576,
+       "wall_s": 5.44,
+       "delta_bic": 11.26,
+       "prob": 0.0034,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.206,
+       "rmse_held_c": 0.173,
+       "bic": -398.96,
+       "evals": 24576,
+       "wall_s": 4.28,
+       "delta_bic": 18.0,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.227,
+       "rmse_held_c": 0.182,
+       "bic": -385.58,
+       "evals": 24576,
+       "wall_s": 5.51,
+       "delta_bic": 31.38,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.222,
+       "rmse_held_c": 0.182,
+       "bic": -381.26,
+       "evals": 24576,
+       "wall_s": 5.63,
+       "delta_bic": 35.7,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ]
+    },
+    "B": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.167,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.167,
+       "bic": -416.96,
+       "evals": 24576,
+       "wall_s": 3.83,
+       "delta_bic": 0.0,
+       "prob": 0.9435,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.204,
+       "rmse_held_c": 0.168,
+       "bic": -410.46,
+       "evals": 24576,
+       "wall_s": 4.9,
+       "delta_bic": 6.5,
+       "prob": 0.0366,
+       "tie_with_best": false
+      },
+      {
+       "id": "B15",
+       "name": "grammar edit: filter_outdoor on S1",
+       "source": "baseline-grammar",
+       "k": 8,
+       "rmse_fit_c": 0.218,
+       "rmse_held_c": 0.17,
+       "bic": -407.61,
+       "evals": 24576,
+       "wall_s": 5.16,
+       "delta_bic": 9.35,
+       "prob": 0.0088,
+       "tie_with_best": false
+      },
+      {
+       "id": "B9",
+       "name": "grammar edit: weekday_gate on S4",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.204,
+       "rmse_held_c": 0.164,
+       "bic": -406.79,
+       "evals": 24576,
+       "wall_s": 8.7,
+       "delta_bic": 10.17,
+       "prob": 0.0058,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.225,
+       "rmse_held_c": 0.171,
+       "bic": -405.7,
+       "evals": 24576,
+       "wall_s": 5.44,
+       "delta_bic": 11.26,
+       "prob": 0.0034,
+       "tie_with_best": false
+      },
+      {
+       "id": "B16",
+       "name": "grammar edit: filter_outdoor+ on S1",
+       "source": "baseline-grammar",
+       "k": 10,
+       "rmse_fit_c": 0.199,
+       "rmse_held_c": 0.166,
+       "bic": -403.74,
+       "evals": 24576,
+       "wall_s": 5.94,
+       "delta_bic": 13.22,
+       "prob": 0.0013,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.167,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.168,
+       "delta_bic": 6.5,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.171,
+       "delta_bic": 11.26,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.173,
+       "delta_bic": 18.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.182,
+       "delta_bic": 31.38,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.182,
+       "delta_bic": 35.7,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.185,
+       "delta_bic": 35.76,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.203,
+       "delta_bic": 38.73,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "B9",
+       "source": "baseline-grammar",
+       "expr": "where(weekday() < wk1, T_room + kp * (sp - T_room) + integral(sp - T_room, ti), T_room + kp * (sp - T_room) + integral(sp - T_room, ti) - dr1)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "wk1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: weekday_gate on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.164,
+       "delta_bic": 10.17,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B10",
+       "source": "baseline-grammar",
+       "expr": "where((hour_of_day() >= on1) | (hour_of_day() < off1), T_room + kp * (sp - T_room) + integral(sp - T_room, ti) - dr1, T_room + kp * (sp - T_room) + integral(sp - T_room, ti))",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "on1": "clock_h",
+        "off1": "clock_h",
+        "dr1": "delta_c"
+       },
+       "mechanism": "grammar edit: night_setback on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.164,
+       "delta_bic": 15.15,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B11",
+       "source": "baseline-grammar",
+       "expr": "min(level + slope * T_out, mx1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "mx1": "temp_c"
+       },
+       "mechanism": "grammar edit: cap on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.185,
+       "delta_bic": 30.73,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "B12",
+       "source": "baseline-grammar",
+       "expr": "min(T_room + kp * (sp - T_room) + integral(sp - T_room, ti), mx1) + integral(sp1 - T_room, ti1)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "mx1": "temp_c",
+        "sp1": "temp_c",
+        "ti1": "hours"
+       },
+       "mechanism": "grammar edit: cap+ on S4",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.171,
+       "delta_bic": 24.87,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B13",
+       "source": "baseline-grammar",
+       "expr": "where(ema(T_out, tau1) < co1, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "co1": "temp_c"
+       },
+       "mechanism": "grammar edit: cutoff on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.187,
+       "delta_bic": 38.62,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B14",
+       "source": "baseline-grammar",
+       "expr": "where(hysteresis(T_out, lo1, hi1), level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo1": "temp_c",
+        "hi1": "temp_c"
+       },
+       "mechanism": "grammar edit: outdoor_hysteresis on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.184,
+       "delta_bic": 33.45,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B15",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours"
+       },
+       "mechanism": "grammar edit: filter_outdoor on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.17,
+       "delta_bic": 9.35,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "B16",
+       "source": "baseline-grammar",
+       "expr": "level + slope * ema(T_out, tau1) + kp1 * (sp1 - T_room)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "tau1": "hours",
+        "kp1": "gain",
+        "sp1": "temp_c"
+       },
+       "mechanism": "grammar edit: filter_outdoor+ on S1",
+       "targets": "",
+       "refute": "",
+       "rmse_held_c": 0.166,
+       "delta_bic": 13.22,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ]
+    },
+    "C": {
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.167,
+     "right_mechanism": false,
+     "fits": 393216,
+     "ranked": [
+      {
+       "id": "S1",
+       "name": "Weather curve, linear",
+       "source": "catalogue",
+       "k": 7,
+       "rmse_fit_c": 0.203,
+       "rmse_held_c": 0.167,
+       "bic": -416.96,
+       "evals": 24576,
+       "wall_s": 3.83,
+       "delta_bic": 0.0,
+       "prob": 0.9591,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.204,
+       "rmse_held_c": 0.168,
+       "bic": -410.46,
+       "evals": 24576,
+       "wall_s": 4.9,
+       "delta_bic": 6.5,
+       "prob": 0.0372,
+       "tie_with_best": false
+      },
+      {
+       "id": "S5",
+       "name": "On/off thermostat with hysteresis",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.225,
+       "rmse_held_c": 0.171,
+       "bic": -405.7,
+       "evals": 24576,
+       "wall_s": 5.44,
+       "delta_bic": 11.26,
+       "prob": 0.0034,
+       "tie_with_best": false
+      },
+      {
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.206,
+       "rmse_held_c": 0.173,
+       "bic": -398.96,
+       "evals": 24576,
+       "wall_s": 4.28,
+       "delta_bic": 18.0,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.1",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 8,
+       "rmse_fit_c": 0.213,
+       "rmse_held_c": 0.176,
+       "bic": -398.76,
+       "evals": 24576,
+       "wall_s": 4.8,
+       "delta_bic": 18.2,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.2",
+       "name": "",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "k": 9,
+       "rmse_fit_c": 0.211,
+       "rmse_held_c": 0.18,
+       "bic": -388.04,
+       "evals": 24576,
+       "wall_s": 5.95,
+       "delta_bic": 28.92,
+       "prob": 0.0,
+       "tie_with_best": false
+      }
+     ],
+     "notebook": [
+      {
+       "round": 0,
+       "id": "S1",
+       "source": "catalogue",
+       "expr": "level + slope * T_out",
+       "mechanism": "Weather curve, linear",
+       "rmse_held_c": 0.167,
+       "delta_bic": 0.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S4",
+       "source": "catalogue",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "mechanism": "PI control on room temperature",
+       "rmse_held_c": 0.168,
+       "delta_bic": 6.5,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S5",
+       "source": "catalogue",
+       "expr": "where(hysteresis(T_room, lo, hi), level, OFF)",
+       "mechanism": "On/off thermostat with hysteresis",
+       "rmse_held_c": 0.171,
+       "delta_bic": 11.26,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S6",
+       "source": "catalogue",
+       "expr": "level + slope * T_out + kp * (sp - T_room)",
+       "mechanism": "Weather curve plus proportional room feedback",
+       "rmse_held_c": 0.173,
+       "delta_bic": 18.0,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S3",
+       "source": "catalogue",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "mechanism": "Weather curve plus summer cutoff on smoothed outdoor",
+       "rmse_held_c": 0.182,
+       "delta_bic": 31.38,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S7",
+       "source": "catalogue",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)",
+       "mechanism": "Weather curve plus night setback",
+       "rmse_held_c": 0.182,
+       "delta_bic": 35.7,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S2",
+       "source": "catalogue",
+       "expr": "clip(level + slope * T_out, lo, hi)",
+       "mechanism": "Weather curve with min/max clamps",
+       "rmse_held_c": 0.185,
+       "delta_bic": 35.76,
+       "verdict": "seed"
+      },
+      {
+       "round": 0,
+       "id": "S0",
+       "source": "catalogue",
+       "expr": "OFF",
+       "mechanism": "No control (free-floating)",
+       "rmse_held_c": 0.203,
+       "delta_bic": 38.73,
+       "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "max(level + slope * T_out, floor)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "floor": "temp_c"
+       },
+       "mechanism": "a minimum supply-water temperature or boiler low-limit holds the reset curve at a floor during severe cold, instead of letting it fall linearly",
+       "targets": "large positive residual in the coldest outdoor band, where the linear reset seed under-predicts supply",
+       "refute": "if the fitted floor sits below the linear reset over the cold band, or the cold-band residual stays positive and held-out error does not improve",
+       "rmse_held_c": 0.176,
+       "delta_bic": 18.2,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(weekday() >= wknd, level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "wknd": "clock_h"
+       },
+       "mechanism": "a weekly occupancy schedule lowers the supply setpoint on weekends or other unoccupied weekdays",
+       "targets": "negative weekend-minus-weekday residual and the Friday/Saturday negative weekday pattern",
+       "refute": "if the fitted weekend drop is negligible, or weekend residuals are not reduced while weekday midweek residuals remain",
+       "rmse_held_c": 0.18,
+       "delta_bic": 28.92,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((hour_of_day() < morning) & (weekday() < wknd), level + slope * T_out + boost, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "boost": "delta_c",
+        "morning": "clock_h",
+        "wknd": "clock_h"
+       },
+       "mechanism": "a weekday morning warm-up or preheat boost raises supply in the early hours before occupancy, but not on weekends",
+       "targets": "positive overnight residual and the weekday-night versus weekend-night difference",
+       "refute": "if the fitted boost does not land in the early hours or on weekdays, or overnight residuals are unchanged",
+       "rmse_held_c": 0.179,
+       "delta_bic": 31.33,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((month() >= start) & (month() <= end), level + slope * T_out - drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "start": "month_n",
+        "end": "month_n"
+       },
+       "mechanism": "a seasonal occupancy or holiday schedule lowers supply across a contiguous month range, such as summer vacation",
+       "targets": "monthly residual pattern with negative summer months and positive September",
+       "refute": "if the fitted month range is empty or covers the whole year, or monthly residuals are not reduced",
+       "rmse_held_c": 0.183,
+       "delta_bic": 37.97,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(T_out < knee, level + slope * T_out + boost_slope * (knee - T_out), level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "knee": "temp_c",
+        "boost_slope": "slope"
+       },
+       "mechanism": "weather-compensated heating curve with a breakpoint: below a knee outdoor temperature the curve becomes steeper (cold-weather boost / design-day segment), a common two-segment reset schedule",
+       "targets": "large positive residual in the coldest outdoor band; the single straight line under-predicts supply when it is very cold",
+       "refute": "if the fitted knee lands at the edge of its range, if boost_slope fits near zero, or if held-out error does not improve over the straight line and the cold-band residual stays positive",
+       "rmse_held_c": 0.189,
+       "delta_bic": 40.07,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "level + slope * T_out + integral(sp - T_room, ti)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "sp": "temp_c",
+        "ti": "hours"
+       },
+       "mechanism": "outdoor-reset feedforward plus a slow room-temperature integral trim (PI room loop on top of weather compensation), so sustained room droop in cold weather and slow solar/internal-gain swings add or remove supply",
+       "targets": "cold-band positive residual plus the slow daytime-negative / night-positive drift; a pure feedforward curve cannot correct persistent room error",
+       "refute": "if the integral time constant fits very short (behaving like proportional-only) or the integral term is negligible, or if held-out error is worse than the plain reset curve",
+       "rmse_held_c": 0.183,
+       "delta_bic": 31.87,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where((weekday() < sat) & ((hour_of_day() >= n_on) | (hour_of_day() < n_off)), level + slope * T_out + boost, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "boost": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h",
+        "sat": "clock_h"
+       },
+       "mechanism": "weekday-only night boost: the controller raises supply temperature during a night window on weekdays (off-peak charging or early occupancy preheat) and does not do so at weekends",
+       "targets": "night hours positive residual, the weekday-night versus weekend-night difference, and the weekend-minus-weekday offset",
+       "refute": "if the fitted night window collapses to zero length, if boost fits near zero, or if the weekday/weekend residual contrast is not reduced and held-out error worsens",
+       "rmse_held_c": 0.182,
+       "delta_bic": 41.05,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (STAND-IN ENDPOINT (OpenRouter, not AMD))",
+       "expr": "where(hysteresis(T_room, lo, hi), level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c"
+       },
+       "mechanism": "room thermostat with hysteresis gating a weather-compensated supply temperature: heat is called only when the room falls below the lower threshold and stops above the upper threshold, with supply level set by outdoor reset while on",
+       "targets": "diurnal residual shape and the assumption that heat is always on; a room thermostat would produce off periods and weather-dependent supply when on",
+       "refute": "if the hysteresis band collapses to a point, if the predicted off-share is near zero, or if held-out error is worse than the always-on reset curve",
+       "rmse_held_c": 0.183,
+       "delta_bic": 32.81,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
+      }
+     ],
+     "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+    }
+   }
+  }
+ ]
+}

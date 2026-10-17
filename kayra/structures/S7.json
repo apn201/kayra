@@ -1,0 +1,1 @@
+{"id":"S7","name":"Weather curve plus night setback","params":{"level":"temp_c","slope":"slope","drop":"delta_c","n_on":"clock_h","n_off":"clock_h"},"expr":"where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level - drop + slope * T_out, level + slope * T_out)","gives_away":"daily step in heating not explained by gains"}

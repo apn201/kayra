@@ -1,0 +1,1 @@
+{"id":"S3","name":"Weather curve plus summer cutoff on smoothed outdoor","params":{"level":"temp_c","slope":"slope","cutoff":"temp_c","tau":"hours"},"expr":"where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)","gives_away":"heating stops above a threshold"}
