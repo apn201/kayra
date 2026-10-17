@@ -281,7 +281,7 @@ function S_bench() {
   const AB = A.amdBench;
   if (AB) {
     const best = Math.max(...AB.models.map((m) => m.score));
-    h += `<h3>AMD token factory: every chat model on Käyrä's own tasks</h3><p class="lede">Graded by code, not by another model: hypothesis programs through the structure-language validator, an operator note into a program that must use the room temperature, and prose through the number guardrails. ${AB.repeats} repeats per task, all models in parallel, wall time ${typeof AB.wall_s === "number" ? AB.wall_s + " s" : esc(AB.wall_s) + " s"}.${AB.note ? " " + esc(AB.note) : ""} Picked: <b>${esc(AB.pick.code)}</b> for programs, <b>${esc(AB.pick.text)}</b> for prose.</p>`;
+    h += `<h3>AMD token factory: every chat model on Käyrä's own tasks</h3><p class="lede">Graded by code, not by another model: hypothesis programs through the structure-language validator, an operator note into a program that must use the room temperature, and prose through the number guardrails. ${AB.repeats} repeats per task, all models in parallel, wall time ${typeof AB.wall_s === "number" ? AB.wall_s + " s" : esc(AB.wall_s) + " s"}.${AB.note ? " " + esc(AB.note) : ""} All Käyrä runs use <b>${esc(AB.pick.code)}</b>: best at programs; on prose every model scored the same.</p>`;
     h += `<div class="scroll"><table><thead><tr><th>Model</th><th>Score</th><th>Valid programs</th><th>Operator note</th><th>Grounded prose</th><th>Median s</th><th>Tokens/s</th><th>$ / call</th><th>Failed</th></tr></thead><tbody>`;
     for (const m of AB.models) h += `<tr class="${m.score === best ? "lead" : ""}"><td>${esc(m.model)}</td><td class="n"><span class="bar" style="width:${Math.round((m.score / Math.max(best, 0.01)) * 60)}px"></span> ${fmt(m.score, 2)}</td><td class="n">${fmt(m.valid_program_share * 100, 0)} %</td><td class="n">${fmt(m.operator_pass_rate * 100, 0)} %</td><td class="n">${fmt(m.grounded_prose_share * 100, 0)} %</td><td class="n">${fmt(m.median_latency_s, 1)}</td><td class="n">${fmt(m.median_tokens_per_s, 0)}</td><td class="n">${m.cost_usd_per_call === null ? "-" : m.cost_usd_per_call.toFixed(5)}</td><td class="n">${m.failed}</td></tr>`;
     h += `</tbody></table></div>`;
@@ -308,7 +308,7 @@ function S_bench() {
     h += `<tr class="lead"><td></td><td>Right mechanism (checklist fixed before the runs)</td><td>${tot("A")} / ${S.cases.length}</td><td>${tot("B")} / ${S.cases.length}</td><td>${tot("C")} / ${S.cases.length}</td></tr>`;
     const low = (k) => S.cases.filter((c) => !c.arms[k].status && c.arms[k].rmse_held_c <= Math.min(...["A", "B", "C"].filter((j) => !c.arms[j].status).map((j) => c.arms[j].rmse_held_c))).length;
     h += `<tr class="lead"><td></td><td>Lowest held-out error (ties count for each)</td><td>${low("A")} / ${S.cases.length}</td><td>${low("B")} / ${S.cases.length}</td><td>${low("C")} / ${S.cases.length}</td></tr></tbody></table></div>`;
-    h += `<p class="lede">Some of the language model's wins come from month() terms that follow seasonal drift rather than the hidden mechanism. On H6 it wrote the thermostat with explicit room thresholds instead of the hysteresis operator, which the literal checklist does not count.</p>`;
+    h += `<p class="lede">Ties count for each arm in the held-out row. Results vary between runs: in an earlier run (AMD with fallback) the language-model arm was strictly best in four of six cases, in this one (all on AMD) in one. Six cases is too few to claim more.</p>`;
     h += `<p class="lede">Arm C model: ${esc(S.meta.llm)}.</p>`;
   }
   return h;

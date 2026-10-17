@@ -125,17 +125,17 @@ SYNTHETIC - real outdoor history and fitted real building, hidden test controlle
 | Case | Hidden | Arm A best | right? | Arm B best | right? | Arm C |
 |---|---|---|---|---|---|---|
 | H1 | curve on 12-hour filtered outdoor, summer cutoff | S3 (0.135) | yes | S3 (0.135) | yes | S3 yes |
-| H2 | curve with weekday night setback | S4 (0.155) | no | B11 (0.15) | no | M1.3 no |
-| H3 | PI on room temperature with output saturation | S1 (0.137) | no | S1 (0.137) | no | M2.2 no |
+| H2 | curve with weekday night setback | S4 (0.155) | no | B11 (0.15) | no | S4 no |
+| H3 | PI on room temperature with output saturation | S1 (0.137) | no | S1 (0.137) | no | S1 no |
 | H4 | curve with cutoff hysteresis on outdoor | S1 (0.135) | no | S1 (0.135) | no | S1 no |
-| H5 | STACK: weather curve plus a PI trim on the room that partly fights it | S1 (0.127) | no | S1 (0.127) | no | M3.1r no |
-| H6 | STACK: weather curve gated by an on/off room thermostat | S1 (0.167) | no | S1 (0.167) | no | M1.4 no |
+| H5 | STACK: weather curve plus a PI trim on the room that partly fights it | S1 (0.127) | no | S1 (0.127) | no | S1 no |
+| H6 | STACK: weather curve gated by an on/off room thermostat | S1 (0.167) | no | S1 (0.167) | no | M1.3r no |
 
 ## Compute
 
 - cpu x1 threads: 163840 candidates in 56.32 s, 38118740 room-hours simulated per second.
 - cpu x6 threads: 163840 candidates in 31.86 s, 67383566 room-hours simulated per second.
-- AMD GPU: NOT MEASURED - no GPU on this machine. Run `python -m kayra.run bench` on the AMD Developer Cloud droplet to fill this in. No estimate is given.
+- AMD GPU: NOT MEASURED - no AMD GPU was available for this build. The fitter is PyTorch and picks a ROCm device when one exists; no estimate is given. The AMD workload in this version is inference on the AMD token factory (see the AMD benchmark above).
 
 ## Not done in this version
 

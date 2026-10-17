@@ -106,14 +106,14 @@
       <div class="lcd" style="font-size:26px;padding:26px 36px"><table><thead><tr><th>Model</th><th>Score</th><th>Valid programs</th><th>Operator</th><th>Grounded prose</th><th>Median s</th><th>$ / call</th></tr></thead><tbody>
       ${top.map((m) => `<tr><td>${esc(m.model)}</td><td>${f(m.score, 2)}</td><td>${f(m.valid_program_share * 100, 0)} %</td><td>${f(m.operator_pass_rate * 100, 0)} %</td><td>${f(m.grounded_prose_share * 100, 0)} %</td><td>${f(m.median_latency_s, 1)}</td><td>${m.cost_usd_per_call === null ? "-" : m.cost_usd_per_call.toFixed(5)}</td></tr>`).join("")}
       </tbody></table>
-      <p style="font:26px var(--f-label);margin-top:18px">Picked: ${esc(ab.pick.code)} for programs, ${esc(ab.pick.text)} for prose. Real-data run on AMD: ${esc(real.meta.llm || "")}${c.amd_cost_usd !== undefined ? `, total AMD cost $${Number(c.amd_cost_usd).toFixed(4)}` : ""}.</p></div>`);
+      <p style="font:26px var(--f-label);margin-top:18px">All runs used ${esc(ab.pick.code)} (best at programs; on prose every model scored the same). Real-data run on AMD: ${esc(real.meta.llm || "")}${c.amd_cost_usd !== undefined ? `, total AMD cost $${Number(c.amd_cost_usd).toFixed(4)}` : ""}.</p></div>`);
   }
 
   const tot = (k) => synth ? synth.cases.filter((c) => c.arms[k] && c.arms[k].right_mechanism).length : 0;
   const n = synth ? synth.cases.length : 0;
   const low = (k) => synth ? synth.cases.filter((c) => !c.arms[k].status && c.arms[k].rmse_held_c <= Math.min(...["A", "B", "C"].filter((j) => !c.arms[j].status).map((j) => c.arms[j].rmse_held_c))).length : 0;
   slide(`<h2>What worked, what did not</h2><ul>
-    <li>Synthetic controllers in the real building model, three arms. Lowest held-out error: language model ${low("C")}/${n}, grammar search ${low("B")}/${n}, catalogue ${low("A")}/${n}. Right mechanism by the checklist fixed before the runs: ${tot("C")}, ${tot("B")}, ${tot("A")} of ${n}. Some of the model's wins come from month() terms following seasonal drift.</li>
+    <li>Synthetic controllers in the real building model, three arms. Lowest held-out error: language model ${low("C")}/${n}, grammar search ${low("B")}/${n}, catalogue ${low("A")}/${n}. Right mechanism by the checklist fixed before the runs: ${tot("C")}, ${tot("B")}, ${tot("A")} of ${n}. Between two runs the model arm went from best in four cases to best in one: six cases is too few to claim more.</li>
     <li>Integrating controllers do not show in room data that sits near setpoint.</li>
     <li>The uncertainty band is too narrow. Room data alone get the slope, not the level.</li>
     <li>The model's prose: numbers are checked, reasoning is not. The computed tables are shown next to it.</li></ul>`);

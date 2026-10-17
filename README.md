@@ -98,14 +98,15 @@ Blind evaluation against the configured curve (`kayra/evaluate.py`):
 - Identified curve vs configured L1: 15.9 °C off from room data alone, 2.9 °C with three spot readings. The uncertainty band contained the configured curve in at most 1 of 8 points: too narrow.
 - Which floor does L1 heat? Nobody knew. The product's spot-reading test leans upstairs (margin 0.084 °C of room error). The evaluation by curve slope says downstairs (margin 1.08 °C/°C). They disagree, so it is not settled. A hand on the two supply pipes would settle it.
 
-Synthetic controllers hidden in the real building model, three arms with the same fitter:
+Synthetic controllers hidden in the real building model, three arms with the same fitter, two runs:
 
-| | Catalogue | + grammar search | + language model |
+| Run | Catalogue | + grammar search | + language model |
 |---|---|---|---|
-| Lowest held-out error (6 cases, ties count) | 2 | 2 | 6 |
-| Right mechanism by the checklist fixed before the runs | 1 | 1 | 1 |
+| 2026-10-18, all model calls on AMD: strictly lowest held-out error | 0 | 1 (H2) | 1 (H6) |
+| 2026-10-17, AMD + OpenRouter fallback: strictly lowest held-out error | 0 | 0 | 4 |
+| Right mechanism by the checklist fixed before the runs (both runs) | 1 | 1 | 1 |
 
-The model arm used fewer fits than grammar search. Some of its wins come from `month()` terms that follow seasonal drift rather than the hidden mechanism. On H6 it wrote the thermostat with explicit room thresholds instead of the `hysteresis` operator, which the literal checklist does not count.
+The remaining cases are ties. Between two runs of the same setup the language-model arm went from best in four cases to best in one. Six cases is too few to claim more than that, and the report does not. In the AMD run the validator rejected 29 of the model's 76 programs (literals, undeclared names, operators outside the language). Some earlier wins came from `month()` terms that follow seasonal drift rather than the hidden mechanism. The earlier run is in the git history (commit 28928a4).
 
 Site context: from the menu labels alone the model wrote the controller's setpoint structure (curve on delayed outdoor, autumn drying, min and max limits). Every such program scored worse than the best program found without context (ΔBIC +15 to +24). The room data cannot support that much structure yet.
 

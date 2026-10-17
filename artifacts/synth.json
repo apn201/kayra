@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_utc": "2026-10-17T19:11:55Z",
+  "generated_utc": "2026-10-17T22:29:22Z",
   "device": {
    "device": "cpu",
    "torch": "2.14.1+cpu",
@@ -14,10 +14,15 @@
    "iters": 8,
    "rounds": 3
   },
-  "llm": "ONLINE (AMD 6 calls, OpenRouter fallback, not AMD 16 calls)",
+  "llm": "ONLINE (AMD 23 calls, no fallback)",
   "llm_calls": {
-   "amd": 6,
-   "fallback": 16
+   "amd": 23,
+   "other": 0,
+   "fallback": 0,
+   "archive": 0,
+   "amd_cost_usd": 0.021234,
+   "amd_completion_tokens": 17409,
+   "amd_daily_usd_left": 0.88043105
   }
  },
  "label": "SYNTHETIC - real outdoor history and fitted real building, hidden test controllers",
@@ -56,7 +61,7 @@
        "rmse_held_c": 0.135,
        "bic": -461.17,
        "evals": 24576,
-       "wall_s": 9.14,
+       "wall_s": 5.28,
        "delta_bic": 0.0,
        "prob": 0.9927,
        "tie_with_best": false
@@ -70,7 +75,7 @@
        "rmse_held_c": 0.141,
        "bic": -450.23,
        "evals": 24576,
-       "wall_s": 7.94,
+       "wall_s": 4.72,
        "delta_bic": 10.94,
        "prob": 0.0042,
        "tie_with_best": false
@@ -84,7 +89,7 @@
        "rmse_held_c": 0.141,
        "bic": -449.61,
        "evals": 24576,
-       "wall_s": 4.36,
+       "wall_s": 3.62,
        "delta_bic": 11.56,
        "prob": 0.0031,
        "tie_with_best": false
@@ -98,7 +103,7 @@
        "rmse_held_c": 0.155,
        "bic": -436.58,
        "evals": 24576,
-       "wall_s": 5.77,
+       "wall_s": 4.09,
        "delta_bic": 24.59,
        "prob": 0.0,
        "tie_with_best": false
@@ -112,7 +117,7 @@
        "rmse_held_c": 0.153,
        "bic": -424.24,
        "evals": 24576,
-       "wall_s": 5.9,
+       "wall_s": 4.9,
        "delta_bic": 36.93,
        "prob": 0.0,
        "tie_with_best": false
@@ -126,7 +131,7 @@
        "rmse_held_c": 0.203,
        "bic": -362.52,
        "evals": 24576,
-       "wall_s": 5.91,
+       "wall_s": 5.58,
        "delta_bic": 98.65,
        "prob": 0.0,
        "tie_with_best": false
@@ -149,7 +154,7 @@
        "rmse_held_c": 0.135,
        "bic": -461.17,
        "evals": 24576,
-       "wall_s": 9.14,
+       "wall_s": 5.28,
        "delta_bic": 0.0,
        "prob": 0.9927,
        "tie_with_best": false
@@ -163,7 +168,7 @@
        "rmse_held_c": 0.141,
        "bic": -450.23,
        "evals": 24576,
-       "wall_s": 7.94,
+       "wall_s": 4.72,
        "delta_bic": 10.94,
        "prob": 0.0042,
        "tie_with_best": false
@@ -177,7 +182,7 @@
        "rmse_held_c": 0.141,
        "bic": -449.61,
        "evals": 24576,
-       "wall_s": 4.36,
+       "wall_s": 3.62,
        "delta_bic": 11.56,
        "prob": 0.0031,
        "tie_with_best": false
@@ -191,7 +196,7 @@
        "rmse_held_c": 0.155,
        "bic": -436.58,
        "evals": 24576,
-       "wall_s": 5.77,
+       "wall_s": 4.09,
        "delta_bic": 24.59,
        "prob": 0.0,
        "tie_with_best": false
@@ -205,7 +210,7 @@
        "rmse_held_c": 0.149,
        "bic": -431.75,
        "evals": 24576,
-       "wall_s": 6.22,
+       "wall_s": 9.65,
        "delta_bic": 29.42,
        "prob": 0.0,
        "tie_with_best": false
@@ -219,7 +224,7 @@
        "rmse_held_c": 0.149,
        "bic": -426.19,
        "evals": 24576,
-       "wall_s": 6.77,
+       "wall_s": 10.68,
        "delta_bic": 34.98,
        "prob": 0.0,
        "tie_with_best": false
@@ -476,7 +481,7 @@
      "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
      "rmse_held_c": 0.135,
      "right_mechanism": true,
-     "fits": 196608,
+     "fits": 393216,
      "ranked": [
       {
        "id": "S3",
@@ -487,9 +492,9 @@
        "rmse_held_c": 0.135,
        "bic": -461.17,
        "evals": 24576,
-       "wall_s": 9.14,
+       "wall_s": 5.28,
        "delta_bic": 0.0,
-       "prob": 0.9927,
+       "prob": 0.9922,
        "tie_with_best": false
       },
       {
@@ -501,7 +506,7 @@
        "rmse_held_c": 0.141,
        "bic": -450.23,
        "evals": 24576,
-       "wall_s": 7.94,
+       "wall_s": 4.72,
        "delta_bic": 10.94,
        "prob": 0.0042,
        "tie_with_best": false
@@ -515,9 +520,37 @@
        "rmse_held_c": 0.141,
        "bic": -449.61,
        "evals": 24576,
-       "wall_s": 4.36,
+       "wall_s": 3.62,
        "delta_bic": 11.56,
        "prob": 0.0031,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.4",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 11,
+       "rmse_fit_c": 0.131,
+       "rmse_held_c": 0.138,
+       "bic": -445.95,
+       "evals": 24576,
+       "wall_s": 11.16,
+       "delta_bic": 15.22,
+       "prob": 0.0005,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.2r",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 11,
+       "rmse_fit_c": 0.148,
+       "rmse_held_c": 0.14,
+       "bic": -442.68,
+       "evals": 24576,
+       "wall_s": 5.82,
+       "delta_bic": 18.49,
+       "prob": 0.0001,
        "tie_with_best": false
       },
       {
@@ -529,36 +562,8 @@
        "rmse_held_c": 0.155,
        "bic": -436.58,
        "evals": 24576,
-       "wall_s": 5.77,
+       "wall_s": 4.09,
        "delta_bic": 24.59,
-       "prob": 0.0,
-       "tie_with_best": false
-      },
-      {
-       "id": "S7",
-       "name": "Weather curve plus night setback",
-       "source": "catalogue",
-       "k": 10,
-       "rmse_fit_c": 0.14,
-       "rmse_held_c": 0.153,
-       "bic": -424.24,
-       "evals": 24576,
-       "wall_s": 5.9,
-       "delta_bic": 36.93,
-       "prob": 0.0,
-       "tie_with_best": false
-      },
-      {
-       "id": "S5",
-       "name": "On/off thermostat with hysteresis",
-       "source": "catalogue",
-       "k": 8,
-       "rmse_fit_c": 0.244,
-       "rmse_held_c": 0.203,
-       "bic": -362.52,
-       "evals": 24576,
-       "wall_s": 5.91,
-       "delta_bic": 98.65,
        "prob": 0.0,
        "tie_with_best": false
       }
@@ -643,9 +648,266 @@
        "rmse_held_c": 0.219,
        "delta_bic": 102.87,
        "verdict": "seed"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + boost * where(T_out < cutoff - band, 1, 0), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c",
+        "band": "delta_c"
+       },
+       "mechanism": "Outdoor-reset curve with a cold-weather boost / low-temperature cut-in step: below a second, lower outdoor threshold the controller adds a fixed offset to the supply setpoint (common 'boost' or 'warm-weather shutdown with cold kick' feature).",
+       "targets": "mean_by_outdoor_band: positive residual at cold bands (<0, 0-5) while warm bands are slightly negative; S3 under-predicts supply in deep cold",
+       "refute": "If the fitted boost collapses to zero, or the cold-band residual does not shrink while warm-band residual stays flat, the step is not real.",
+       "verdict": "rejected by validator: numeric literal 1: every number must be a typed parameter"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (T_room - sp) + integral(T_room - sp, ti), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "kp": "gain",
+        "ti": "hours"
+       },
+       "mechanism": "Weather curve with PI room trim: proportional plus integral on room error, so slow seasonal drift in the building load is absorbed by the integrator while the weather curve handles fast outdoor changes.",
+       "targets": "monthly residual drift (May positive, Oct negative) and slow hour-of-day bias; S3 has no integral term so it cannot absorb slow load drift",
+       "refute": "If the integral time fits to the bound (effectively off) or the monthly residual pattern persists, integral trim is not the missing mechanism.",
+       "verdict": "rejected by validator: unknown name 'sp'"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (sp - T_room), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "kp": "gain",
+        "sp": "temp_c"
+       },
+       "mechanism": "Outdoor-reset base curve plus proportional room-temperature trim: the controller biases supply up when the room is below setpoint, giving a small closed-loop correction on top of the weather curve.",
+       "targets": "weekday residual pattern (Thu/Fri positive, Sun negative) and hour-of-day midday bump; S3 has no room feedback so it cannot correct slow room drift",
+       "refute": "If kp fits to zero or the weekday/hour residual structure is unchanged, room feedback is not the missing mechanism.",
+       "rmse_held_c": 0.151,
+       "delta_bic": 37.66,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (AMD)",
+       "expr": "where((ema(T_out, tau) < cutoff) & (hour_of_day() < n_on), level + slope * T_out - drop, where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "drop": "delta_c",
+        "n_on": "clock_h"
+       },
+       "mechanism": "Night setback: during the early-morning hours the controller lowers the supply setpoint by a fixed offset (or raises the effective cutoff), producing a scheduled dip that the pure weather curve misses.",
+       "targets": "mean_by_local_hour: negative residual in hours 0-7 and 20-23, positive in 13-17; S3 has no schedule so it cannot lower the night setpoint",
+       "refute": "If the fitted n_on lands outside the night window or the drop is zero, or the hour-of-day residual is not reduced, setback is not the explanation.",
+       "rmse_held_c": 0.156,
+       "delta_bic": 46.81,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + boost * where(T_out < cutoff - band, boost, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c",
+        "band": "delta_c"
+       },
+       "mechanism": "outdoor-reset curve with a cold-weather boost: below a second, lower outdoor threshold the controller adds a fixed extra supply-temperature offset on top of the linear reset, as cold-weather compensation or boiler-protection minimum (repaired after validator rejection)",
+       "targets": "cold-outdoor residual: S3 underpredicts supply (positive residual) below 0-5C, growing as T_out falls",
+       "refute": "if the fitted boost collapses to zero, or the residual in the <0C band does not shrink relative to S3, the cold boost is not real",
+       "rmse_held_c": 0.166,
+       "delta_bic": 61.5,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (sp - T_room), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "kp": "gain",
+        "sp": "temp_c"
+       },
+       "mechanism": "outdoor-reset base with a proportional room-temperature trim active only while the weather-compensation window is on: supply is raised when the room is below setpoint and lowered when above, giving a mild daytime recovery (repaired after validator rejection)",
+       "targets": "hour-of-day residual shape: S3 overpredicts overnight (negative residuals 0-7h) and underpredicts midday/afternoon (positive 13-17h), suggesting room feedback inside the heating window",
+       "refute": "if kp fits to zero, or if adding the room term does not reduce the systematic hour-of-day residual pattern left by S3, room feedback is not present",
+       "rmse_held_c": 0.14,
+       "delta_bic": 18.49,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + boost * where(lag(T_out, tau) - T_out > band, 1,  aper), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c",
+        "band": "delta_c"
+       },
+       "mechanism": "Cold-start / morning recovery boost: when outdoor temperature is falling fast (recent lag much colder than now) the boiler adds a fixed boost to supply temperature, a common 'outdoor reset with reset-ratio acceleration' or anticipator feature. The boost is only active when the heat curve is on, so it lifts the cold-band residuals without affecting warm bands.",
+       "targets": "mean_by_outdoor_band: positive residual at cold outdoor bands (<0, 0-5) while warm bands are slightly negative; corr_with_outdoor = -0.103",
+       "refute": "If the fitted boost parameter collapses to zero, or if the residual by outdoor band does not flatten (cold bands stay positive), the mechanism is wrong.",
+       "verdict": "rejected by validator: numeric literal 1: every number must be a typed parameter"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - night_drop * where((hour_of_day() >= n_off) | (hour_of_day() < n_on), 1, 0), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "night_drop": "delta_c",
+        "n_off": "clock_h",
+        "n_on": "clock_h"
+       },
+       "mechanism": "Night setback with a fixed supply-temperature offset applied only during the unoccupied window, distinct from S7 which shifted the whole curve. Here the setback is a subtraction from the outdoor-reset curve while the boiler is enabled, so it only bites when heat is on.",
+       "targets": "mean_by_local_hour: small negative residuals overnight (hours 0-7) and small positive residuals midday/afternoon (hours 13-17); night_00_06_weekday_minus_weekend = -0.006",
+       "refute": "If the fitted night_drop is indistinguishable from zero, or if the hour-of-day residual pattern does not improve, the setback explanation fails.",
+       "verdict": "rejected by validator: 7 parameters, cap is 6"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (sp - T_room) * where(T_room < sp, 1, 0), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "kp": "gain",
+        "sp": "temp_c"
+       },
+       "mechanism": "One-sided proportional trim: the controller only adds heat when the room is below setpoint, never subtracts when above. This is a common 'low-limit' or 'boost on demand' behaviour in residential boilers, and it explains why a symmetric P term (M1.2r) made things worse while a one-sided term can absorb the shoulder-season residuals.",
+       "targets": "mean_by_month: April/May positive, June-October negative; corr_with_outdoor = -0.103; the fact that M1.2r (symmetric P term) was refuted",
+       "refute": "If the one-sided P term fits no better than S3, or if the fitted kp is tiny, the asymmetric-trim hypothesis is refuted.",
+       "verdict": "rejected by validator: numeric literal 1: every number must be a typed parameter"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, clip(level + slope * T_out, lo, hi), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "hi": "temp_c",
+        "lo": "temp_c"
+       },
+       "mechanism": "Outdoor-reset curve with both a high-limit (supply temperature cap, e.g. boiler max) and a low-limit (minimum supply temperature / boiler minimum firing temperature), combined with the weather-compensated enable. The high limit clips the cold-end boost, the low limit clips the warm-end, matching the observed residual shape.",
+       "targets": "mean_by_outdoor_band: positive residual at <0 and 0-5 °C, negative at >20 °C; the fact that S2 (clip without enable) scored worse than S3",
+       "refute": "If the fitted lo and hi collapse to the same value or to the parameter bounds, or if the clipped curve does not beat S3, the dual-limit mechanism is refuted.",
+       "rmse_held_c": 0.138,
+       "delta_bic": 15.22,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + boost * where(lag(T_out, tau) - T_out > band, boost, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c",
+        "band": "delta_c"
+       },
+       "mechanism": "cold-snap boost: when outdoor has dropped sharply relative to its lagged value (falling faster than the filter tracks), the controller adds extra supply temperature on top of the weather-compensation curve (repaired after validator rejection)",
+       "targets": "positive residual at cold outdoor bands (<0, 0-5): model under-predicts supply when outdoor is coldest",
+       "refute": "held-out RMSE not better than S3, or fitted band collapses to zero / boost collapses to zero, meaning no cold-snap term is needed",
+       "rmse_held_c": 0.164,
+       "delta_bic": 59.32,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - night_drop * where(hour_of_day() < n_on, night_drop, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "night_drop": "delta_c",
+        "n_on": "clock_h"
+       },
+       "mechanism": "night setback: before the morning start clock the controller lowers the supply setpoint by a fixed setback amount, then returns to the daytime curve (repaired after validator rejection)",
+       "targets": "negative residual in hours 0-7 (mean_by_local_hour): model over-predicts supply overnight",
+       "refute": "held-out RMSE not better than S3, or fitted n_on lands outside the early-morning window, or night_drop collapses to zero",
+       "rmse_held_c": 0.218,
+       "delta_bic": 130.76,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (sp - T_room) * where(T_room < sp, sp - T_room, OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "kp": "gain",
+        "sp": "temp_c"
+       },
+       "mechanism": "one-sided proportional feedback: the controller only adds heat when the room is below setpoint, never subtracts when above, so the correction is gated by the sign of the error (repaired after validator rejection)",
+       "targets": "residual structure not captured by linear room feedback (M1.2r refuted): asymmetric PI-like correction only when room is below setpoint",
+       "refute": "held-out RMSE not better than S3, or fitted kp collapses to zero, or the one-sided gate performs no better than the symmetric M1.2r",
+       "rmse_held_c": 0.218,
+       "delta_bic": 130.71,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 0 calls, OpenRouter fallback, not AMD 1 calls)"
+     "llm": "ONLINE (AMD 4 calls, no fallback)"
     }
    }
   },
@@ -677,7 +939,7 @@
        "rmse_held_c": 0.155,
        "bic": -430.31,
        "evals": 24576,
-       "wall_s": 4.34,
+       "wall_s": 3.9,
        "delta_bic": 0.0,
        "prob": 0.8618,
        "tie_with_best": false
@@ -691,7 +953,7 @@
        "rmse_held_c": 0.162,
        "bic": -425.39,
        "evals": 24576,
-       "wall_s": 3.83,
+       "wall_s": 3.4,
        "delta_bic": 4.92,
        "prob": 0.0736,
        "tie_with_best": false
@@ -705,7 +967,7 @@
        "rmse_held_c": 0.159,
        "bic": -424.99,
        "evals": 24576,
-       "wall_s": 6.24,
+       "wall_s": 4.48,
        "delta_bic": 5.32,
        "prob": 0.0603,
        "tie_with_best": false
@@ -719,7 +981,7 @@
        "rmse_held_c": 0.159,
        "bic": -419.59,
        "evals": 24576,
-       "wall_s": 3.78,
+       "wall_s": 4.19,
        "delta_bic": 10.72,
        "prob": 0.0041,
        "tie_with_best": false
@@ -733,7 +995,7 @@
        "rmse_held_c": 0.163,
        "bic": -413.52,
        "evals": 24576,
-       "wall_s": 5.06,
+       "wall_s": 4.68,
        "delta_bic": 16.79,
        "prob": 0.0002,
        "tie_with_best": false
@@ -747,7 +1009,7 @@
        "rmse_held_c": 0.166,
        "bic": -409.43,
        "evals": 24576,
-       "wall_s": 4.71,
+       "wall_s": 4.02,
        "delta_bic": 20.88,
        "prob": 0.0,
        "tie_with_best": false
@@ -770,7 +1032,7 @@
        "rmse_held_c": 0.15,
        "bic": -434.37,
        "evals": 24576,
-       "wall_s": 5.11,
+       "wall_s": 3.99,
        "delta_bic": 0.0,
        "prob": 0.8545,
        "tie_with_best": false
@@ -784,7 +1046,7 @@
        "rmse_held_c": 0.155,
        "bic": -430.31,
        "evals": 24576,
-       "wall_s": 4.34,
+       "wall_s": 3.9,
        "delta_bic": 4.06,
        "prob": 0.1122,
        "tie_with_best": false
@@ -798,7 +1060,7 @@
        "rmse_held_c": 0.153,
        "bic": -425.47,
        "evals": 24576,
-       "wall_s": 5.67,
+       "wall_s": 5.4,
        "delta_bic": 8.9,
        "prob": 0.01,
        "tie_with_best": false
@@ -812,7 +1074,7 @@
        "rmse_held_c": 0.162,
        "bic": -425.39,
        "evals": 24576,
-       "wall_s": 3.83,
+       "wall_s": 3.4,
        "delta_bic": 8.98,
        "prob": 0.0096,
        "tie_with_best": false
@@ -826,7 +1088,7 @@
        "rmse_held_c": 0.159,
        "bic": -424.99,
        "evals": 24576,
-       "wall_s": 6.24,
+       "wall_s": 4.48,
        "delta_bic": 9.38,
        "prob": 0.0078,
        "tie_with_best": false
@@ -840,7 +1102,7 @@
        "rmse_held_c": 0.153,
        "bic": -424.11,
        "evals": 24576,
-       "wall_s": 4.58,
+       "wall_s": 4.48,
        "delta_bic": 10.26,
        "prob": 0.0051,
        "tie_with_best": false
@@ -1167,26 +1429,12 @@
      ]
     },
     "C": {
-     "best": "M1.3",
-     "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost)",
-     "rmse_held_c": 0.141,
+     "best": "S4",
+     "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti)",
+     "rmse_held_c": 0.155,
      "right_mechanism": false,
-     "fits": 491520,
+     "fits": 344064,
      "ranked": [
-      {
-       "id": "M1.3",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 10,
-       "rmse_fit_c": 0.171,
-       "rmse_held_c": 0.141,
-       "bic": -445.57,
-       "evals": 24576,
-       "wall_s": 5.14,
-       "delta_bic": 0.0,
-       "prob": 0.9994,
-       "tie_with_best": false
-      },
       {
        "id": "S4",
        "name": "PI control on room temperature",
@@ -1196,23 +1444,9 @@
        "rmse_held_c": 0.155,
        "bic": -430.31,
        "evals": 24576,
-       "wall_s": 4.34,
-       "delta_bic": 15.26,
-       "prob": 0.0005,
-       "tie_with_best": false
-      },
-      {
-       "id": "M1.1",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 9,
-       "rmse_fit_c": 0.151,
-       "rmse_held_c": 0.155,
-       "bic": -426.52,
-       "evals": 24576,
-       "wall_s": 4.45,
-       "delta_bic": 19.05,
-       "prob": 0.0001,
+       "wall_s": 3.9,
+       "delta_bic": 0.0,
+       "prob": 0.8613,
        "tie_with_best": false
       },
       {
@@ -1224,9 +1458,9 @@
        "rmse_held_c": 0.162,
        "bic": -425.39,
        "evals": 24576,
-       "wall_s": 3.83,
-       "delta_bic": 20.18,
-       "prob": 0.0,
+       "wall_s": 3.4,
+       "delta_bic": 4.92,
+       "prob": 0.0736,
        "tie_with_best": false
       },
       {
@@ -1238,23 +1472,51 @@
        "rmse_held_c": 0.159,
        "bic": -424.99,
        "evals": 24576,
-       "wall_s": 6.24,
-       "delta_bic": 20.58,
-       "prob": 0.0,
+       "wall_s": 4.48,
+       "delta_bic": 5.32,
+       "prob": 0.0602,
        "tie_with_best": false
       },
       {
-       "id": "M1.2r",
+       "id": "S6",
+       "name": "Weather curve plus proportional room feedback",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.159,
+       "bic": -419.59,
+       "evals": 24576,
+       "wall_s": 4.19,
+       "delta_bic": 10.72,
+       "prob": 0.004,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.2",
        "name": "",
        "source": "model (AMD)",
-       "k": 11,
-       "rmse_fit_c": 0.183,
-       "rmse_held_c": 0.153,
-       "bic": -419.99,
+       "k": 10,
+       "rmse_fit_c": 0.142,
+       "rmse_held_c": 0.159,
+       "bic": -414.66,
        "evals": 24576,
-       "wall_s": 8.13,
-       "delta_bic": 25.58,
-       "prob": 0.0,
+       "wall_s": 3.91,
+       "delta_bic": 15.65,
+       "prob": 0.0003,
+       "tie_with_best": false
+      },
+      {
+       "id": "S3",
+       "name": "Weather curve plus summer cutoff on smoothed outdoor",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.139,
+       "rmse_held_c": 0.163,
+       "bic": -413.52,
+       "evals": 24576,
+       "wall_s": 4.68,
+       "delta_bic": 16.79,
+       "prob": 0.0002,
        "tie_with_best": false
       }
      ],
@@ -1341,339 +1603,266 @@
       },
       {
        "round": 1,
-       "id": "M1.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(hour_of_day() < n_off | hour_of_day() >= n_on, -drop, drop - drop)",
+       "id": "M1.3",
+       "source": "model (AMD)",
+       "expr": "clip(level + slope * T_out, lo, hi) + where(T_out < lo, boost, 0)",
        "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "drop": "delta_c",
-        "n_on": "clock_h",
-        "n_off": "clock_h"
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "boost": "delta_c"
        },
-       "mechanism": "Night setback: supply temperature is reduced during night hours, on top of PI control.",
-       "targets": "hour-of-day residual pattern",
-       "refute": "If the fitted drop is not positive, or if the hour-of-day residual does not improve, then the missing mechanism is not a night setback.",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
+       "mechanism": "cold-weather boost / reset-curve breakpoint: below a design outdoor temperature the controller adds a fixed lift to the supply setpoint",
+       "targets": "outdoor-band residual: strong negative below 0 and 0-5 C, near zero in 10-20 C",
+       "refute": "if the boost parameter collapses to zero or the <0 band residual does not improve",
+       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
       },
       {
        "round": 1,
        "id": "M1.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(hour_of_day() >= n_on & hour_of_day() < n_boost_end, boost, boost - boost)",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_on": "clock_h",
-        "n_boost_end": "clock_h"
-       },
-       "mechanism": "Morning recovery boost: supply temperature is increased for a few hours after night setback to bring room up to temperature.",
-       "targets": "midday negative residual (actual higher than predicted)",
-       "refute": "If the fitted boost is not positive, or if the midday residual does not improve, then the missing mechanism is not a morning recovery boost.",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
-      },
-      {
-       "round": 1,
-       "id": "M1.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * T_out",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "slope": "slope"
-       },
-       "mechanism": "Weather compensation added to PI control: supply temperature increases as outdoor temperature falls, on top of room feedback.",
-       "targets": "cold outdoor band bias and correlation with outdoor",
-       "refute": "If adding outdoor reset does not reduce the cold-band residual or if the fitted slope is near zero, then the missing mechanism is not weather compensation.",
-       "rmse_held_c": 0.155,
-       "delta_bic": 19.05,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 1,
-       "id": "M1.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost)",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h"
-       },
-       "mechanism": "Weekend boost: supply temperature is increased on weekends, on top of PI control.",
-       "targets": "weekend-minus-weekday difference",
-       "refute": "If the fitted boost is not positive, or if the weekend residual does not improve, then the missing mechanism is not a weekend boost.",
-       "rmse_held_c": 0.141,
-       "delta_bic": 0.0,
-       "verdict": "new best"
-      },
-      {
-       "round": 1,
-       "id": "M1.1r",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where((hour_of_day() < n_off) | (hour_of_day() >= n_on), -drop, drop - drop)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) - where(weekday() >= 5, wknd_drop, 0)",
        "params": {
-        "kp": "gain",
+        "level": "temp_c",
+        "slope": "slope",
+        "wknd_drop": "delta_c",
         "sp": "temp_c",
-        "ti": "hours",
-        "drop": "delta_c",
-        "n_on": "clock_h",
-        "n_off": "clock_h"
+        "kp": "gain"
        },
-       "mechanism": "PID room-temperature control with a night setback: the setpoint is lowered by a fixed offset during the unoccupied window, so the controller asks for less supply water overnight and the room drifts slightly below the daytime setpoint. (repaired after validator rejection)",
-       "targets": "night-time positive residual (00-06) and the hour-of-day wave in the residual report",
-       "refute": "If the fitted n_on/n_off do not align with the observed hour-of-day residual wave, or if the drop parameter collapses to zero, the setback mechanism is not supported.",
-       "rmse_held_c": 0.16,
-       "delta_bic": 36.31,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "weekend/holiday schedule: controller uses a lower setpoint on weekends, so the model over-predicts heat then",
+       "targets": "weekend_minus_weekday -0.064 and mean_by_weekday dip on days 0 and 6",
+       "refute": "if wknd_drop fits to zero or the weekday pattern persists after removing the term",
+       "verdict": "rejected by validator: numeric literal 5: every number must be a typed parameter"
       },
       {
        "round": 1,
        "id": "M1.2r",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where((hour_of_day() >= n_on) & (hour_of_day() < n_boost_end), boost, boost - boost)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) - where(weekday() >= weekday_sat, wknd_drop, OFF)",
        "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "wknd_drop": "delta_c",
+        "sp": "temp_c",
+        "kp": "gain"
+       },
+       "mechanism": "weather-compensated supply with room feedback plus a weekend setback: on weekend days the controller lowers the supply setpoint by a fixed amount (repaired after validator rejection)",
+       "targets": "weekend_minus_weekday = -0.064 and mean_by_weekday dip on days 0 and 6",
+       "refute": "if the fitted weekday_sat threshold does not land on the weekend boundary, or if wknd_drop fits to zero and the weekend residual persists",
+       "verdict": "rejected by validator: unknown name 'weekday_sat'"
+      },
+      {
+       "round": 1,
+       "id": "M1.1",
+       "source": "model (AMD)",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level + slope * T_out - night_drop, level + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "night_drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h"
+       },
+       "mechanism": "night setback: controller lowers supply setpoint during unoccupied hours, so the model over-predicts heat at night and under-predicts during the day",
+       "targets": "diurnal residual: positive at night (00-06), negative midday (11-16), zero near 08 and 20",
+       "refute": "if fitted n_on/n_off land outside plausible occupancy windows or the diurnal residual amplitude does not shrink",
+       "rmse_held_c": 0.167,
+       "delta_bic": 28.22,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - ema(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
         "kp": "gain",
         "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_on": "clock_h",
-        "n_boost_end": "clock_h"
+        "tau": "hours"
        },
-       "mechanism": "PID control with an optimal-start morning boost: the controller raises the effective setpoint for a fixed window before occupancy to pull the room up to temperature, producing extra supply water in the early hours and a slight overshoot that decays later. (repaired after validator rejection)",
-       "targets": "morning warm-up residual (positive hours 00-06, negative midday) and the recovery ramp after the unoccupied period",
-       "refute": "If the boost window does not sit in the early morning, or if boost collapses to zero, the morning-boost mechanism is not supported.",
-       "rmse_held_c": 0.153,
-       "delta_bic": 25.58,
+       "mechanism": "PI control on a filtered room temperature (sensor lag / thermal mass of the sensing element), so the effective error the controller sees lags the true room temperature",
+       "targets": "corr_with_humidity 0.175 and the slow drift across hours; residual is not purely outdoor-driven",
+       "refute": "if tau fits to near zero (no lag) or the humidity correlation is unchanged",
+       "rmse_held_c": 0.159,
+       "delta_bic": 15.65,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (AMD)",
+       "expr": "clip(level + slope * T_out, lo, hi) + where(T_out < lo, boost, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "boost": "delta_c"
+       },
+       "mechanism": "weather-compensated curve with a low-outdoor boost: when outdoor temperature drops below the curve's lower clip, the controller adds a fixed boost to the supply setpoint (cold-weather reset / boost) (repaired after validator rejection)",
+       "targets": "mean_by_outdoor_band: negative residuals below 0-5 C band, i.e. model under-predicts supply in cold weather",
+       "refute": "if the fitted boost is indistinguishable from zero, or if the cold-band residual stays negative after adding it",
+       "rmse_held_c": 0.17,
+       "delta_bic": 31.54,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.1",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) - ema(boost * (sp - T_room), tau)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) - where(weekday() >= sat, wknd_drop, OFF)",
        "params": {
-        "sp": "temp_c",
+        "level": "temp_c",
+        "slope": "slope",
         "kp": "gain",
+        "sp": "temp_c",
         "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "tau": "hours"
+        "wknd_drop": "delta_c"
        },
-       "mechanism": "Weekend boost is applied but a slow first-order recovery/decay term (e.g. thermal mass of the fireplace mass cooling after weekend setback) subtracts a lagged fraction of the boost, producing a negative residual that grows through the day and is larger on weekends.",
-       "targets": "weekend_minus_weekday = -0.057 and the afternoon negative residual trough (hours 12-17)",
-       "refute": "If the fitted tau collapses to near-zero or the boost coefficient goes to zero, the weekend residual would not be explained by a lagged boost term.",
-       "rmse_held_c": 0.198,
-       "delta_bic": 90.32,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "PI room control with a weekend setback: the controller lowers its effective setpoint (or biases the supply) on Saturday and Sunday, producing a persistent negative residual on weekend days while weekday hours stay unbiased.",
+       "targets": "weekend_minus_weekday = -0.064 and mean_by_weekday dip on days 0 and 6",
+       "refute": "If the fitted weekend drop is near zero, or if applying it makes held-out RMSE worse than S4 by more than the noise band, the weekend setback is not the missing mechanism.",
+       "verdict": "rejected by validator: unknown name 'sat'"
       },
       {
        "round": 2,
        "id": "M2.2",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + slope * (T_out - ema(T_out, ti))",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(T_out < cold, boost, OFF)",
        "params": {
-        "sp": "temp_c",
+        "level": "temp_c",
+        "slope": "slope",
         "kp": "gain",
+        "sp": "temp_c",
         "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "slope": "slope"
+        "boost": "delta_c"
        },
-       "mechanism": "Controller uses a weather-compensation curve based on a filtered outdoor temperature rather than instantaneous T_out; the residual is the difference between the instantaneous and filtered outdoor signal times a slope, which is largest during cold snaps.",
-       "targets": "mean_by_outdoor_band showing -0.20 at <0C and -0.15 at 0-5C, plus corr_with_outdoor = 0.098",
-       "refute": "If the fitted slope is near zero or the filtered-vs-instantaneous difference does not correlate with the cold-band residuals, weather compensation on filtered T_out is not the mechanism.",
-       "rmse_held_c": 0.159,
-       "delta_bic": 35.34,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "Cold-weather boost / reset override: below a cutoff outdoor temperature the controller adds a fixed supply-temperature boost (or raises the curve), so the model under-predicts heat exactly in the coldest bands.",
+       "targets": "mean_by_outdoor_band: -0.191 below 0 C and -0.132 in 0-5 C, i.e. under-prediction at cold outdoor temperatures",
+       "refute": "If the fitted cutoff falls outside the plausible outdoor range, or the boost does not reduce the cold-band residuals, the cold-weather boost is not the mechanism.",
+       "verdict": "rejected by validator: unknown name 'cold'"
       },
       {
        "round": 2,
        "id": "M2.3",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + where(hour_of_day() < n_off, -boost, boost - boost)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * (T_out - lag(T_out, lag_h))",
        "params": {
-        "sp": "temp_c",
+        "level": "temp_c",
+        "slope": "slope",
         "kp": "gain",
+        "sp": "temp_c",
         "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "n_off": "clock_h"
+        "lag_h": "hours"
        },
-       "mechanism": "A night setback schedule: the controller drops the effective setpoint during early-morning hours, so the model (which assumes constant setpoint) over-predicts supply at night and under-predicts during the day when the controller catches up.",
-       "targets": "the overnight positive residual (hours 0-6, +0.03) and the daytime negative trough (hours 12-17, -0.05)",
-       "refute": "If the fitted n_off lands outside the 0-6 window or the boost coefficient is near zero, a night setback does not explain the diurnal residual shape.",
-       "rmse_held_c": 0.163,
-       "delta_bic": 41.9,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "Outdoor-temperature rate feedforward: the controller anticipates heat demand from the rate of change of outdoor temperature (or a lagged outdoor signal), adding supply when outdoor is falling and cutting when rising, which the pure PI loop cannot reproduce.",
+       "targets": "corr_with_outdoor = 0.088 and the hour-of-day residual shape (positive overnight, negative midday)",
+       "refute": "If the fitted lag is at the bound of the hours range or the term does not reduce the hour-of-day residual pattern, rate feedforward is not supported.",
+       "verdict": "rejected by validator: declared but unused parameters: ['level']"
       },
       {
        "round": 2,
        "id": "M2.4",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + where(month() >= month_n, boost, boost - boost)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + rh_gain * (ema(T_room, tau) - T_room)",
        "params": {
-        "sp": "temp_c",
+        "level": "temp_c",
+        "slope": "slope",
         "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "rh_gain": "gain"
+       },
+       "mechanism": "Enthalpy / humidity-compensated reset: the controller biases supply temperature with a slow-filtered room signal (a proxy for moisture or thermal mass), adding a slow correction term on top of the PI loop.",
+       "targets": "corr_with_humidity = 0.175 and the small hour-of-day curvature not captured by PI",
+       "refute": "If the fitted gain is near zero or the term does not improve held-out RMSE beyond S4, the humidity/enthalpy compensation is not present.",
+       "verdict": "rejected by validator: ema: second argument must be a parameter of type 'hours'"
+      },
+      {
+       "round": 2,
+       "id": "M2.1r",
+       "source": "model (AMD)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) - where(weekday() >= sat, wknd_drop, OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "wknd_drop": "delta_c",
+        "sat": "weekday"
+       },
+       "mechanism": "Setback schedule active on weekends: the controller lowers the effective supply temperature on Saturday and Sunday, producing a persistent weekend residual of the same sign as the observed weekend-minus-weekday offset. (repaired after validator rejection)",
+       "targets": "weekend_minus_weekday = -0.064 and mean_by_weekday weekend dip (Sun -0.101, Sat -0.072)",
+       "refute": "If the fitted sat parameter lands on a weekday boundary that leaves the weekend residual unexplained, or if adding the weekend drop does not reduce held-out RMSE below the noise band, the weekend setback is not the cause.",
+       "verdict": "rejected by validator: parameter 'sat' has unknown type 'weekday'; known: ['clock_h', 'delta_c', 'fraction', 'gain', 'hours', 'month_n', 'slope', 'temp_c']"
+      },
+      {
+       "round": 2,
+       "id": "M2.2r",
+       "source": "model (AMD)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(T_out < cold, boost, OFF)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
         "ti": "hours",
         "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "month_n": "month_n"
+        "cold": "temp_c"
        },
-       "mechanism": "Shoulder-season changeover: the controller switches between heating modes (or enables a seasonal boost) at a calendar month boundary, producing a step in supply temperature that the continuous model cannot capture.",
-       "targets": "mean_by_month showing -0.14 in April and -0.16 in October vs near-zero in summer months",
-       "refute": "If the fitted month_n falls in summer or the boost is near zero, a seasonal changeover does not explain the shoulder-month residuals.",
-       "rmse_held_c": 0.159,
-       "delta_bic": 36.06,
+       "mechanism": "Cold-weather boost: when outdoor temperature falls below a cutoff the controller adds extra supply temperature (e.g. boiler reset curve steepening or frost protection), correcting the under-prediction at low T_out. (repaired after validator rejection)",
+       "targets": "mean_by_outdoor_band negative residuals at <0 (-0.191) and 0-5 (-0.132)",
+       "refute": "If the fitted cold cutoff sits well inside the mild band, or if the boost term does not remove the negative residual at the coldest outdoor band, the cold-boost mechanism is wrong.",
+       "rmse_held_c": 0.172,
+       "delta_bic": 35.02,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
-       "round": 3,
-       "id": "M3.1",
+       "round": 2,
+       "id": "M2.3r",
        "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + slope_ema * (T_out - ema(T_out, tau))",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * (T_out - lag(T_out, lag_h))",
        "params": {
         "kp": "gain",
         "sp": "temp_c",
         "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
+        "slope": "slope",
+        "lag_h": "hours"
+       },
+       "mechanism": "Outdoor-temperature rate feedforward: the controller anticipates outdoor temperature change and adds supply proportional to the recent drop in T_out, giving a lead that shows up as a diurnal residual pattern. (repaired after validator rejection)",
+       "targets": "hour-of-day residual shape (positive overnight, negative midday) and corr_with_outdoor = 0.088",
+       "refute": "If the fitted lag_h is at the edge of its bound or the term does not reduce the hour-of-day residual amplitude, the rate feedforward is not present.",
+       "rmse_held_c": 0.162,
+       "delta_bic": 19.96,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.4r",
+       "source": "model (AMD)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + rh_gain * (ema(T_room, tau) - T_room)",
+       "params": {
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours",
+        "rh_gain": "gain",
         "tau": "hours"
        },
-       "mechanism": "Weather-compensated reset: the controller adds a term proportional to the deviation of outdoor temperature from its slow moving average, so a cold snap (T_out below its EMA) raises supply and a warm spell lowers it. This is a standard outdoor-reset curve with a filtered reference rather than the raw T_out used in M1.1/M2.2.",
-       "targets": "mean_by_outdoor_band: negative residual at cold outdoor (<0, 0-5) and the corr_with_outdoor=0.098; also the diurnal residual trough at 14-16.",
-       "refute": "If the fitted tau collapses to a very short or very long horizon and the term's coefficient goes to zero, or if held-out RMSE does not improve over M1.3, the residual's outdoor-band structure is not a filtered-outdoor reset effect.",
-       "verdict": "rejected by validator: unknown name 'slope_ema'"
-      },
-      {
-       "round": 3,
-       "id": "M3.2",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + where(hour_of_day() < n_off, -drop, drop - drop)",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "n_off": "clock_h"
-       },
-       "mechanism": "Night setback with morning recovery: the controller lowers the supply setpoint during a night window (early hours) and lets the integral term recover it during the day. The residual's sign flip at ~08:00 is the recovery transient the pure proportional+integral loop cannot reproduce.",
-       "targets": "mean_by_local_hour: positive residual 0-6 and negative residual 12-18; the night_00_06_weekday_minus_weekend=0.041.",
-       "refute": "If the fitted n_off lands outside the 0-8 window, or if the term is not significant in held-out data, the diurnal residual is not a setback schedule but something else (e.g Calibration drift).",
-       "verdict": "rejected by validator: unknown name 'drop'"
-      },
-      {
-       "round": 3,
-       "id": "M3.3",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + gain_h * (T_room - ema(T_room, tau))",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "tau": "hours"
-       },
-       "mechanism": "Adaptive/self-tuning room feedback: the controller adds a correction proportional to the recent room-temperature trend (room minus its own EMA), i.e. a derivative-like term on the room state. In shoulder months the room drifts more, so this term is larger, explaining the month-dependent residual.",
-       "targets": "mean_by_month: April and October residuals (-0.139, -0.158) versus mid-summer near zero; also the weekend_minus_weekday=-0.057.",
-       "refute": "If the fitted tau is outside a plausible derivative horizon (minutes to a couple of hours) or the term does not reduce the April/October bias in held-out data, the seasonal residual is not a room-derivative effect.",
-       "verdict": "rejected by validator: unknown name 'gain_h'"
-      },
-      {
-       "round": 3,
-       "id": "M3.4",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + where(month() >= n_summer, -boost, boost - boost)",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "n_summer": "month_n"
-       },
-       "mechanism": "Seasonal changeover / heating-lockout: the controller disables or reduces heating above a calendar threshold (summer mode), so shoulder months carry a systematic offset relative to the pure loop. This is distinct from M2.4, which added a positive boost in summer rather than a negative one in the shoulder months.",
-       "targets": "mean_by_month: the strong negative residual in April and October and near-zero in June-August; the corr_with_humidity=0.231.",
-       "refute": "If the fitted n_summer falls in a month where the residual is already near zero, or if the term does not improve held-out RMSE over M1.3, the month structure is not a calendar changeover.",
-       "rmse_held_c": 0.153,
-       "delta_bic": 25.89,
+       "mechanism": "Smoothed-room-temperature feedback: the controller uses a filtered room temperature (as a humidity-compensated or slow sensor) so the effective error includes the difference between filtered and instantaneous T_room. (repaired after validator rejection)",
+       "targets": "corr_with_humidity = 0.175 and the slow room-temperature drift not captured by the PI term",
+       "refute": "If the fitted tau collapses to a very short time constant (making the term vanish) or the residual correlation with humidity is unchanged, the filtered-sensor mechanism is not supported.",
+       "rmse_held_c": 0.16,
+       "delta_bic": 16.88,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
-       "round": 3,
-       "id": "M3.1r",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + slope * (T_out - ema(T_out, ti))",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "slope": "slope"
-       },
-       "mechanism": "weather-compensated reset with a slow outdoor filter: the controller tracks filtered outdoor temperature rather than instantaneous outdoor temperature, so the supply offset lags weather swings and leaves a diurnal residual pattern (repaired after validator rejection)",
-       "targets": "weekend_minus_weekday and corr_with_outdoor; the hour-of-day residual arc that the plain outdoor term cannot follow",
-       "refute": "held-out RMSE no better than M1.3, or the fitted slope collapsing to zero, or the ema time constant hitting its bound",
-       "rmse_held_c": 0.191,
-       "delta_bic": 81.36,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
-       "id": "M3.2r",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + where(hour_of_day() < n_off, -boost, boost - boost)",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "n_off": "clock_h"
-       },
-       "mechanism": "night setback: the controller lowers the supply setpoint during the early-morning hours, so the model over-predicts heat then and the residual is positive before dawn (repaired after validator rejection)",
-       "targets": "night_00_06_weekday_minus_weekend and the positive early-morning residual band in mean_by_local_hour",
-       "refute": "held-out RMSE no better than M1.3, or the fitted n_off landing outside the night window, or the boost sign flipping to a morning boost",
-       "rmse_held_c": 0.154,
-       "delta_bic": 28.11,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
-       "id": "M3.3r",
-       "source": "model (AMD)",
-       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + where(weekday() >= n_weekend, boost, boost - boost) + gain * (T_room - ema(T_room, ti))",
-       "params": {
-        "kp": "gain",
-        "sp": "temp_c",
-        "ti": "hours",
-        "boost": "delta_c",
-        "n_weekend": "clock_h",
-        "gain": "gain"
-       },
-       "mechanism": "room-temperature feedback trim: the controller adds a term proportional to how fast room temperature is drifting from its own filtered value, correcting overshoot that the pure proportional-plus-integral law misses (repaired after validator rejection)",
-       "targets": "the midday negative residual trough in mean_by_local_hour and the weekend_minus_weekday offset",
-       "refute": "held-out RMSE no better than M1.3, or the fitted gain indistinguishable from zero, or the term worsening the midday residual instead of flattening it",
-       "rmse_held_c": 0.159,
-       "delta_bic": 35.35,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
+       "round": 2,
        "id": "-",
        "source": "loop",
        "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 4 calls, OpenRouter fallback, not AMD 2 calls)"
+     "llm": "ONLINE (AMD 8 calls, no fallback)"
     }
    }
   },
@@ -1705,7 +1894,7 @@
        "rmse_held_c": 0.137,
        "bic": -466.61,
        "evals": 24576,
-       "wall_s": 3.44,
+       "wall_s": 3.54,
        "delta_bic": 0.0,
        "prob": 0.8982,
        "tie_with_best": false
@@ -1719,7 +1908,7 @@
        "rmse_held_c": 0.135,
        "bic": -461.1,
        "evals": 24576,
-       "wall_s": 3.8,
+       "wall_s": 3.57,
        "delta_bic": 5.51,
        "prob": 0.0571,
        "tie_with_best": false
@@ -1733,7 +1922,7 @@
        "rmse_held_c": 0.146,
        "bic": -460.37,
        "evals": 24576,
-       "wall_s": 3.45,
+       "wall_s": 3.5,
        "delta_bic": 6.24,
        "prob": 0.0397,
        "tie_with_best": false
@@ -1747,7 +1936,7 @@
        "rmse_held_c": 0.138,
        "bic": -456.1,
        "evals": 24576,
-       "wall_s": 4.12,
+       "wall_s": 4.15,
        "delta_bic": 10.51,
        "prob": 0.0047,
        "tie_with_best": false
@@ -1761,7 +1950,7 @@
        "rmse_held_c": 0.144,
        "bic": -450.22,
        "evals": 24576,
-       "wall_s": 3.92,
+       "wall_s": 4.5,
        "delta_bic": 16.39,
        "prob": 0.0002,
        "tie_with_best": false
@@ -1775,7 +1964,7 @@
        "rmse_held_c": 0.146,
        "bic": -445.35,
        "evals": 24576,
-       "wall_s": 4.43,
+       "wall_s": 4.47,
        "delta_bic": 21.26,
        "prob": 0.0,
        "tie_with_best": false
@@ -1798,7 +1987,7 @@
        "rmse_held_c": 0.137,
        "bic": -466.61,
        "evals": 24576,
-       "wall_s": 3.44,
+       "wall_s": 3.54,
        "delta_bic": 0.0,
        "prob": 0.8217,
        "tie_with_best": false
@@ -1812,7 +2001,7 @@
        "rmse_held_c": 0.137,
        "bic": -462.03,
        "evals": 24576,
-       "wall_s": 3.74,
+       "wall_s": 3.56,
        "delta_bic": 4.58,
        "prob": 0.0832,
        "tie_with_best": false
@@ -1826,7 +2015,7 @@
        "rmse_held_c": 0.135,
        "bic": -461.1,
        "evals": 24576,
-       "wall_s": 3.8,
+       "wall_s": 3.57,
        "delta_bic": 5.51,
        "prob": 0.0523,
        "tie_with_best": false
@@ -1840,7 +2029,7 @@
        "rmse_held_c": 0.146,
        "bic": -460.37,
        "evals": 24576,
-       "wall_s": 3.45,
+       "wall_s": 3.5,
        "delta_bic": 6.24,
        "prob": 0.0363,
        "tie_with_best": false
@@ -1854,7 +2043,7 @@
        "rmse_held_c": 0.138,
        "bic": -456.1,
        "evals": 24576,
-       "wall_s": 4.12,
+       "wall_s": 4.15,
        "delta_bic": 10.51,
        "prob": 0.0043,
        "tie_with_best": false
@@ -1868,7 +2057,7 @@
        "rmse_held_c": 0.136,
        "bic": -454.57,
        "evals": 24576,
-       "wall_s": 11.75,
+       "wall_s": 5.03,
        "delta_bic": 12.04,
        "prob": 0.002,
        "tie_with_best": false
@@ -2112,26 +2301,12 @@
      ]
     },
     "C": {
-     "best": "M2.2",
-     "expr": "where(month() >= spring_start, where(month() <= spring_end, level + slope * T_out - spring_drop, level + slope * T_out), level + slope * T_out)",
-     "rmse_held_c": 0.12,
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.137,
      "right_mechanism": false,
      "fits": 368640,
      "ranked": [
-      {
-       "id": "M2.2",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 10,
-       "rmse_fit_c": 0.167,
-       "rmse_held_c": 0.12,
-       "bic": -485.71,
-       "evals": 24576,
-       "wall_s": 5.08,
-       "delta_bic": 0.0,
-       "prob": 0.9999,
-       "tie_with_best": false
-      },
       {
        "id": "S1",
        "name": "Weather curve, linear",
@@ -2141,23 +2316,9 @@
        "rmse_held_c": 0.137,
        "bic": -466.61,
        "evals": 24576,
-       "wall_s": 3.44,
-       "delta_bic": 19.1,
-       "prob": 0.0001,
-       "tie_with_best": false
-      },
-      {
-       "id": "M3.1r",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 9,
-       "rmse_fit_c": 0.187,
-       "rmse_held_c": 0.134,
-       "bic": -462.6,
-       "evals": 24576,
-       "wall_s": 4.68,
-       "delta_bic": 23.11,
-       "prob": 0.0,
+       "wall_s": 3.54,
+       "delta_bic": 0.0,
+       "prob": 0.8886,
        "tie_with_best": false
       },
       {
@@ -2169,9 +2330,9 @@
        "rmse_held_c": 0.135,
        "bic": -461.1,
        "evals": 24576,
-       "wall_s": 3.8,
-       "delta_bic": 24.61,
-       "prob": 0.0,
+       "wall_s": 3.57,
+       "delta_bic": 5.51,
+       "prob": 0.0565,
        "tie_with_best": false
       },
       {
@@ -2183,23 +2344,51 @@
        "rmse_held_c": 0.146,
        "bic": -460.37,
        "evals": 24576,
-       "wall_s": 3.45,
-       "delta_bic": 25.34,
-       "prob": 0.0,
+       "wall_s": 3.5,
+       "delta_bic": 6.24,
+       "prob": 0.0392,
        "tie_with_best": false
       },
       {
-       "id": "M1.3",
+       "id": "M1.2r",
        "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 9,
-       "rmse_fit_c": 0.198,
-       "rmse_held_c": 0.136,
-       "bic": -459.42,
+       "source": "model (AMD)",
+       "k": 10,
+       "rmse_fit_c": 0.199,
+       "rmse_held_c": 0.134,
+       "bic": -457.73,
        "evals": 24576,
-       "wall_s": 3.84,
-       "delta_bic": 26.29,
-       "prob": 0.0,
+       "wall_s": 4.8,
+       "delta_bic": 8.88,
+       "prob": 0.0105,
+       "tie_with_best": false
+      },
+      {
+       "id": "S2",
+       "name": "Weather curve with min/max clamps",
+       "source": "catalogue",
+       "k": 9,
+       "rmse_fit_c": 0.205,
+       "rmse_held_c": 0.138,
+       "bic": -456.1,
+       "evals": 24576,
+       "wall_s": 4.15,
+       "delta_bic": 10.51,
+       "prob": 0.0046,
+       "tie_with_best": false
+      },
+      {
+       "id": "S4",
+       "name": "PI control on room temperature",
+       "source": "catalogue",
+       "k": 8,
+       "rmse_fit_c": 0.243,
+       "rmse_held_c": 0.144,
+       "bic": -450.22,
+       "evals": 24576,
+       "wall_s": 4.5,
+       "delta_bic": 16.39,
+       "prob": 0.0002,
        "tie_with_best": false
       }
      ],
@@ -2287,212 +2476,215 @@
       {
        "round": 1,
        "id": "M1.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out - midday_drop * (hour_of_day() >= midday_start & hour_of_day() < midday_end)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + where((hour_of_day() >= t_start) & (hour_of_day() < t_end), boost, 0)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "midday_drop": "delta_c",
-        "midday_start": "clock_h",
-        "midday_end": "clock_h"
+        "boost": "delta_c",
+        "t_start": "clock_h",
+        "t_end": "clock_h"
        },
-       "mechanism": "Controller reduces supply temperature during peak solar/occupancy hours to avoid overheating, a solar compensation or day setback.",
-       "targets": "mean_by_local_hour negative midday residual",
-       "refute": "If fitted midday_drop is not significantly negative or the held-out error does not improve, the midday residual is not explained by a scheduled supply reduction.",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
-      },
-      {
-       "round": 1,
-       "id": "M1.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out + season_offset * (month() >= season_start & month() <= season_end)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "season_offset": "delta_c",
-        "season_start": "month_n",
-        "season_end": "month_n"
-       },
-       "mechanism": "Calendar-based seasonal changeover or shoulder-season reset: a month window applies a fixed supply temperature offset.",
-       "targets": "mean_by_month May negative and September/October positive residual",
-       "refute": "If season_offset is not significant or the fitted month window does not cover the anomalous months, the monthly residual is not a calendar offset.",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
-      },
-      {
-       "round": 1,
-       "id": "M1.1r",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(hour_of_day() >= midday_start & hour_of_day() < midday_end, level + slope * T_out - midday_drop, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "midday_drop": "delta_c",
-        "midday_start": "clock_h",
-        "midday_end": "clock_h"
-       },
-       "mechanism": "a scheduled midday setback / reduced-flow window in the controller's daily program: during a fixed block of local clock hours the supply setpoint is shifted down by a fixed offset, while the rest of the day follows the outdoor-reset curve (repaired after validator rejection)",
-       "targets": "the broad negative residual trough in mean_by_local_hour between late morning and late afternoon, where the plain weather-compensation curve over-predicts supply temperature",
-       "refute": "the fitter collapses the window (start equal to end, or a window covering nearly all or none of the day) or drives the offset to zero, or held-out RMSE does not beat the plain reset curve S1; also refuted if the fitted window does not overlap the hours where the residual is most negative",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
-      },
-      {
-       "round": 1,
-       "id": "M1.2r",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(month() >= season_start & month() <= season_end, level + slope * T_out + season_offset, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "season_offset": "delta_c",
-        "season_start": "month_n",
-        "season_end": "month_n"
-       },
-       "mechanism": "a seasonal changeover / calendar-based offset in the controller, e.g. a summer-winter mode switch or a seasonal reset-curve shift that adds a fixed bias to the supply setpoint for a contiguous block of months (repaired after validator rejection)",
-       "targets": "the month-blocked residual structure: a large negative residual in the late-spring month and positive residuals in the early-autumn months, which a single outdoor-reset line cannot absorb",
-       "refute": "the fitted month block is empty or spans the whole year, or the offset is negligible, or the improvement disappears on held-out months; also refuted if the residual month pattern is better explained by an outdoor-temperature or humidity term rather than by calendar month",
-       "verdict": "rejected by validator: only single <, >, <=, >= comparisons"
-      },
-      {
-       "round": 1,
-       "id": "M1.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out + boost * max(cutoff - T_out, T_out - T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "cutoff": "temp_c",
-        "boost": "slope"
-       },
-       "mechanism": "Low outdoor temperature boost: the outdoor reset curve becomes steeper below a cutoff, increasing supply to protect against cold.",
-       "targets": "mean_by_outdoor_band positive residual below freezing",
-       "refute": "If boost is not significantly positive or cutoff is outside the observed outdoor range, the cold-band residual is not a piecewise reset.",
-       "rmse_held_c": 0.139,
-       "delta_bic": 13.64,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "A scheduled midday setback or reduced setpoint: the controller lowers the supply temperature during occupied midday hours (e.g Calorifier/boiler setback, or a fixed daytime schedule), producing a systematic negative residual against the pure weather-compensated S1 baseline.",
+       "targets": "midday negative residual band (hours 10-16) in mean_by_local_hour, plus the negative mean_by_outdoor_band at 15-20 and >20",
+       "refute": "If the fitted boost parameter collapses to zero or the fitted window covers the whole day, the midday residual is not a schedule effect; if held-out RMSE does not improve over S1, the schedule hypothesis is refuted.",
+       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
       },
       {
        "round": 1,
        "id": "M1.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out - warm_drop * max(T_out - warm_cutoff, T_out - T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where(ema(T_out, tau) < cutoff, drop, 0)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "warm_cutoff": "temp_c",
-        "warm_drop": "slope"
+        "drop": "delta_c",
+        "cutoff": "temp_c",
+        "tau": "hours"
        },
-       "mechanism": "Warm weather compensation: above a warm cutoff the controller reduces supply temperature more steeply, a high-limit reset.",
-       "targets": "mean_by_outdoor_band negative residual above warm band",
-       "refute": "If warm_drop is not significantly positive or warm_cutoff is outside the observed range, the warm-band residual is not a high-limit reset.",
-       "rmse_held_c": 0.136,
-       "delta_bic": 7.19,
+       "mechanism": "A cold-weather boost or frost-protection override: when the filtered outdoor temperature falls below a threshold the controller raises the supply above the weather-compensation line, which is exactly the positive residual seen at the coldest band. This is distinct from S3 which turns the plant OFF below a cutoff.",
+       "targets": "positive residual in the <0 outdoor band (0.115) and the September/October positive month residuals",
+       "refute": "If the fitted drop is negative or zero, or if the cutoff lands outside the observed outdoor range, the cold-band residual is not a boost; if held-out RMSE does not improve over S1, refuted.",
+       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where((weekday() >= 5), weekend_off, 0) - where((hour_of_day() >= n_start) | (hour_of_day() < n_end), night_off, 0)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "weekend_off": "delta_c",
+        "night_off": "delta_c",
+        "n_start": "clock_h",
+        "n_end": "clock_h"
+       },
+       "mechanism": "Separate weekend and night setback schedules: the controller drops supply on weekends and during night hours independently, which is common in commercial BMS. S7 only has one daily window and no weekday/weekend distinction, so it cannot capture the interaction seen in the residual.",
+       "targets": "weekend_minus_weekday = 0.014, night_00_06_weekday_minus_weekend = -0.013, and the small negative hour-of-day residuals in the early morning",
+       "refute": "If either fitted setback is zero, or if the night window overlaps the whole day, the residual is not a dual-schedule effect; if held-out RMSE does not beat S7, refuted.",
+       "verdict": "rejected by validator: numeric literal 5: every number must be a typed parameter"
+      },
+      {
+       "round": 1,
+       "id": "M1.3r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where(weekday() >= weekend_day, weekend_off, weekend_off - weekend_off) - where((hour_of_day() >= n_start) | (hour_of_day() < n_end), night_off, night_off - night_off)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "weekend_off": "delta_c",
+        "night_off": "delta_c",
+        "n_start": "clock_h",
+        "n_end": "clock_h",
+        "weekend_day": "weekday"
+       },
+       "mechanism": "separate weekend setback and overnight setback, each subtracting a fixed offset from the weather-compensation curve (repaired after validator rejection)",
+       "targets": "weekend_minus_weekday and night_00_06_weekday_minus_weekend residual features",
+       "refute": "if weekend_off or night_off fit to zero, or the fitted weekend_day is not at the end of the week, the residual has no weekend/night setback structure",
+       "verdict": "rejected by validator: parameter 'weekend_day' has unknown type 'weekday'; known: ['clock_h', 'delta_c', 'fraction', 'gain', 'hours', 'month_n', 'slope', 'temp_c']"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + gain * (T_room - ema(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "gain": "gain",
+        "tau": "hours"
+       },
+       "mechanism": "A room-temperature feedback trim on top of weather compensation: the controller nudges supply up when the room is warmer than its recent filtered average (or vice versa), which correlates with humidity because humid hours tend to be warmer hours. This is a PI-style room reset that S1 lacks.",
+       "targets": "corr_with_humidity = 0.222 and the small but structured hour-of-day residual, plus the negative residual at 15-20 outdoor band",
+       "refute": "If the fitted gain is near zero or the sign is opposite to what improves held-out RMSE, the residual is not a room-feedback trim; if RMSE does not beat S6, the extra room term is spurious.",
+       "rmse_held_c": 0.144,
+       "delta_bic": 21.47,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + where((hour_of_day() >= t_start) & (hour_of_day() < t_end), boost, boost - boost)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "boost": "delta_c",
+        "t_start": "clock_h",
+        "t_end": "clock_h"
+       },
+       "mechanism": "supply temperature is raised by a fixed boost during a scheduled daytime window, on top of the weather-compensation curve (repaired after validator rejection)",
+       "targets": "positive residual bump during occupied hours in the by-hour residual profile",
+       "refute": "if the fitted boost collapses to zero or the window is degenerate, the residual has no scheduled daytime offset",
+       "rmse_held_c": 0.138,
+       "delta_bic": 16.73,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where(ema(T_out, tau) < cutoff, drop, drop - drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "cutoff": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "controller lowers supply when the filtered outdoor temperature is above a cutoff, i.e. a warm-weather setback keyed on a smoothed outdoor signal (repaired after validator rejection)",
+       "targets": "residual bias in mild outdoor bands where a smoothed outdoor signal crosses a threshold",
+       "refute": "if the fitted cutoff sits outside the observed outdoor range or the drop is zero, no smoothed-outdoor setback exists",
+       "rmse_held_c": 0.134,
+       "delta_bic": 8.88,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(hour_of_day() >= sun_start, where(hour_of_day() < sun_end, level + slope * T_out - sun_drop, level + slope * T_out), level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + where((hour_of_day() >= t_start) & (hour_of_day() < t_end), boost * (T_room - ema(T_room, tau)), boost - boost)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "sun_start": "clock_h",
-        "sun_end": "clock_h",
-        "sun_drop": "temp_c"
+        "boost": "delta_c",
+        "t_start": "clock_h",
+        "t_end": "clock_h",
+        "tau": "hours"
        },
-       "mechanism": "solar gain compensation or daytime setback reduces supply temperature when sun is expected",
-       "targets": "midday negative residual, strongest in afternoon",
-       "refute": "fitted sun_drop negligible, or window not covering midday, or held-out RMSE not improved",
-       "rmse_held_c": 0.136,
-       "delta_bic": 31.14,
+       "mechanism": "occupancy-driven setpoint boost: during a daytime schedule window the controller raises the effective setpoint, so supply climbs above the weather-compensation curve whenever the room is below the boosted target; the boost term is proportional to the room's deviation from its own slow average, capturing recovery from overnight setback",
+       "targets": "midday negative residual trough (hours 10-17) and the May dip in mean_by_month",
+       "refute": "if the fitted t_start/t_end window is degenerate (zero width) or the boost gain is indistinguishable from zero, the midday trough is not a scheduled setpoint boost",
+       "rmse_held_c": 0.139,
+       "delta_bic": 22.28,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(month() >= spring_start, where(month() <= spring_end, level + slope * T_out - spring_drop, level + slope * T_out), level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + integral(sp - T_room, ti)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "spring_start": "month_n",
-        "spring_end": "month_n",
-        "spring_drop": "temp_c"
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours"
        },
-       "mechanism": "seasonal changeover or manual spring reset lowers supply temperature for a limited month window",
-       "targets": "May negative residual, large negative mean in May",
-       "refute": "fitted window not including May, or spring_drop negligible, or held-out RMSE not improved",
-       "rmse_held_c": 0.12,
-       "delta_bic": 0.0,
-       "verdict": "new best"
+       "mechanism": "weather-compensated PI: the base curve sets supply from outdoor, and a PI trim on room error corrects slow drift; the integral term explains the long, smooth hour-of-day residual arc that a pure proportional law cannot",
+       "targets": "the residual's weak but persistent correlation with outdoor (-0.1) and the hour-of-day shape that S1 leaves behind",
+       "refute": "if the integral time constant fits to the bound (very short or very long) or the PI trim adds no held-out improvement over S6, the residual is not closed-loop room-error correction",
+       "rmse_held_c": 0.147,
+       "delta_bic": 31.38,
+       "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(weekday() >= weekend_start, level + slope * T_out + weekend_boost, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where(ema(T_out, tau) > cutoff, drop, drop - drop)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "weekend_start": "clock_h",
-        "weekend_boost": "temp_c"
+        "drop": "delta_c",
+        "cutoff": "temp_c",
+        "tau": "hours"
        },
-       "mechanism": "weekend schedule or occupancy boost raises supply temperature on weekends",
-       "targets": "weekend positive residual, weekend minus weekday",
-       "refute": "weekend_boost negligible, or weekend_start not at weekend, or held-out RMSE not improved",
-       "rmse_held_c": 0.14,
-       "delta_bic": 33.81,
+       "mechanism": "mild-weather shutdown / warm-weather lockout: when the filtered outdoor temperature rises above a cutoff the controller drops supply (or shuts the zone), producing a step down at the warm end that a linear slope cannot represent",
+       "targets": "the positive residual in the <0 outdoor band and the negative residual in the >20 band (curvature in mean_by_outdoor_band)",
+       "refute": "if the fitted cutoff lands outside the observed outdoor range or the drop is zero, no warm-weather cutoff is present",
+       "rmse_held_c": 0.146,
+       "delta_bic": 30.73,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < curve_break, level + slope_cold * T_out, level + slope_warm * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope_cold": "slope",
-        "slope_warm": "slope",
-        "curve_break": "temp_c"
-       },
-       "mechanism": "nonlinear weather compensation curve with steeper slope at cold outdoor and flatter slope at warm outdoor",
-       "targets": "outdoor band residuals: positive at cold, negative at warm",
-       "refute": "slopes not significantly different, or breakpoint outside observed outdoor range, or held-out RMSE not improved",
-       "rmse_held_c": 0.138,
-       "delta_bic": 30.23,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
-       "id": "M3.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": null,
-       "params": null,
-       "mechanism": "",
-       "targets": "",
-       "refute": "",
-       "verdict": "rejected by validator: empty expression"
-      },
-      {
-       "round": 3,
-       "id": "M3.1r",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < cold_cutoff, level + slope * T_out + cold_boost, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where((hour_of_day() >= t_start) | (hour_of_day() < t_end), drop, drop - drop)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "cold_cutoff": "temp_c",
-        "cold_boost": "temp_c"
+        "drop": "delta_c",
+        "t_start": "clock_h",
+        "t_end": "clock_h"
        },
-       "mechanism": "Cold weather step boost: when outdoor temperature falls below a threshold, add a fixed boost to supply temperature. This is a common cold-weather compensation or boiler boost. (repaired after validator rejection)",
-       "targets": "mean_by_outdoor_band <0 (0.133) and 0-5 (0.033)",
-       "refute": "If the fitter sets cold_boost near zero or the held-out RMSE does not improve over M2.2, the residual at cold temperatures is not a step boost.",
-       "rmse_held_c": 0.134,
-       "delta_bic": 23.11,
+       "mechanism": "night setback: the controller lowers supply during an overnight window, so the residual is systematically negative in the small hours; the same window shifted on weekends would show up as the weekend offset",
+       "targets": "the night hours 0-6 residual (slightly negative) and the weekend_minus_weekday offset",
+       "refute": "if the fitted night window does not overlap hours 0-6, or the drop is zero, no night setback is active",
+       "rmse_held_c": 0.144,
+       "delta_bic": 26.86,
        "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 4 calls, OpenRouter fallback, not AMD 7 calls)"
+     "llm": "ONLINE (AMD 11 calls, no fallback)"
     }
    }
   },
@@ -2523,7 +2715,7 @@
        "rmse_held_c": 0.135,
        "bic": -469.92,
        "evals": 24576,
-       "wall_s": 3.57,
+       "wall_s": 3.38,
        "delta_bic": 0.0,
        "prob": 0.9993,
        "tie_with_best": false
@@ -2537,7 +2729,7 @@
        "rmse_held_c": 0.138,
        "bic": -454.9,
        "evals": 24576,
-       "wall_s": 3.97,
+       "wall_s": 4.56,
        "delta_bic": 15.02,
        "prob": 0.0005,
        "tie_with_best": false
@@ -2551,7 +2743,7 @@
        "rmse_held_c": 0.14,
        "bic": -451.86,
        "evals": 24576,
-       "wall_s": 5.7,
+       "wall_s": 4.83,
        "delta_bic": 18.06,
        "prob": 0.0001,
        "tie_with_best": false
@@ -2565,7 +2757,7 @@
        "rmse_held_c": 0.146,
        "bic": -446.81,
        "evals": 24576,
-       "wall_s": 4.53,
+       "wall_s": 4.91,
        "delta_bic": 23.11,
        "prob": 0.0,
        "tie_with_best": false
@@ -2579,7 +2771,7 @@
        "rmse_held_c": 0.145,
        "bic": -443.8,
        "evals": 24576,
-       "wall_s": 4.21,
+       "wall_s": 4.96,
        "delta_bic": 26.12,
        "prob": 0.0,
        "tie_with_best": false
@@ -2593,7 +2785,7 @@
        "rmse_held_c": 0.143,
        "bic": -441.03,
        "evals": 24576,
-       "wall_s": 4.9,
+       "wall_s": 5.89,
        "delta_bic": 28.89,
        "prob": 0.0,
        "tie_with_best": false
@@ -2616,7 +2808,7 @@
        "rmse_held_c": 0.135,
        "bic": -469.92,
        "evals": 24576,
-       "wall_s": 3.57,
+       "wall_s": 3.38,
        "delta_bic": 0.0,
        "prob": 0.9965,
        "tie_with_best": false
@@ -2630,7 +2822,7 @@
        "rmse_held_c": 0.137,
        "bic": -457.91,
        "evals": 24576,
-       "wall_s": 4.74,
+       "wall_s": 4.83,
        "delta_bic": 12.01,
        "prob": 0.0025,
        "tie_with_best": false
@@ -2644,7 +2836,7 @@
        "rmse_held_c": 0.138,
        "bic": -454.9,
        "evals": 24576,
-       "wall_s": 3.97,
+       "wall_s": 4.56,
        "delta_bic": 15.02,
        "prob": 0.0005,
        "tie_with_best": false
@@ -2658,7 +2850,7 @@
        "rmse_held_c": 0.133,
        "bic": -454.25,
        "evals": 24576,
-       "wall_s": 5.01,
+       "wall_s": 4.88,
        "delta_bic": 15.67,
        "prob": 0.0004,
        "tie_with_best": false
@@ -2672,7 +2864,7 @@
        "rmse_held_c": 0.14,
        "bic": -451.86,
        "evals": 24576,
-       "wall_s": 5.7,
+       "wall_s": 4.83,
        "delta_bic": 18.06,
        "prob": 0.0001,
        "tie_with_best": false
@@ -2686,7 +2878,7 @@
        "rmse_held_c": 0.146,
        "bic": -446.81,
        "evals": 24576,
-       "wall_s": 4.53,
+       "wall_s": 4.91,
        "delta_bic": 23.11,
        "prob": 0.0,
        "tie_with_best": false
@@ -2934,7 +3126,7 @@
      "expr": "level + slope * T_out",
      "rmse_held_c": 0.135,
      "right_mechanism": false,
-     "fits": 294912,
+     "fits": 393216,
      "ranked": [
       {
        "id": "S1",
@@ -2945,23 +3137,37 @@
        "rmse_held_c": 0.135,
        "bic": -469.92,
        "evals": 24576,
-       "wall_s": 3.57,
+       "wall_s": 3.38,
        "delta_bic": 0.0,
-       "prob": 0.9705,
+       "prob": 0.9968,
        "tie_with_best": false
       },
       {
-       "id": "M1.2",
+       "id": "M1.4",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 9,
+       "rmse_fit_c": 0.132,
+       "rmse_held_c": 0.137,
+       "bic": -456.91,
+       "evals": 24576,
+       "wall_s": 5.35,
+       "delta_bic": 13.01,
+       "prob": 0.0015,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.4",
        "name": "",
        "source": "model (AMD)",
        "k": 10,
-       "rmse_fit_c": 0.124,
-       "rmse_held_c": 0.132,
-       "bic": -462.87,
+       "rmse_fit_c": 0.158,
+       "rmse_held_c": 0.135,
+       "bic": -455.33,
        "evals": 24576,
-       "wall_s": 4.68,
-       "delta_bic": 7.05,
-       "prob": 0.0286,
+       "wall_s": 4.91,
+       "delta_bic": 14.59,
+       "prob": 0.0007,
        "tie_with_best": false
       },
       {
@@ -2973,7 +3179,7 @@
        "rmse_held_c": 0.138,
        "bic": -454.9,
        "evals": 24576,
-       "wall_s": 3.97,
+       "wall_s": 4.56,
        "delta_bic": 15.02,
        "prob": 0.0005,
        "tie_with_best": false
@@ -2987,7 +3193,7 @@
        "rmse_held_c": 0.136,
        "bic": -453.58,
        "evals": 24576,
-       "wall_s": 4.07,
+       "wall_s": 4.24,
        "delta_bic": 16.34,
        "prob": 0.0003,
        "tie_with_best": false
@@ -3001,23 +3207,9 @@
        "rmse_held_c": 0.14,
        "bic": -451.86,
        "evals": 24576,
-       "wall_s": 5.7,
+       "wall_s": 4.83,
        "delta_bic": 18.06,
        "prob": 0.0001,
-       "tie_with_best": false
-      },
-      {
-       "id": "S5",
-       "name": "On/off thermostat with hysteresis",
-       "source": "catalogue",
-       "k": 8,
-       "rmse_fit_c": 0.223,
-       "rmse_held_c": 0.146,
-       "bic": -446.81,
-       "evals": 24576,
-       "wall_s": 4.53,
-       "delta_bic": 23.11,
-       "prob": 0.0,
        "tie_with_best": false
       }
      ],
@@ -3104,58 +3296,40 @@
       },
       {
        "round": 1,
-       "id": "M1.4",
-       "source": "model (AMD)",
-       "expr": "level + slope * T_out - where((hour_of_day() >= n_on) | (hour_of_day() < n_off), drop, OFF) + slope2 * ema(T_out, tau)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "n_on": "clock_h",
-        "n_off": "clock_h",
-        "drop": "delta_c",
-        "tau": "hours"
-       },
-       "mechanism": "night setback combined with a second, slower outdoor-reset slope: the controller uses a steeper reset line during unoccupied hours and a shallower one during the day, so the effective slope changes with time of day",
-       "targets": "the month-by-month residual (April +0.013, October -0.068) and the small positive residual at hour 23 / negative at 11-17",
-       "refute": "if the two slopes fit to the same value or the setback window is empty, the day/night slope split is not supported",
-       "verdict": "rejected by validator: unknown name 'slope2'"
-      },
-      {
-       "round": 1,
        "id": "M1.1",
        "source": "model (AMD)",
-       "expr": "level + slope * T_out + where((hour_of_day() >= n_start) & (hour_of_day() < n_end), boost, OFF)",
+       "expr": "level + slope * T_out + where((month() >= m_start) & (month() <= m_end), boost, OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
         "boost": "delta_c",
-        "n_start": "clock_h",
-        "n_end": "clock_h"
+        "m_start": "month_n",
+        "m_end": "month_n"
        },
-       "mechanism": "a morning-to-evening occupancy boost that raises the supply setpoint during working hours, independent of outdoor reset; the controller adds a fixed delta to the weather-compensated curve when the building is occupied",
-       "targets": "midday negative residual band (hours 9-19) and the -0.068 mean in month 10; the S1 fit under-predicts during the day",
-       "refute": "if the fitted boost window collapses to zero width or the boost parameter goes to zero, or if held-out RMSE does not improve over S1, the daytime residual is not an occupancy boost",
-       "rmse_held_c": 0.145,
-       "delta_bic": 31.99,
+       "mechanism": "A seasonal changeover: the boiler runs a higher supply setpoint during a warm-season window (e.g. domestic-hot-water priority or a summer/winter changeover schedule), adding a fixed offset to the weather-compensation curve in those months.",
+       "targets": "mean_by_month residual: S1 under-predicts in April/May/August and over-predicts in June/July/September/October (seasonal bias not captured by T_out alone).",
+       "refute": "If the fitted month window is empty or the boost parameter collapses to zero, or if held-out RMSE does not improve over S1, the seasonal-offset hypothesis is refuted.",
+       "rmse_held_c": 0.147,
+       "delta_bic": 35.07,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 1,
        "id": "M1.2",
        "source": "model (AMD)",
-       "expr": "level + slope * T_out - where(ema(T_out, tau) > cutoff, drop, OFF)",
+       "expr": "level + slope * T_out - where((hour_of_day() >= n_on) | (hour_of_day() < n_off), drop, OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "tau": "hours",
-        "cutoff": "temp_c",
-        "drop": "delta_c"
+        "drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h"
        },
-       "mechanism": "warm-weather shutdown with a lagged outdoor sensor: when the filtered outdoor temperature exceeds a threshold the controller cuts the supply setpoint by a fixed amount (or to a low limit) rather than following the reset line",
-       "targets": "the -0.051 residual in the >20 outdoor band and -0.034 in 5-10 band; S1 over-predicts when it is warm outside",
-       "refute": "if the cutoff lands outside the observed outdoor range or the drop is zero, or if the warm-band residual is unchanged, the warm-weather cutoff is not the cause",
-       "rmse_held_c": 0.132,
-       "delta_bic": 7.05,
+       "mechanism": "A daytime setback / night-setback schedule on the heating circuit: the controller lowers the supply setpoint during occupied hours (or raises it at night), producing wipeout of the weather-compensation offset in a clock window.",
+       "targets": "mean_by_local_hour residual: S1 is biased negative through the working day (peaking around late morning) and near zero overnight, indicating a daytime supply reduction.",
+       "refute": "If the fitted clock window is degenerate (n_on == n_off) or the drop is not significantly different from zero on held-out data, the schedule hypothesis is refuted.",
+       "rmse_held_c": 0.145,
+       "delta_bic": 32.43,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
@@ -3170,35 +3344,170 @@
         "sp": "temp_c",
         "tau": "hours"
        },
-       "mechanism": "weather compensation plus a slow room-temperature trim: the controller biases the supply curve by a proportional term on the filtered room error, so the supply rises when the room drifts below setpoint during the day",
-       "targets": "the hour-of-day residual shape (negative midday, near-zero at night) and the small weekend/weekday differences; S1 has no room feedback",
-       "refute": "if kp fits to zero or the filtered-room term does not reduce the hour-of-day residual structure, room feedback is not present",
+       "mechanism": "Weather compensation with a slow room-temperature feedback (PI on a filtered room sensor): the controller trims the supply curve using a lagged room error, which shows up as a residual that correlates with room temperature rather than outdoor temperature.",
+       "targets": "residual correlation with outdoor band and the small negative bias at high outdoor temperature; S1's pure feedforward leaves a slow room-temperature feedback term unexplained.",
+       "refute": "If kp fits to zero or the filtered-room term does not reduce held-out RMSE relative to S1, the feedback-trim hypothesis is refuted.",
        "rmse_held_c": 0.136,
        "delta_bic": 16.34,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 1,
-       "id": "M1.1r",
+       "id": "M1.4",
        "source": "model (AMD)",
-       "expr": "level + slope * T_out - where((hour_of_day() >= n_on) | (hour_of_day() < n_off), drop, OFF) + slope * ema(T_out, tau)",
+       "expr": "where(hysteresis(T_out, lo, hi), level + slope * T_out, level + slope * T_out + (hi - lo))",
        "params": {
         "level": "temp_c",
         "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c"
+       },
+       "mechanism": "A weather-compensation curve with a hysteresis switch (e.g. boiler enable/disable or a two-slope curve selected by an outdoor thermostat): the effective slope steps up or down when outdoor temperature crosses a threshold, producing a kink not captured by a single line.",
+       "targets": "mean_by_outdoor_band residual: S两头 over-predicts in the 5-10 band and under-predicts above 20, suggesting a discontinuous jump in the supply curve rather than a smooth line.",
+       "refute": "If the hysteresis thresholds collapse to the same value or the kinked model does not beat S1 on held-out data, the two-slope hypothesis is refuted.",
+       "rmse_held_c": 0.137,
+       "delta_bic": 13.01,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where((hour_of_day() >= n_on) | (hour_of_day() < n_off), drop, OFF) - where(ema(T_out, tau) > cutoff, drop, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
         "n_on": "clock_h",
         "n_off": "clock_h",
-        "drop": "delta_c",
         "tau": "hours"
        },
-       "mechanism": "Weather-compensated supply curve with a night/setback offset subtracted during occupied hours, plus a slow-filtered outdoor term that adds curvature the pure linear T_out term misses. (repaired after validator rejection)",
-       "targets": "hour-of-day residual dip during occupied hours, plus outdoor-band curvature",
-       "refute": "If the fitted tau collapses to zero or the drop parameter goes to zero, the setback and lag terms are not supported; if held-out RMSE does not improve on S1, the residual hour-of-day and outdoor-band structure is not explained by this mechanism.",
-       "rmse_held_c": 0.153,
-       "delta_bic": 50.05,
+       "mechanism": "night setback plus a mild-weather heat-pump lockout: the boiler is disabled when the filtered outdoor temperature is above a cutoff, so on mild days the supply is lower than the pure weather curve predicts, producing the negative residual in the 5-10 band and the daytime dip",
+       "targets": "the negative residual in the 5-10 °C outdoor band and the midday dip (hours 9-17) that S1 leaves unexplained",
+       "refute": "if the fitted cutoff lands outside the 5-10 °C band, or if the daytime dip persists after the lockout term is added, or if held-out RMSE does not improve over S1",
+       "verdict": "rejected by validator: unknown name 'cutoff'"
+      },
+      {
+       "round": 2,
+       "id": "M2.2",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + kp * (sp - lag(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "proportional room-temperature feedback with a transport-delay term: the controller compares room temperature to setpoint and adds a correction proportional to the error, but the sensor or pipe lag makes the correction act on a delayed room temperature, so the supply is slightly low when the room is warming and slightly high when cooling",
+       "targets": "the small but persistent negative residual in the 9-17 h window and the negative residual at >20 °C outdoor, which a pure feed-forward curve cannot produce",
+       "refute": "if the fitted kp is indistinguishable from zero, or if the residual by hour-of-day is unchanged, or if the lag parameter collapses to the ema already tried in M1.3",
+       "verdict": "rejected by validator: lag takes T_out only; use ema or integral for anything else"
+      },
+      {
+       "round": 2,
+       "id": "M2.3",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + where((month() >= m_start) & (month() <= m_end), boost, OFF) - where(ema(T_out, tau) > cutoff, boost, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "boost": "delta_c",
+        "m_start": "month_n",
+        "m_end": "month_n",
+        "tau": "hours"
+       },
+       "mechanism": "shoulder-season changeover: the controller raises supply during the heating-season shoulder months (spring and autumn) and cuts it during warm months, reflecting a manual seasonal switch or a changeover between heating and free-cooling modes",
+       "targets": "the large negative residual in October and the positive residual in April/May/August, which are seasonal rather than diurnal",
+       "refute": "if the fitted month window does not bracket the shoulder months, or if the October residual is not reduced, or if the term is redundant with the outdoor-band residual",
+       "verdict": "rejected by validator: unknown name 'cutoff'"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + integral(sp - T_room, ti)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours"
+       },
+       "mechanism": "PI room-temperature control: the weather curve provides the bulk of the supply, while a proportional term reacts to instantaneous error and an integral term slowly removes the persistent offset, so the residual should lose its low-frequency structure",
+       "targets": "the slow drift in the residual by month and the small negative bias in the 9-17 h window, which suggest integral action slowly correcting a steady-state offset",
+       "refute": "if the integral term winds up and produces a worse held-out RMSE, or if the residual by month is unchanged, or if the fitted ti is at the bound of the parameter range",
+       "rmse_held_c": 0.135,
+       "delta_bic": 14.59,
        "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.1r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out - where((hour_of_day() >= n_on) | (hour_of_day() < n_off), drop, OFF) - where(ema(T_out, tau) > level, drop, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h",
+        "tau": "hours"
+       },
+       "mechanism": "night setback reduces supply, and a warm-weather lockout (based on filtered outdoor temperature exceeding the reset-curve level) further reduces supply (repaired after validator rejection)",
+       "targets": "negative residual in midday hours and mild outdoor band; setback plus warm-weather cutout",
+       "refute": "if the fitted ema threshold sits far from the reset level, or if the warm-weather term does not improve held-out RMSE over S1",
+       "rmse_held_c": 0.184,
+       "delta_bic": 95.88,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.2r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + kp * (sp - ema(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "proportional control on both instantaneous and filtered room temperature error (dual-sensor or filtered feedback) (repaired after validator rejection)",
+       "targets": "small residual structure not captured by instantaneous proportional term; room-temperature feedback with two time constants",
+       "refute": "if the two gains fit to the same value or the filtered term does not improve held-out RMSE over S6",
+       "rmse_held_c": 0.139,
+       "delta_bic": 21.36,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "M2.3r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + where((month() >= m_start) & (month() <= m_end), boost, OFF) - where(ema(T_out, tau) > level, boost, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "boost": "delta_c",
+        "m_start": "month_n",
+        "m_end": "month_n",
+        "tau": "hours"
+       },
+       "mechanism": "seasonal boost during shoulder months, offset by a warm-weather lockout keyed to filtered outdoor temperature relative to the reset level (repaired after validator rejection)",
+       "targets": "monthly residual pattern (negative in October, positive in shoulder months) combined with outdoor-band residual",
+       "refute": "if the fitted month window is empty or the warm-weather term does not improve held-out RMSE over M1.1",
+       "rmse_held_c": 0.135,
+       "delta_bic": 18.76,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 2,
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 6 calls, OpenRouter fallback, not AMD 8 calls)"
+     "llm": "ONLINE (AMD 14 calls, no fallback)"
     }
    }
   },
@@ -3230,7 +3539,7 @@
        "rmse_held_c": 0.127,
        "bic": -485.47,
        "evals": 24576,
-       "wall_s": 3.57,
+       "wall_s": 3.54,
        "delta_bic": 0.0,
        "prob": 0.9803,
        "tie_with_best": false
@@ -3244,7 +3553,7 @@
        "rmse_held_c": 0.126,
        "bic": -477.65,
        "evals": 24576,
-       "wall_s": 3.86,
+       "wall_s": 3.57,
        "delta_bic": 7.82,
        "prob": 0.0196,
        "tie_with_best": false
@@ -3258,7 +3567,7 @@
        "rmse_held_c": 0.132,
        "bic": -466.78,
        "evals": 24576,
-       "wall_s": 4.59,
+       "wall_s": 4.32,
        "delta_bic": 18.69,
        "prob": 0.0001,
        "tie_with_best": false
@@ -3272,7 +3581,7 @@
        "rmse_held_c": 0.135,
        "bic": -456.41,
        "evals": 24576,
-       "wall_s": 6.04,
+       "wall_s": 5.04,
        "delta_bic": 29.06,
        "prob": 0.0,
        "tie_with_best": false
@@ -3286,7 +3595,7 @@
        "rmse_held_c": 0.141,
        "bic": -450.71,
        "evals": 24576,
-       "wall_s": 4.87,
+       "wall_s": 4.65,
        "delta_bic": 34.76,
        "prob": 0.0,
        "tie_with_best": false
@@ -3300,7 +3609,7 @@
        "rmse_held_c": 0.152,
        "bic": -450.09,
        "evals": 24576,
-       "wall_s": 3.48,
+       "wall_s": 3.47,
        "delta_bic": 35.38,
        "prob": 0.0,
        "tie_with_best": false
@@ -3323,7 +3632,7 @@
        "rmse_held_c": 0.127,
        "bic": -485.47,
        "evals": 24576,
-       "wall_s": 3.57,
+       "wall_s": 3.54,
        "delta_bic": 0.0,
        "prob": 0.9779,
        "tie_with_best": false
@@ -3337,7 +3646,7 @@
        "rmse_held_c": 0.126,
        "bic": -477.65,
        "evals": 24576,
-       "wall_s": 3.86,
+       "wall_s": 3.57,
        "delta_bic": 7.82,
        "prob": 0.0196,
        "tie_with_best": false
@@ -3351,7 +3660,7 @@
        "rmse_held_c": 0.129,
        "bic": -472.79,
        "evals": 24576,
-       "wall_s": 5.41,
+       "wall_s": 5.14,
        "delta_bic": 12.68,
        "prob": 0.0017,
        "tie_with_best": false
@@ -3365,7 +3674,7 @@
        "rmse_held_c": 0.13,
        "bic": -469.95,
        "evals": 24576,
-       "wall_s": 4.9,
+       "wall_s": 4.73,
        "delta_bic": 15.52,
        "prob": 0.0004,
        "tie_with_best": false
@@ -3379,7 +3688,7 @@
        "rmse_held_c": 0.134,
        "bic": -468.68,
        "evals": 24576,
-       "wall_s": 3.81,
+       "wall_s": 3.56,
        "delta_bic": 16.79,
        "prob": 0.0002,
        "tie_with_best": false
@@ -3393,7 +3702,7 @@
        "rmse_held_c": 0.132,
        "bic": -466.78,
        "evals": 24576,
-       "wall_s": 4.59,
+       "wall_s": 4.32,
        "delta_bic": 18.69,
        "prob": 0.0001,
        "tie_with_best": false
@@ -3637,40 +3946,12 @@
      ]
     },
     "C": {
-     "best": "M3.1r",
-     "expr": "level + slope * T_out + curve * T_out * T_out + month_slope * month() * T_out",
-     "rmse_held_c": 0.118,
+     "best": "S1",
+     "expr": "level + slope * T_out",
+     "rmse_held_c": 0.127,
      "right_mechanism": false,
-     "fits": 417792,
+     "fits": 319488,
      "ranked": [
-      {
-       "id": "M3.1r",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 9,
-       "rmse_fit_c": 0.155,
-       "rmse_held_c": 0.118,
-       "bic": -494.02,
-       "evals": 24576,
-       "wall_s": 4.1,
-       "delta_bic": 0.0,
-       "prob": 0.7078,
-       "tie_with_best": false
-      },
-      {
-       "id": "M2.2",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 8,
-       "rmse_fit_c": 0.167,
-       "rmse_held_c": 0.122,
-       "bic": -492.18,
-       "evals": 24576,
-       "wall_s": 3.88,
-       "delta_bic": 1.84,
-       "prob": 0.2821,
-       "tie_with_best": true
-      },
       {
        "id": "S1",
        "name": "Weather curve, linear",
@@ -3680,9 +3961,9 @@
        "rmse_held_c": 0.127,
        "bic": -485.47,
        "evals": 24576,
-       "wall_s": 3.57,
-       "delta_bic": 8.55,
-       "prob": 0.0098,
+       "wall_s": 3.54,
+       "delta_bic": 0.0,
+       "prob": 0.9803,
        "tie_with_best": false
       },
       {
@@ -3694,23 +3975,9 @@
        "rmse_held_c": 0.126,
        "bic": -477.65,
        "evals": 24576,
-       "wall_s": 3.86,
-       "delta_bic": 16.37,
-       "prob": 0.0002,
-       "tie_with_best": false
-      },
-      {
-       "id": "M1.1",
-       "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 9,
-       "rmse_fit_c": 0.181,
-       "rmse_held_c": 0.129,
-       "bic": -473.13,
-       "evals": 24576,
-       "wall_s": 5.1,
-       "delta_bic": 20.89,
-       "prob": 0.0,
+       "wall_s": 3.57,
+       "delta_bic": 7.82,
+       "prob": 0.0196,
        "tie_with_best": false
       },
       {
@@ -3722,8 +3989,50 @@
        "rmse_held_c": 0.132,
        "bic": -466.78,
        "evals": 24576,
-       "wall_s": 4.59,
-       "delta_bic": 27.24,
+       "wall_s": 4.32,
+       "delta_bic": 18.69,
+       "prob": 0.0001,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.3",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 10,
+       "rmse_fit_c": 0.187,
+       "rmse_held_c": 0.133,
+       "bic": -459.71,
+       "evals": 24576,
+       "wall_s": 5.23,
+       "delta_bic": 25.76,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "M2.2",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 10,
+       "rmse_fit_c": 0.206,
+       "rmse_held_c": 0.134,
+       "bic": -457.23,
+       "evals": 24576,
+       "wall_s": 4.61,
+       "delta_bic": 28.24,
+       "prob": 0.0,
+       "tie_with_best": false
+      },
+      {
+       "id": "S7",
+       "name": "Weather curve plus night setback",
+       "source": "catalogue",
+       "k": 10,
+       "rmse_fit_c": 0.187,
+       "rmse_held_c": 0.135,
+       "bic": -456.41,
+       "evals": 24576,
+       "wall_s": 5.04,
+       "delta_bic": 29.06,
        "prob": 0.0,
        "tie_with_best": false
       }
@@ -3812,44 +4121,76 @@
       {
        "round": 1,
        "id": "M1.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(month() >= m_start, level + offset, level) + slope * T_out",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + hum_gain * (humidity - hum_ref)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "offset": "delta_c",
-        "m_start": "month_n"
+        "hum_gain": "gain",
+        "hum_ref": "fraction"
        },
-       "mechanism": "Calendar-based seasonal changeover: controller adds a fixed offset to the heating curve after a certain month, raising supply in autumn/winter and lowering it in spring/summer.",
-       "targets": "mean_by_month (negative in spring, positive in autumn)",
-       "refute": "If the fitted offset is near zero or the month threshold is outside the heating season, or if held-out RMSE does not improve over S1.",
-       "rmse_held_c": 0.129,
-       "delta_bic": 12.34,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "Weather-compensated supply temperature with a humidity-dependent correction: the controller raises supply when outdoor air is humid (e.g. to protect against condensation or to compensate latent load), so the residual tracks humidity and, through the seasonal humidity cycle, month.",
+       "targets": "residual correlation with humidity (+0.342) and the month-by-month drift (negative in spring, positive in autumn)",
+       "refute": "If adding the humidity term does not reduce held-out RMSE below S1 and does not flatten the month means, humidity is not a real input to this controller.",
+       "verdict": "rejected by validator: unknown name 'humidity'"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + hum_gain * (ema(T_room, hum_ref) - T_room)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "hum_gain": "gain",
+        "hum_ref": "fraction"
+       },
+       "mechanism": "supply temperature is trimmed by a slow-filtered room temperature (a proxy for moisture/thermal mass), so the curve shifts seasonally (repaired after validator rejection)",
+       "targets": "residual correlation with humidity and the spring/autumn month bias",
+       "refute": "if the fitted hum_gain is indistinguishable from zero or the month bias does not shrink, the humidity correlation is spurious",
+       "verdict": "rejected by validator: ema: second argument must be a parameter of type 'hours'"
       },
       {
        "round": 1,
        "id": "M1.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where((hour_of_day() >= n_start) & (hour_of_day() < n_end), level + boost + slope * T_out, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + warm_bias * (ema(T_out, tau) - T_out)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "boost": "delta_c",
-        "n_start": "clock_h",
-        "n_end": "clock_h"
+        "tau": "hours",
+        "warm_bias": "delta_c"
        },
-       "mechanism": "Morning warm-up boost: controller raises supply temperature during a morning window to recover from night setback or preheat the building.",
-       "targets": "mean_by_local_hour (positive residual in morning hours)",
-       "refute": "If the fitted window does not overlap the positive residual hours, or if the boost is negative, or if held-out RMSE does not improve.",
-       "rmse_held_c": 0.134,
-       "delta_bic": 27.63,
+       "mechanism": "Weather compensation on a filtered (smoothed) outdoor temperature rather than the instantaneous one: a building-mass-aware controller uses an EMA of T_out, so during fast swings the commanded supply leads/lags the instantaneous value, producing a curvature in the residual vs T_out.",
+       "targets": "residual by outdoor band (positive at cold extremes, negative at warm extremes) and the negative corr_with_outdoor despite a positive slope",
+       "refute": "If the fitted tau collapses to near zero or the warm_bias term does not improve held-out fit, the controller is using instantaneous T_out.",
+       "rmse_held_c": 0.143,
+       "delta_bic": 39.37,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 1,
        "id": "M1.3",
-       "source": "model (OpenRouter fallback, not AMD)",
+       "source": "model (AMD)",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level + slope * T_out, level - drop + slope * T_out)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h"
+       },
+       "mechanism": "A night setback inverted: the controller holds a higher supply during the night/early-morning window and a lower one during the day, i.e. the setback schedule is phase-shifted relative to S7 (which used the opposite polarity).",
+       "targets": "the hour-of-day residual shape: positive in the early morning (0-10), negative in the afternoon/evening (15-21)",
+       "refute": "If the fitted on/off window does not align with the residual hour pattern, or if the drop is not significantly non-zero, the schedule is not the explanation.",
+       "rmse_held_c": 0.133,
+       "delta_bic": 25.76,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (AMD)",
        "expr": "level + slope * T_out + kp * (sp - T_room) + integral(sp - T_room, ti)",
        "params": {
         "level": "temp_c",
@@ -3858,133 +4199,133 @@
         "sp": "temp_c",
         "ti": "hours"
        },
-       "mechanism": "Weather-compensated PI control: outdoor reset plus proportional and integral room temperature feedback to trim supply based on persistent room error.",
-       "targets": "seasonal drift and room temperature feedback (S6 improvement)",
-       "refute": "If the integral term winds up or the fitted kp/ti are at bounds, or if held-out RMSE does not beat S6.",
-       "rmse_held_c": 0.137,
-       "delta_bic": 32.13,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 1,
-       "id": "M1.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < cutoff, level + slope_cold * T_out, level + slope_warm * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope_cold": "slope",
-        "slope_warm": "slope",
-        "cutoff": "temp_c"
-       },
-       "mechanism": "Heating curve with breakpoint: controller uses a steeper slope below a cutoff outdoor temperature to provide extra heat in cold weather, and a shallower slope above.",
-       "targets": "mean_by_outdoor_band (positive at cold, negative at warm)",
-       "refute": "If the two slopes are not significantly different, or if the cutoff is outside the observed outdoor range, or if held-out RMSE does not improve over S1.",
-       "rmse_held_c": 0.133,
-       "delta_bic": 21.15,
+       "mechanism": "Weather-compensated feedforward plus a PI trim on room temperature: the feedforward sets the base curve, the PI corrects for occupancy/internal gains (weekday vs weekend) and slow drift, which pure S1 cannot capture.",
+       "targets": "the small but persistent weekday-vs-weekend and hour-of-day structure that pure feedforward (S1) leaves, plus the residual's negative corr_with_outdoor",
+       "refute": "If the PI gains fit to zero or the held-out RMSE does not beat S1, this room is not closed-loop on T_room.",
+       "rmse_held_c": 0.151,
+       "delta_bic": 57.89,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
-       "id": "M2.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * ema(T_out, tau)",
+       "id": "M2.3",
+       "source": "model (AMD)",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - drop)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h"
+       },
+       "mechanism": "Occupancy-scheduled setback with proportional feedback. During unoccupied hours the setpoint is lowered by a fixed offset (drop), so the controller asks for less heat; the residual shows the model over-predicts in the evening and under-predicts in the morning because the schedule transition is not captured.",
+       "targets": "residual mean_by_local_hour: positive bias 06-10 and negative bias 15-20; weekend_minus_weekday small",
+       "refute": "If the fitted n_on/n_off do not fall near the observed morning/evening transitions, or if adding the schedule does not reduce held-out RMSE below S6, the setback hypothesis is wrong.",
+       "verdict": "rejected by validator: unknown name 'drop'"
+      },
+      {
+       "round": 2,
+       "id": "M2.4",
+       "source": "model (AMD)",
+       "expr": "where(hysteresis(T_room, lo, hi), level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "lo": "temp_c",
+        "hi": "temp_c"
+       },
+       "mechanism": "Room-temperature hysteresis (bang-bang thermostat) superimposed on a weather-compensated curve. The controller only calls for heat when the room drops below lo Outlook and stops when it rises above hi, so the supply temperature is gated by a room-temperature deadband rather than a continuous proportional law.",
+       "targets": "residual mean_by_outdoor_band: positive at <0 and 10-15, negative at >20; corr_with_humidity positive",
+       "refute": "If the fitted lo and hi are so wide that hysteresis is always 1 (or always 0), or if held-out RMSE is not better than S6, the deadband gating is not the mechanism.",
+       "verdict": "rejected by validator: unknown name 'drop'"
+      },
+      {
+       "round": 2,
+       "id": "M2.1r",
+       "source": "model (AMD)",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h",
+        "drop": "delta_c"
+       },
+       "mechanism": "night setback: proportional room-temperature feedback with a scheduled overnight supply-temperature drop (repaired after validator rejection)",
+       "targets": "residual mean_by_local_hour (positive overnight, negative late afternoon)",
+       "refute": "held-out RMSE not better than S6/S1, or fitted n_on/n_off not aligned with the overnight positive residual window",
+       "verdict": "rejected by validator: 7 parameters, cap is 6"
+      },
+      {
+       "round": 2,
+       "id": "M2.2r",
+       "source": "model (AMD)",
+       "expr": "where(hysteresis(T_room, lo, hi), level + slope * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room) - drop)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "drop": "delta_c"
+       },
+       "mechanism": "room-temperature hysteresis setback: supply reduced when room is above the upper threshold, restored when it falls below the lower threshold (repaired after validator rejection)",
+       "targets": "residual mean_by_local_hour and mean_by_outdoor_band",
+       "refute": "held-out RMSE not better than S6, or fitted lo/hi outside plausible comfort band",
+       "verdict": "rejected by validator: 7 parameters, cap is 6"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - ema(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
         "tau": "hours"
        },
-       "mechanism": "weather compensation uses a filtered outdoor temperature, so supply lags outdoor swings and differs between warming and cooling seasons",
-       "targets": "seasonal residual: spring negative and autumn positive at similar outdoor temperatures",
-       "refute": "if fitted tau collapses to a very short time constant or held-out error does not improve over instantaneous outdoor reset",
-       "rmse_held_c": 0.136,
-       "delta_bic": 27.25,
+       "mechanism": "PI controller whose proportional term acts on a filtered room-temperature measurement (sensor lag / thermal mass of the sensing element). The filter delays the response to morning warm-up and evening cool-down, producing a diurnal residual pattern in supply temperature.",
+       "targets": "residual mean_by_local_hour: positive bias 06-10, negative bias 15-20; also corr_with_humidity positive",
+       "refute": "If the fitted tau collapses to the minimum bound (no filtering) or the held-out RMSE is not better than S6, the sensor-lag explanation fails.",
+       "rmse_held_c": 0.147,
+       "delta_bic": 50.06,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out + curve * T_out * T_out",
+       "source": "model (AMD)",
+       "expr": "level + slope * T_out + kp * (sp - T_room) + integral(sp - T_room, ti)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "curve": "slope"
-       },
-       "mechanism": "weather-compensation heating curve is curved rather than linear, steepening at cold outdoor air",
-       "targets": "outdoor-band residual: too low at cold extremes and too high at warm extremes for a straight line",
-       "refute": "if the curve parameter fits near its lower bound or held-out error is worse than the linear outdoor reset",
-       "rmse_held_c": 0.122,
-       "delta_bic": 0.0,
-       "verdict": "new best"
-      },
-      {
-       "round": 2,
-       "id": "M2.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * ema(T_out, tau) + kp * (sp - T_room)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "tau": "hours",
         "kp": "gain",
-        "sp": "temp_c"
+        "sp": "temp_c",
+        "ti": "hours"
        },
-       "mechanism": "weather compensation with filtered outdoor air plus proportional room-temperature feedback trims supply as rooms warm or cool",
-       "targets": "daily residual: morning warm-up positive and afternoon/evening negative, plus seasonal hysteresis",
-       "refute": "if room gain or lag time fits at bounds, or if held-out error does not beat the simpler room-feedback and lagged-outdoor programs",
-       "rmse_held_c": 0.137,
-       "delta_bic": 39.5,
+       "mechanism": "PI control with integral action. The integrator accumulates error over the shoulder seasons when the plant gain changes, producing a seasonal bias that a pure proportional law cannot track. This is the classic reason real boiler controllers include an integrator.",
+       "targets": "residual mean_by_month: strong negative in spring (Apr-May), positive in autumn (Sep-Oct); corr_with_outdoor negative",
+       "refute": "If the integral term is driven to its anti-windup limit for most hours, or held-out RMSE is worse than S6, the integrator is not the missing mechanism.",
+       "rmse_held_c": 0.134,
+       "delta_bic": 28.24,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
-       "id": "M2.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(weekday() >= d_start, level + offset + slope * T_out, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "offset": "delta_c",
-        "d_start": "clock_h"
-       },
-       "mechanism": "weekly occupancy schedule applies a different supply-temperature offset on later weekdays or weekends",
-       "targets": "weekday residual: small weekend-minus-weekday offset not explained by outdoor reset",
-       "refute": "if the fitted day threshold sits at a bound or held-out error does not improve over a constant offset",
-       "rmse_held_c": 0.133,
-       "delta_bic": 27.53,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
-       "id": "M3.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": null,
-       "params": null,
-       "mechanism": "",
-       "targets": "",
-       "refute": "",
-       "verdict": "rejected by validator: empty expression"
-      },
-      {
-       "round": 3,
-       "id": "M3.1r",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out + curve * T_out * T_out + month_slope * month() * T_out",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "curve": "slope",
-        "month_slope": "slope"
-       },
-       "mechanism": "The controller adjusts the heating curve slope linearly with the calendar month, likely to compensate for seasonal solar gain or ground temperature lag. (repaired after validator rejection)",
-       "targets": "monthly residual bias, especially the spring dip and autumn rise",
-       "refute": "If the held-out RMSE does not improve over the quadratic model, or if the month_slope parameter is not significantly different from no effect, the mechanism is refuted.",
-       "rmse_held_c": 0.118,
-       "delta_bic": 0.0,
-       "verdict": "survives (within noise of best)"
+       "id": "-",
+       "source": "loop",
+       "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 6 calls, OpenRouter fallback, not AMD 12 calls)"
+     "llm": "ONLINE (AMD 18 calls, no fallback)"
     }
    }
   },
@@ -4016,7 +4357,7 @@
        "rmse_held_c": 0.167,
        "bic": -416.96,
        "evals": 24576,
-       "wall_s": 3.61,
+       "wall_s": 3.4,
        "delta_bic": 0.0,
        "prob": 0.9592,
        "tie_with_best": false
@@ -4030,7 +4371,7 @@
        "rmse_held_c": 0.168,
        "bic": -410.46,
        "evals": 24576,
-       "wall_s": 4.09,
+       "wall_s": 3.9,
        "delta_bic": 6.5,
        "prob": 0.0372,
        "tie_with_best": false
@@ -4044,7 +4385,7 @@
        "rmse_held_c": 0.171,
        "bic": -405.7,
        "evals": 24576,
-       "wall_s": 4.42,
+       "wall_s": 4.8,
        "delta_bic": 11.26,
        "prob": 0.0034,
        "tie_with_best": false
@@ -4058,7 +4399,7 @@
        "rmse_held_c": 0.173,
        "bic": -398.96,
        "evals": 24576,
-       "wall_s": 3.75,
+       "wall_s": 3.66,
        "delta_bic": 18.0,
        "prob": 0.0001,
        "tie_with_best": false
@@ -4072,7 +4413,7 @@
        "rmse_held_c": 0.182,
        "bic": -385.58,
        "evals": 24576,
-       "wall_s": 5.33,
+       "wall_s": 5.01,
        "delta_bic": 31.38,
        "prob": 0.0,
        "tie_with_best": false
@@ -4086,7 +4427,7 @@
        "rmse_held_c": 0.182,
        "bic": -381.26,
        "evals": 24576,
-       "wall_s": 4.99,
+       "wall_s": 5.56,
        "delta_bic": 35.7,
        "prob": 0.0,
        "tie_with_best": false
@@ -4109,7 +4450,7 @@
        "rmse_held_c": 0.167,
        "bic": -416.96,
        "evals": 24576,
-       "wall_s": 3.61,
+       "wall_s": 3.4,
        "delta_bic": 0.0,
        "prob": 0.9435,
        "tie_with_best": false
@@ -4123,7 +4464,7 @@
        "rmse_held_c": 0.168,
        "bic": -410.46,
        "evals": 24576,
-       "wall_s": 4.09,
+       "wall_s": 3.9,
        "delta_bic": 6.5,
        "prob": 0.0366,
        "tie_with_best": false
@@ -4137,7 +4478,7 @@
        "rmse_held_c": 0.17,
        "bic": -407.61,
        "evals": 24576,
-       "wall_s": 4.08,
+       "wall_s": 3.91,
        "delta_bic": 9.35,
        "prob": 0.0088,
        "tie_with_best": false
@@ -4151,7 +4492,7 @@
        "rmse_held_c": 0.164,
        "bic": -406.79,
        "evals": 24576,
-       "wall_s": 5.45,
+       "wall_s": 5.55,
        "delta_bic": 10.17,
        "prob": 0.0058,
        "tie_with_best": false
@@ -4165,7 +4506,7 @@
        "rmse_held_c": 0.171,
        "bic": -405.7,
        "evals": 24576,
-       "wall_s": 4.42,
+       "wall_s": 4.8,
        "delta_bic": 11.26,
        "prob": 0.0034,
        "tie_with_best": false
@@ -4179,7 +4520,7 @@
        "rmse_held_c": 0.166,
        "bic": -403.74,
        "evals": 24576,
-       "wall_s": 4.31,
+       "wall_s": 4.13,
        "delta_bic": 13.22,
        "prob": 0.0013,
        "tie_with_best": false
@@ -4423,24 +4764,24 @@
      ]
     },
     "C": {
-     "best": "M1.4",
-     "expr": "where(T_room < lo, level + slope * T_out + boost, where(T_room > hi, level + slope * T_out - drop, level + slope * T_out))",
-     "rmse_held_c": 0.145,
+     "best": "M1.3r",
+     "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+     "rmse_held_c": 0.155,
      "right_mechanism": false,
-     "fits": 491520,
+     "fits": 466944,
      "ranked": [
       {
-       "id": "M1.4",
+       "id": "M1.3r",
        "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "k": 11,
-       "rmse_fit_c": 0.179,
-       "rmse_held_c": 0.145,
-       "bic": -433.69,
+       "source": "model (AMD)",
+       "k": 9,
+       "rmse_fit_c": 0.186,
+       "rmse_held_c": 0.155,
+       "bic": -426.82,
        "evals": 24576,
-       "wall_s": 5.06,
+       "wall_s": 4.65,
        "delta_bic": 0.0,
-       "prob": 0.9998,
+       "prob": 0.9924,
        "tie_with_best": false
       },
       {
@@ -4452,9 +4793,9 @@
        "rmse_held_c": 0.167,
        "bic": -416.96,
        "evals": 24576,
-       "wall_s": 3.61,
-       "delta_bic": 16.73,
-       "prob": 0.0002,
+       "wall_s": 3.4,
+       "delta_bic": 9.86,
+       "prob": 0.0072,
        "tie_with_best": false
       },
       {
@@ -4466,9 +4807,23 @@
        "rmse_held_c": 0.168,
        "bic": -410.46,
        "evals": 24576,
-       "wall_s": 4.09,
-       "delta_bic": 23.23,
-       "prob": 0.0,
+       "wall_s": 3.9,
+       "delta_bic": 16.36,
+       "prob": 0.0003,
+       "tie_with_best": false
+      },
+      {
+       "id": "M1.2r",
+       "name": "",
+       "source": "model (AMD)",
+       "k": 9,
+       "rmse_fit_c": 0.2,
+       "rmse_held_c": 0.166,
+       "bic": -409.24,
+       "evals": 24576,
+       "wall_s": 5.14,
+       "delta_bic": 17.58,
+       "prob": 0.0002,
        "tie_with_best": false
       },
       {
@@ -4480,36 +4835,22 @@
        "rmse_held_c": 0.171,
        "bic": -405.7,
        "evals": 24576,
-       "wall_s": 4.42,
-       "delta_bic": 27.99,
+       "wall_s": 4.8,
+       "delta_bic": 21.12,
        "prob": 0.0,
        "tie_with_best": false
       },
       {
-       "id": "S6",
-       "name": "Weather curve plus proportional room feedback",
-       "source": "catalogue",
-       "k": 9,
-       "rmse_fit_c": 0.206,
-       "rmse_held_c": 0.173,
-       "bic": -398.96,
-       "evals": 24576,
-       "wall_s": 3.75,
-       "delta_bic": 34.73,
-       "prob": 0.0,
-       "tie_with_best": false
-      },
-      {
-       "id": "M3.1",
+       "id": "M2.4",
        "name": "",
-       "source": "model (OpenRouter fallback, not AMD)",
+       "source": "model (AMD)",
        "k": 10,
-       "rmse_fit_c": 0.213,
-       "rmse_held_c": 0.171,
-       "bic": -396.56,
+       "rmse_fit_c": 0.198,
+       "rmse_held_c": 0.167,
+       "bic": -402.48,
        "evals": 24576,
-       "wall_s": 4.36,
-       "delta_bic": 37.13,
+       "wall_s": 5.54,
+       "delta_bic": 24.34,
        "prob": 0.0,
        "tie_with_best": false
       }
@@ -4598,250 +4939,301 @@
       {
        "round": 1,
        "id": "M1.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < cutoff, level + slope * T_out + boost, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "cutoff": "temp_c",
-        "boost": "delta_c"
-       },
-       "mechanism": "cold-snap or frost-protection boost: controller adds a fixed supply-temperature offset when outdoor air falls below a threshold, on top of the normal outdoor-reset line",
-       "targets": "large positive residual in the coldest outdoor band",
-       "refute": "if the fitted threshold is not in the cold tail, or the boost does not remove the cold-band residual, or the same offset appears across all outdoor temperatures",
-       "rmse_held_c": 0.182,
-       "delta_bic": 47.29,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 1,
-       "id": "M1.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where((hour_of_day() >= n_start) & (hour_of_day() < n_end), level + slope * T_out + boost, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "n_start": "clock_h",
-        "n_end": "clock_h",
-        "boost": "delta_c"
-       },
-       "mechanism": "optimum-start or morning warm-up boost: controller raises supply temperature during a fixed early-morning window to recover room temperature before occupancy",
-       "targets": "positive residual in the early-morning hours and negative residual later in the day",
-       "refute": "if the fitted window is not in the morning, or the boost does not reduce the early-morning positive residual, or the afternoon negative residual grows",
-       "rmse_held_c": 0.179,
-       "delta_bic": 48.74,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 1,
-       "id": "M1.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(weekday() >= n_weekend, level + slope * T_out - drop, level + slope * T_out)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
-        "n_weekend": "clock_h",
-        "drop": "delta_c"
-       },
-       "mechanism": "weekday/weekend occupancy schedule: controller lowers the supply-temperature target on weekend days, with a separate night behavior implied by the same schedule",
-       "targets": "weekend-minus-weekday residual and the weekday-night versus weekend-night difference",
-       "refute": "if the fitted weekend boundary is not at the end of the work week, or the drop does not reduce the weekend residual, or weekday and weekend residuals remain separated",
-       "rmse_held_c": 0.184,
-       "delta_bic": 50.95,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 1,
-       "id": "M1.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_room < lo, level + slope * T_out + boost, where(T_room > hi, level + slope * T_out - drop, level + slope * T_out))",
+       "source": "model (AMD)",
+       "expr": "clip(level + slope * T_out, lo, hi) + gain * (T_room - ema(T_room, tau))",
        "params": {
         "level": "temp_c",
         "slope": "slope",
         "lo": "temp_c",
         "hi": "temp_c",
-        "boost": "delta_c",
-        "drop": "delta_c"
+        "gain": "gain"
        },
-       "mechanism": "room-temperature high/low trim with a deadband: controller boosts supply when the room is below a low limit and cuts supply when the room is above a high limit, leaving the outdoor-reset line unchanged inside the deadband",
-       "targets": "hour-of-day residual pattern that tracks room temperature rather than outdoor temperature",
-       "refute": "if the fitted low and high limits overlap or are not ordered, or the boost and drop do not line up with cold and warm room states, or the hourly residual pattern remains",
-       "rmse_held_c": 0.145,
+       "mechanism": "Weather-compensated curve with a high-limit and low-limit clip (boiler max/min supply clamp), plus a small proportional trim on room temperature error. The clip explains why the coldest outdoor band is under-predicted by the linear S1: the real supply saturates at a maximum when it is very cold, so the linear extrapolation overshoots.",
+       "targets": "mean_by_outdoor_band: large positive residual below 0 C while S1 has no upper/lower limit; also the small negative bias in the 15-20 band",
+       "refute": "If the fitted lo/hi collapse to the parameter bounds (no clipping active) or the room-trim gain fits to zero, the clip+trim mechanism is not supported and the cold-band residual must come from something else.",
+       "verdict": "rejected by validator: ema: second argument must be a parameter of type 'hours'"
+      },
+      {
+       "round": 1,
+       "id": "M1.3",
+       "source": "model (AMD)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * T_out",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours"
+       },
+       "mechanism": "PI room control with an outdoor reset offset added to the room loop. The weekend bias arises because the integral term keeps winding during unoccupied weekend hours when the room is warm from internal gains, so the controller asks for less heat than the weekday-only model predicts.",
+       "targets": "weekend_minus_weekday = -0.05 and the weekday pattern (Fri/Sat negative, Wed/Thu positive); also the small corr_with_outdoor",
+       "refute": "If the integral time fits to a value so long it is effectively off, or the weekend residual persists after fitting, the PI-with-reset mechanism does not explain the weekend offset.",
+       "verdict": "rejected by validator: declared but unused parameters: ['level']"
+      },
+      {
+       "round": 1,
+       "id": "M1.4",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "Outdoor-air lockout with a filtered outdoor signal: the boiler is disabled when the smoothed outdoor temperature rises above a cutoff. This produces a seasonal on/off pattern that a pure linear curve misses, and the filter delay explains why the transition months (Sep, Jun) carry the largest residuals.",
+       "targets": "mean_by_month: positive residual in Sep/Jun and negative in Jul/Aug; the seasonal sign flip that S1 cannot capture",
+       "refute": "If the fitted cutoff lands above the warmest observed outdoor temperature (lockout never fires) or below the coldest (always off), the lockout mechanism is refuted.",
+       "verdict": "rejected by validator: unknown name 'cutoff'"
+      },
+      {
+       "round": 1,
+       "id": "M1.2",
+       "source": "model (AMD)",
+       "expr": "where((hour_of_day() >= n_on) | (hour_of_day() < n_off), level + slope * T_out, level - drop + slope * T_out) - ema(level + slope * T_out, tau)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "drop": "delta_c",
+        "n_on": "clock_h",
+        "n_off": "clock_h",
+        "tau": "hours"
+       },
+       "mechanism": "Night setback with a recovery ramp. The controller lowers the supply setpoint during unoccupied hours and raises it before occupancy; the ema term models the thermal lag of the emitter so the room sees the setback effect shifted later than the clock schedule.",
+       "targets": "mean_by_local_hour: positive residual overnight (0-7) and negative residual in the afternoon (15-19); also the weekday/weekend difference",
+       "refute": "If the fitted n_on/n_off land outside plausible occupancy windows, or the drop fits to zero, the setback hypothesis fails and the diurnal residual is not a schedule effect.",
+       "rmse_held_c": 0.202,
+       "delta_bic": 76.96,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.1r",
+       "source": "model (AMD)",
+       "expr": "clip(level + slope * T_out, lo, hi) + gain * (T_room - ema(T_room, tau))",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "lo": "temp_c",
+        "hi": "temp_c",
+        "gain": "gain",
+        "tau": "hours"
+       },
+       "mechanism": "outdoor-reset supply curve with saturation limits, plus a room-temperature feedback trim that nudges supply when the room drifts from its filtered recent value (repaired after validator rejection)",
+       "targets": "residual curvature vs outdoor band and hour-of-day shape not captured by a pure outdoor-reset line",
+       "refute": "if the fitted gain collapses to zero or the held-out RMSE does not improve over S1/S2, the feedback trim is not real",
+       "rmse_held_c": 0.176,
+       "delta_bic": 42.53,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.2r",
+       "source": "model (AMD)",
+       "expr": "T_room + kp * (sp - T_room) + integral(sp - T_room, ti) + slope * T_out",
+       "params": {
+        "slope": "slope",
+        "kp": "gain",
+        "sp": "temp_c",
+        "ti": "hours"
+       },
+       "mechanism": "PI room-temperature control whose setpoint is effectively reset by outdoor temperature, i.e. outdoor-reset of the room loop rather than of supply directly (repaired after validator rejection)",
+       "targets": "residual correlation with outdoor temperature on top of the PI room loop (S4 underperforms S1 slightly)",
+       "refute": "if slope fits to zero or the integral term dominates and the outdoor term adds no held-out skill, the outdoor reset is spurious",
+       "rmse_held_c": 0.166,
+       "delta_bic": 17.58,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 1,
+       "id": "M1.3r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out, OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours"
+       },
+       "mechanism": "outdoor-reset curve gated by a filtered outdoor temperature: heat is enabled only when the smoothed outdoor temperature falls below a lockout threshold, otherwise the boiler is off (repaired after validator rejection)",
+       "targets": "residual large positive bias in the coldest outdoor band (<0) and the hour-of-day warm/cool pattern",
+       "refute": "if the fitted cutoff lies outside the observed outdoor range or the gate never fires, the lockout is not supported",
+       "rmse_held_c": 0.155,
        "delta_bic": 0.0,
        "verdict": "new best"
       },
       {
        "round": 2,
-       "id": "M2.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(hour_of_day() < n_morning, level + slope * T_out + boost, where(hour_of_day() >= n_afternoon, level + slope * T_out - drop, level + slope * T_out))",
+       "id": "M2.2",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - where((weekday() >= 5) & (hour_of_day() < hour_of_day()), drop, OFF - OFF), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "n_morning": "clock_h",
-        "n_afternoon": "clock_h",
-        "boost": "delta_c",
+        "cutoff": "temp_c",
+        "tau": "hours",
         "drop": "delta_c"
        },
-       "mechanism": "clock schedule with early-morning recovery boost and later-day setback drop",
-       "targets": "diurnal residual: positive before morning, negative in afternoon and evening",
-       "refute": "if fitted windows collapse or held-out error does not improve over the room-threshold model",
-       "rmse_held_c": 0.18,
-       "delta_bic": 54.5,
-       "verdict": "refuted (worse than best by more than the noise band)"
+       "mechanism": "weekend setback: controller lowers supply on Saturday and Sunday relative to weekday schedule",
+       "targets": "weekend_minus_weekday = -0.049 and mean_by_weekday negative on 5,6",
+       "refute": "if drop fits to zero or the weekday pattern flips sign, weekend setback is not the cause",
+       "verdict": "rejected by validator: numeric literal 5: every number must be a typed parameter"
       },
       {
        "round": 2,
-       "id": "M2.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where((weekday() >= n_weekend) & (hour_of_day() >= n_start) & (hour_of_day() < n_end), level + slope * T_out + boost, level + slope * T_out)",
+       "id": "M2.1r",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - where(weekday() >= wknd, drop, OFF - OFF), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "n_weekend": "clock_h",
-        "n_start": "clock_h",
-        "n_end": "clock_h",
-        "boost": "delta_c"
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "drop": "delta_c",
+        "wknd": "weekday"
        },
-       "mechanism": "weekday-only morning occupancy recovery boost, with weekends left on the base curve",
-       "targets": "weekend-minus-weekday residual and weekday morning residual",
-       "refute": "if the fitted weekday window is empty or weekend/weekday residual separation remains",
-       "rmse_held_c": 0.175,
-       "delta_bic": 47.08,
+       "mechanism": "Outdoor-reset supply curve with a weekend setback: when the outdoor filtered temperature is below cutoff the boiler runs on the reset curve, but on weekend days the supply target is dropped by a fixed delta (unoccupied setback), producing lower supply on weekends than weekdays at the same outdoor temperature. (repaired after validator rejection)",
+       "targets": "weekend_minus_weekday residual (-0.049) and the negative weekday-6 / positive weekday-3 pattern in mean_by_weekday",
+       "refute": "If the fitted wknd parameter lands on a weekday boundary that does not separate the residual's weekend_minus_weekday sign, or if adding the weekend drop does not reduce held-out RMSE below the noise band of M1.3r, the weekend-setback mechanism is refuted.",
+       "verdict": "rejected by validator: parameter 'wknd' has unknown type 'weekday'; known: ['clock_h', 'delta_c', 'fraction', 'gain', 'hours', 'month_n', 'slope', 'temp_c']"
+      },
+      {
+       "round": 2,
+       "id": "M2.1",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + where(hour_of_day() >= start, boost, OFF - OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c",
+        "start": "clock_h"
+       },
+       "mechanism": "weather-compensated curve with an early-morning setback recovery: controller raises supply a fixed increment before the occupancy start hour, then drops it in the afternoon/evening",
+       "targets": "morning positive residual (hours 4-11) and evening negative residual (hours 15-22) in mean_by_local_hour",
+       "refute": "if the fitted start lands outside 3-9 or boost is indistinguishable from zero, the diurnal residual is not a morning recovery boost",
+       "rmse_held_c": 0.188,
+       "delta_bic": 58.69,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < cutoff, level + slope_cold * T_out, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + where(T_out < cutoff, boost, OFF - OFF), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "slope_cold": "slope",
-        "cutoff": "temp_c"
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "boost": "delta_c"
        },
-       "mechanism": "weather compensation curve with a different slope below a cold cutoff, as in boiler return-water protection or a dual-slope heating curve",
-       "targets": "outdoor-band residual: cold-end overprediction and near-freezing underprediction",
-       "refute": "if fitted cold slope equals warm slope or held-out outdoor-band residuals remain",
-       "rmse_held_c": 0.175,
-       "delta_bic": 37.44,
+       "mechanism": "cold-weather boost: below a threshold outdoor temperature the controller adds a fixed increment to the weather curve (frost protection / design-day reset)",
+       "targets": "large positive residual in outdoor band <0 (+0.145) and negative residual in 0-5 (-0.06)",
+       "refute": "if boost fits to zero or the <0 band residual does not shrink, the cold-weather kink is not a step boost",
+       "rmse_held_c": 0.177,
+       "delta_bic": 38.72,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 2,
        "id": "M2.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where((month() >= m_start) & (month() <= m_end), level + slope * T_out + offset, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - where((hour_of_day() < hour_of_day()) & (weekday() < weekday()), drop, OFF - OFF), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "m_start": "month_n",
-        "m_end": "month_n",
-        "offset": "delta_c"
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "drop": "delta_c"
        },
-       "mechanism": "seasonal changeover offset in the heating curve, such as winter/summer mode or frost-protection adjustment",
-       "targets": "monthly residual: spring negative and early autumn positive",
-       "refute": "if the fitted month window is empty or seasonal residual is not reduced",
-       "rmse_held_c": 0.182,
-       "delta_bic": 52.84,
+       "mechanism": "night setback active only on weekdays: supply is lowered during unoccupied weekday nights, so weekday nights run cooler than weekend nights",
+       "targets": "night_00_06_weekday_minus_weekend = +0.037 and small positive early-morning residuals",
+       "refute": "if the fitted night window is empty or drop is zero, weekday-only night setback is not present",
+       "rmse_held_c": 0.167,
+       "delta_bic": 24.34,
+       "verdict": "refuted (worse than best by more than the noise band)"
+      },
+      {
+       "round": 3,
+       "id": "M3.1",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out - where((hour_of_day() >= start) & (weekday() >= start), drop, OFF - OFF), OFF)",
+       "params": {
+        "level": "temp_c",
+        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "drop": "delta_c",
+        "start": "clock_h"
+       },
+       "mechanism": "A setback/schedule that drops supply temperature during an occupancy window defined by both a clock hour and a weekday threshold — i.e Calendars that treat late-day and weekend hours as unoccupied, so the controller commands a lower supply then.",
+       "targets": "weekend_minus_weekday = -0.049 and the negative weekday-6 residual (-0.045) plus the evening negative residual band (hours 15-23)",
+       "refute": "If the fitted drop is ~0 or the schedule window collapses to empty (start outside 0-23 or weekday threshold never crossed), the weekend/evening residual is not a schedule setback.",
+       "rmse_held_c": 0.172,
+       "delta_bic": 36.03,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 3,
        "id": "M3.2",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * T_out + kp * (sp - T_room) + where(hour_of_day() < n_morning, boost_morning, 0)",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + gain * (sp - T_room), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "kp": "gain",
-        "sp": "temp_c",
-        "n_morning": "clock_h",
-        "boost_morning": "delta_c"
-       },
-       "mechanism": "morning warm-up recovery from night setback: an extra supply-temperature boost is added during the early-morning hours on top of a PI-like room compensation",
-       "targets": "early-morning positive residual (warm-up period)",
-       "refute": "if the fitted morning boost is negligible or the morning residual does not shrink, the early-morning positive residual is not a warm-up boost",
-       "verdict": "rejected by validator: numeric literal 0: every number must be a typed parameter"
-      },
-      {
-       "round": 3,
-       "id": "M3.1",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "level + slope * ema(T_out, tau) + kp * (sp - T_room)",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
+        "cutoff": "temp_c",
         "tau": "hours",
-        "kp": "gain",
+        "gain": "gain",
         "sp": "temp_c"
        },
-       "mechanism": "controller filters the outdoor temperature with an exponential filter before applying the reset curve, introducing a phase lag that raises supply in the morning and lowers it in the afternoon",
-       "targets": "diurnal residual: positive in early morning, negative in afternoon",
-       "refute": "if the fitted filter time constant sits at a bound or held-out RMSE does not improve, the diurnal residual is not due to outdoor sensor filtering",
-       "rmse_held_c": 0.171,
-       "delta_bic": 37.13,
+       "mechanism": "Outdoor-reset curve with a room-temperature trim: the controller adds a proportional correction on (setpoint - room) on top of the weather-compensation curve, so when the room is warm it trims supply down (explains negative evening residual when the fireplace has heated the room).",
+       "targets": "the residual's weak but nonzero correlation with outdoor (-0.092) and the hour-of-day structure that M1.3r's pure outdoor curve cannot capture; also the >20 band residual (-0.056)",
+       "refute": "If the fitted gain is ~0, or if adding the room term does not reduce held-out RMSE below M1.3r, the residual is not a room-trim term.",
+       "rmse_held_c": 0.164,
+       "delta_bic": 25.18,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 3,
        "id": "M3.3",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(T_out < knee, level + slope_cold * T_out + kp * (sp - T_room), level + slope * T_out + kp * (sp - T_room))",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * lag(T_out, lag_h) + where(lag(T_out, lag_h) < cutoff, boost, OFF - OFF), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "slope_cold": "slope",
-        "knee": "temp_c",
-        "kp": "gain",
-        "sp": "temp_c"
+        "cutoff": "temp_c",
+        "tau": "hours",
+        "lag_h": "hours",
+        "boost": "delta_c"
        },
-       "mechanism": "reset curve with a knee: a steeper slope below a breakpoint outdoor temperature and a shallower slope above it, combined with room compensation",
-       "targets": "outdoor-band zigzag: positive residual at very cold and mild bands, negative at intermediate and warm bands",
-       "refute": "if the fitted knee sits at a bound or the two slopes are indistinguishable, the outdoor-band residual is not a two-slope reset curve",
-       "rmse_held_c": 0.177,
-       "delta_bic": 50.81,
+       "mechanism": "Weather compensation using a lagged outdoor sensor (sensor time constant / pipe transport delay) plus a low-outdoor boost stage: below a threshold the boiler raises supply to protect against cold snaps, producing a steeper slope at very low outdoor temperatures.",
+       "targets": "the <0 band residual (+0.145) — the largest single residual feature — and the curvature in the outdoor-reset relationship",
+       "refute": "If lag_h fits to ~0 and boost to ~0, the low-outdoor residual is not a lagged-sensor or boost-stage effect.",
+       "rmse_held_c": 0.185,
+       "delta_bic": 54.59,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
        "round": 3,
        "id": "M3.4",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where((weekday() >= n_weekend) & ((hour_of_day() < n_morning) | (hour_of_day() >= n_evening)), level + slope * T_out - drop_night, level + slope * T_out)",
+       "source": "model (AMD)",
+       "expr": "where(ema(T_out, tau) < cutoff, level + slope * T_out + kp * (T_room - ema(T_room, tau)) + integral(T_room - ema(T_room, tau), ti), OFF)",
        "params": {
         "level": "temp_c",
         "slope": "slope",
-        "n_weekend": "clock_h",
-        "n_morning": "clock_h",
-        "n_evening": "clock_h",
-        "drop_night": "delta_c"
-       },
-       "mechanism": "deeper weekend night setback: the supply temperature is reduced during weekend nights relative to weekday nights, producing a weekend-night offset",
-       "targets": "weekday/weekend night difference and overall weekend negative residual",
-       "refute": "if the fitted weekend night drop is negligible or the weekday/weekend night residual does not shrink, the weekend-night difference is not a deeper setback",
-       "rmse_held_c": 0.168,
-       "delta_bic": 37.31,
-       "verdict": "refuted (worse than best by more than the noise band)"
-      },
-      {
-       "round": 3,
-       "id": "M3.1r",
-       "source": "model (OpenRouter fallback, not AMD)",
-       "expr": "where(hour_of_day() < n_morning, level + slope * T_out + kp * (sp - T_room) + boost_morning, level + slope * T_out + kp * (sp - T_room))",
-       "params": {
-        "level": "temp_c",
-        "slope": "slope",
+        "cutoff": "temp_c",
+        "tau": "hours",
         "kp": "gain",
-        "sp": "temp_c",
-        "n_morning": "clock_h",
-        "boost_morning": "delta_c"
+        "ti": "hours"
        },
-       "mechanism": "weather-compensated supply with proportional room feedback, plus a morning warm-up boost before the early cutoff hour (repaired after validator rejection)",
-       "targets": "morning positive residual bump (hours 4-8) on top of the room-feedback term",
-       "refute": "if the fitted n_morning lands outside the early-morning window, or boost_morning fits to zero, or held-out RMSE does not improve over M1.4",
-       "rmse_held_c": 0.168,
-       "delta_bic": 37.2,
+       "mechanism": "Weather compensation plus a feedback trim on the rate of change of room temperature (derivative-like on the room sensor) with a slow integral — a controller that anticipates the fireplace's warming and cuts supply in the evening, and restores it in the early morning.",
+       "targets": "the hour-of-day residual shape (positive early morning, negative evening) that outdoor-only models leave behind; the fireplace's slow thermal signature",
+       "refute": "If kp and ti both fit to ~0, or if the room-rate term does not improve held-out RMSE over M1.3r, the diurnal residual is not room-feedback.",
+       "rmse_held_c": 0.2,
+       "delta_bic": 74.9,
        "verdict": "refuted (worse than best by more than the noise band)"
       },
       {
@@ -4851,7 +5243,7 @@
        "verdict": "stop: 2 rounds without a program improving the held-out score by more than the noise band"
       }
      ],
-     "llm": "ONLINE (AMD 6 calls, OpenRouter fallback, not AMD 16 calls)"
+     "llm": "ONLINE (AMD 23 calls, no fallback)"
     }
    }
   }

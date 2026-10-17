@@ -16,7 +16,7 @@ Nothing with the controller's brand name or logo in the frame: shoot the panel s
 | 5b | 1:55-2:10 | AMD screen: the benchmark table, then the status line (Model: AMD). | Every chat model on AMD's token factory got the same Käyrä tasks, graded by code. Every model could write grounded prose. Writing valid hypotheses in a strict language is what separated them. DeepSeek V4.1 Flash runs the loop. |
 | 6 | 2:10-2:25 | Spot readings screen: k=0, then k=3. The L1 floor note. | Room data alone gets the slope, not the level. Three readings off the panel fix the level. I did not know which floor loop L1 heats. Käyrä's test says upstairs, the blind check against the real settings says downstairs. So it is not settled, and it says so. |
 | 7 | 2:15-2:35 | Document screen, scroll to the Finnish summary. | The output is the document the house never had. With a summary in Finnish for the guy who comes to fix it. |
-| 8 | 2:35-2:55 | Benchmark screen, then the evaluation result if shown. | On synthetic controllers the language model's programs predicted best in all six cases. It still named the right mechanism only once, same as the plain search. That is in the report too. |
+| 8 | 2:35-2:55 | Benchmark screen, then the evaluation result if shown. | On synthetic controllers the language model was best in four of six cases in one run and in one of six in the next. Six cases is too few. It named the right mechanism once, same as the plain search. That is in the report too. |
 | 9 | 2:55-3:00 | Panel, Curve screen, LIVE. | github.com/apn201/kayra |
 
 B-roll if there is time: the Home Assistant dashboard with the three room sensors; a radiator; the floor-heating manifold.
