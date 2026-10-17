@@ -25,7 +25,10 @@ ART = ROOT / "artifacts"
 SITE = ROOT / "config" / "site.json"
 LABELS = ROOT / "config" / "menu_labels.md"
 
-TASK = """You also get site context: notes from the people who run this plant and the labels shown on the
+TASK = """Targets are rooms and groups of rooms (see the packet). The panel's loops L1 and L2 may also be
+targets: which floor each serves is unknown, so a program aimed at L1 or L2 is tested on every group.
+
+You also get site context: notes from the people who run this plant and the labels shown on the
 controller's menus. Labels only - no values. Turn each piece of context that implies a control
 mechanism into a program in the structure language, aimed at one target (a room, or a loop of rooms
 that share one controller). If a piece of context cannot be written in the language, say so instead
@@ -57,6 +60,19 @@ def _targets(real: dict, site: dict) -> dict:
         elif L.get("same_as_room") in t:  # a one-room loop is that room
             t[lid] = t[L["same_as_room"]]
     return t
+
+
+def _fit_one(f, rooms, spec, priors, problems, device, n, iters, seed):
+    for r in rooms:
+        if r not in priors:
+            priors[r] = search.summer_prior(f, r, device, n=n, iters=iters)
+    key = tuple(rooms)
+    if key not in problems:
+        problems[key] = search.Problem(f, rooms if len(rooms) > 1 else rooms[0], device, season="cold",
+                                       building=[priors[r]["bounds"] for r in rooms])
+    prob = problems[key]
+    res = search.search(prob, spec, n=n, iters=iters, seed=seed)
+    return search.rank([res], prob)[0], res["best_theta"]
 
 
 def build(device: str | None = None, n: int = 2048, iters: int = 6) -> dict:
@@ -110,7 +126,29 @@ def build(device: str | None = None, n: int = 2048, iters: int = 6) -> dict:
         tgt = p.get("target")
         e = {"id": f"C{i + 1}", "target": tgt, "from_text": p.get("from_text", ""), "expr": p.get("expr"),
              "params": p.get("params"), "mechanism": p.get("mechanism", ""), "refute": p.get("refute", ""),
-             "source": f"site context ({client.status(cfg)})"}
+             "source": f"site context ({'AMD' if rep.backend == 'amd' else rep.backend})"}
+        try:
+            dsl.validate(dict(p, id=e["id"]))
+        except dsl.Rejected as exc:
+            e["verdict"] = f"rejected by validator: {exc}"
+            entries.append(e)
+            continue
+        panel_loops = [g for g in site.get("loops", {}) if g in targets]
+        if tgt in ("L1", "L2") and panel_loops:
+            # a panel loop: which floor it serves is unknown, so test the program on every group
+            tried = []
+            for g in panel_loops:
+                tried.append((g, _fit_one(f, targets[g]["rooms"], dict(p, id=e["id"]), priors, problems, device, n, iters, 40 + i)))
+            best_g, (row, theta) = min(tried, key=lambda x: x[1][0]["bic"] - targets[x[0]]["blind_best"]["bic"])
+            d = row["bic"] - targets[best_g]["blind_best"]["bic"]
+            e |= {"target": f"{tgt} (tested on {', '.join(g for g, _ in tried)}; best on {best_g})",
+                  "per_group_delta_bic": {g: round(r[0]["bic"] - targets[g]["blind_best"]["bic"], 2) for g, r in tried},
+                  "rmse_held_c": row["rmse_held_c"], "bic": row["bic"], "blind_best": targets[best_g]["blind_best"]["id"],
+                  "delta_bic_vs_blind_best": round(d, 2), "theta": theta,
+                  "verdict": "beats the blind best" if d < -2 else "ties the blind best" if d < 2 else "worse than the blind best"}
+            entries.append(e)
+            print(f"{e['id']} {e['target']}: {e['verdict']} (dBIC {d:+.1f})  {p.get('expr')}")
+            continue
         if tgt not in targets:
             e["verdict"] = f"unknown target {tgt!r}"
             entries.append(e)
@@ -141,7 +179,7 @@ def build(device: str | None = None, n: int = 2048, iters: int = 6) -> dict:
                           else "worse than the blind best")}
         entries.append(e)
         print(f"{e['id']} {tgt}: {e['verdict']} (dBIC {d:+.1f})  {p.get('expr')}")
-    out = {"llm": client.status(cfg), "model": cfg.get("model_code"), "labels_file": "config/menu_labels.md",
+    out = {"llm": client.status(cfg), "answered_by": rep.backend, "model": rep.model, "labels_file": "config/menu_labels.md",
            "programs": entries, "not_expressible": ans.get("not_expressible", []), "repaired": repaired,
            "note": "Separate arm. The blind run never sees site context. Labels only, no values."}
     (ART / "context.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")

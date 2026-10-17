@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Käyrä slides</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Share+Tech+Mono&display=swap">
+<style>
+  /* Deck: each slide a faceplate (purple, gold print) with one LCD window for the evidence. Numbers come from artifacts/. */
+  :root { --plate: #3a2a57; --gold: #e0b743; --glass: #b9d63a; --ink: #17240a; --dim: #55701a; --key: #c3d4ea; --key-ink: #1f3f93; --housing: #8c8f8e; --warn: #9a2f0c;
+          --f-label: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif; --f-data: "IBM Plex Mono", monospace; --f-num: "Share Tech Mono", monospace; }
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { margin: 0; background: var(--housing); }
+  .slide { width: 1920px; height: 1080px; box-sizing: border-box; padding: 40px; page-break-after: always; break-after: page; }
+  .plate { width: 100%; height: 100%; box-sizing: border-box; background: var(--plate); border-radius: 22px; padding: 64px 80px; color: var(--gold); display: flex; flex-direction: column; gap: 34px; }
+  h1 { font: 700 150px/0.95 var(--f-label); letter-spacing: .04em; margin: 0; }
+  h2 { font: 600 68px/1.05 var(--f-label); margin: 0; letter-spacing: .01em; }
+  p, li { font: 500 36px/1.35 var(--f-label); margin: 0; max-width: 1500px; }
+  ul { margin: 0; padding-left: 36px; display: flex; flex-direction: column; gap: 14px; }
+  .lcd { background: var(--glass); color: var(--ink); border-radius: 6px; box-shadow: inset 0 0 0 6px #2a1f40; padding: 36px 44px; font: 30px/1.4 var(--f-data); flex: 1; overflow: hidden; }
+  .lcd table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .lcd th { text-align: left; font: 600 24px var(--f-label); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); border-bottom: 2px solid var(--dim); padding: 8px 18px 8px 0; }
+  .lcd td { padding: 10px 18px 10px 0; border-bottom: 1px solid #a3c22f; vertical-align: top; }
+  .big { font: 96px/1 var(--f-num); color: var(--ink); }
+  .row { display: flex; gap: 60px; flex-wrap: wrap; }
+  .row > div { display: flex; flex-direction: column; gap: 6px; }
+  .row label { font: 600 22px var(--f-label); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+  .key { font: 600 26px/1 var(--f-label); letter-spacing: .08em; text-transform: uppercase; color: var(--key-ink); background: var(--key); border-radius: 999px; padding: 14px 24px; display: inline-block; margin-right: 12px; }
+  .shot { flex: 1; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 6px #2a1f40; background: var(--glass); }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  code { font: 30px var(--f-data); background: rgba(23, 36, 10, .08); padding: 2px 8px; }
+  .warn { color: var(--warn); }
+</style>
+</head>
+<body>
+<div id="deck"></div>
+<script>
+(async () => {
+  const get = async (n) => { try { const r = await fetch("artifacts/" + n); return r.ok ? r.json() : null; } catch { return null; } };
+  const [real, synth, bench, ctx, ev, writeup] = await Promise.all(["real.json", "synth.json", "benchmark.json", "context.json", "eval.json", "writeup.json"].map(get));
+  const f = (v, d = 1) => (v === null || v === undefined ? "-" : Number(v).toFixed(d));
+  const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const S = [];
+  const slide = (inner) => S.push(`<section class="slide"><div class="plate">${inner}</div></section>`);
+  const d = real.data;
+
+  slide(`<h1>KÄYRÄ</h1><h2>What is the undocumented controller doing?</h2>
+    <p>Found from data a site already logs. No vendor, no manual, no bump test, nothing written to the controller.</p>
+    <div style="margin-top:auto"><span class="key">AMD Developer Hackathon ACT III</span><span class="key">Track 1 Intelligent Industry</span></div>`);
+
+  slide(`<h2>The problem</h2><ul>
+    <li>Factories and buildings run on controllers nobody has documentation for. The integrator left, the vendor is gone.</li>
+    <li>Nobody dares to retune, migrate or replace them, because nobody knows what they do together.</li>
+    <li>The usual way to find out is a bump test: step the process and watch. It costs production time and nerve.</li>
+    <li>I work as director of IT security and architecture in factories full of legacy OT. This is a problem I see at work.</li></ul>`);
+
+  slide(`<h2>Test bench: a heating stack nobody documented</h2>
+    <p>District heating substation, two heating loops, one commercial controller. Its outputs are not logged. Käyrä sees outdoor temperature in and room temperatures out, and identifies the controller through the building.</p>
+    <div class="lcd"><div class="row">
+      <div><label>Outdoor (FMI Utti)</label><span class="big">${d.outdoor.hours}</span><span>hours, ${esc(d.outdoor.first.slice(0, 10))} to ${esc(d.outdoor.last.slice(0, 10))}</span></div>
+      <div><label>Rooms (Home Assistant)</label><span class="big">3</span><span>${d.rooms.kitchen.hours} hourly means each</span></div>
+      <div><label>Outdoor range</label><span class="big">${f(d.outdoor.min_c)} / ${f(d.outdoor.max_c)}</span><span>°C, winter unobserved</span></div>
+    </div><p style="margin-top:30px;font-size:30px">The same engine runs on any process: sources, signals and groups are configuration (config/process.json). The house is the proof of concept.</p></div>`);
+
+  slide(`<h2>How: hypotheses as programs, values from the fitter</h2>
+    <div class="lcd"><p style="font:30px var(--f-data)">Every hypothesis is a short program with no numbers in it:</p>
+    <p style="margin:18px 0"><code>where(ema(T_out, tau) &lt; cutoff, level + slope * T_out, OFF)</code></p>
+    <ul style="font-size:30px"><li>The fitter finds every value: thousands of parameter sets simulated together as tensors (PyTorch, ROCm-ready), scored on held-out weeks.</li>
+    <li>A language model on AMD reads what the best program fails to explain and writes new programs. The validator rejects any literal.</li>
+    <li>Every proposal, score and verdict goes into a lab notebook. Every prose line is checked: a number not in the evidence is dropped.</li></ul></div>`);
+
+  slide(`<h2>The curve, from room data alone</h2><div class="shot"><img src="docs/img/home.png" onerror="this.parentNode.innerHTML='<p style=&quot;padding:40px;color:#17240a&quot;>screenshot: docs/img/home.png</p>'"></div>`);
+
+  const progs = ctx ? ctx.programs.filter((e) => e.bic !== undefined).slice(0, 4) : [];
+  const words = (t, n) => { t = String(t || ""); return t.length <= n ? t : t.slice(0, t.lastIndexOf(" ", n)) + "..."; };
+  slide(`<h2>The model reads the plant: menu labels into mechanisms</h2>
+    <p>Given only the labels on the controller's menus (no values) and operator notes, the model wrote complete control laws. The fitter decides whether the data support them.</p>
+    <div class="lcd" style="padding:28px 36px"><table><thead><tr><th>From the plant</th><th>Program the model wrote</th><th>ΔBIC vs blind best</th></tr></thead><tbody>
+    ${progs.map((e) => `<tr><td style="font-size:24px;width:34%">"${esc(words(e.from_text.replace(/^L1 supply setpoint breakdown screen:\s*/, ""), 60))}"</td><td><code style="font-size:21px;background:none">${esc(e.expr)}</code></td><td>${e.delta_bic_vs_blind_best > 0 ? "+" : ""}${f(e.delta_bic_vs_blind_best)}</td></tr>`).join("")}
+    </tbody></table></div>`);
+
+  const an = real.anchored_fireplace || [];
+  const lf = real.l1_floor;
+  slide(`<h2>Spot readings fix what room data cannot</h2>
+    <div class="lcd"><table><thead><tr><th>Mode</th><th>Error vs other panel readings</th><th>Room error</th></tr></thead><tbody>
+    ${an.map((a) => `<tr><td>${esc(a.mode)}</td><td>${f(a.rmse_vs_panel_l1_c, 2)} °C</td><td>${f(a.room_rmse_held_c, 3)} °C</td></tr>`).join("")}</tbody></table>
+    ${lf ? `<p style="margin-top:24px;font:30px var(--f-label)">Which floor does loop L1 heat? Nobody knew. ${esc(lf.verdict)}.</p>` : ""}</div>`);
+
+  if (ev) {
+    const lc = ev.label_check || {}, av = ev.assignment_verdict;
+    const evL1 = av ? Object.entries(av.by_slope).find(([, l]) => l === "L1") : null;
+    const anc = (ev.anchored || []).filter((x) => x.k === 0 || x.k === 3);
+    slide(`<h2>Blind evaluation against the configured curve</h2>
+      <p>Read off the controller by hand, it entered the repository after the fits. Only evaluate.py reads it; the coding agent saw error numbers only.</p>
+      <div class="lcd" style="font-size:28px"><table><tbody>
+      <tr><td>Configured curves vs the panel's own readings</td><td>L1 ${f(lc["sealed L1 vs panel L1 readings"]?.rmse_c, 2)} °C, L2 ${f(lc["sealed L2 vs panel L2 readings"]?.rmse_c, 2)} °C - the file is consistent</td></tr>
+      ${anc.map((x) => `<tr><td>${esc(x.mode)}, identified curve vs configured L1</td><td>${f(x.rmse_vs_L1_c, 1)} °C</td></tr>`).join("")}
+      ${lf && evL1 ? `<tr><td>Which floor is L1?</td><td>Spot-reading test: ${esc(lf.best_group_name)} (margin ${f(lf.margin_c, 3)} °C). Evaluation by slope: ${esc(evL1[0])} (margin ${f(av.margin_c_per_c, 2)} °C/°C). The two disagree: not settled.</td></tr>` : ""}
+      </tbody></table></div>`);
+  }
+
+  const tot = (k) => synth ? synth.cases.filter((c) => c.arms[k] && c.arms[k].right_mechanism).length : 0;
+  const n = synth ? synth.cases.length : 0;
+  const low = (k) => synth ? synth.cases.filter((c) => !c.arms[k].status && c.arms[k].rmse_held_c <= Math.min(...["A", "B", "C"].filter((j) => !c.arms[j].status).map((j) => c.arms[j].rmse_held_c))).length : 0;
+  slide(`<h2>What worked, what did not</h2><ul>
+    <li>Synthetic controllers in the real building model, three arms. Lowest held-out error: language model ${low("C")}/${n}, grammar search ${low("B")}/${n}, catalogue ${low("A")}/${n}. Right mechanism by the checklist fixed before the runs: ${tot("C")}, ${tot("B")}, ${tot("A")} of ${n}. Some of the model's wins come from month() terms following seasonal drift.</li>
+    <li>Integrating controllers do not show in room data that sits near setpoint.</li>
+    <li>The uncertainty band is too narrow. Room data alone get the slope, not the level.</li>
+    <li>The model's prose: numbers are checked, reasoning is not. The computed tables are shown next to it.</li></ul>`);
+
+  const cpu = bench ? bench.runs[bench.runs.length - 1] : null;
+  slide(`<h2>AMD and what is next</h2><ul>
+    <li>Language model: AMD token factory, DeepSeek-V4.1-Flash, picked by scoring the endpoint's models on Käyrä's own tasks. OpenRouter fallback when AMD rate-limits or times out, labelled per call: ${esc(real.meta.llm)}.</li>
+    <li>Fitter: PyTorch, ${cpu ? `${cpu.candidates.toLocaleString("en")} candidates in ${cpu.wall_s} s on a laptop CPU` : "CPU"}. AMD GPU: not measured, no estimate given.</li>
+    <li>Next: OPC UA, Modbus and historian connectors, domain catalogues, the replacement controller, editing the setup in the panel.</li></ul>
+    <p style="margin-top:auto">github.com/apn201/kayra</p>`);
+
+  const only = parseInt(location.hash.slice(1), 10);   // #N renders slide N alone (for previews)
+  document.getElementById("deck").innerHTML = only ? S[only - 1] : S.join("");
+  document.body.dataset.ready = "1";
+})();
+</script>
+</body>
+</html>

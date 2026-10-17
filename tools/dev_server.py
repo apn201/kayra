@@ -57,6 +57,10 @@ class H(SimpleHTTPRequestHandler):
         p = path.split("?", 1)[0]
         if p.startswith("/artifacts/"):
             return str(ART / p[len("/artifacts/"):])
+        if p.startswith("/config/") and p.endswith(".json"):
+            return str(ROOT / "config" / Path(p).name)
+        if p.startswith("/docs/img/") and p.endswith(".png"):
+            return str(ROOT / "docs" / "img" / Path(p).name)
         return str(WEB / (p.lstrip("/") or "index.html"))
 
     def _json(self, obj):

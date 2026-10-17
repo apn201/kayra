@@ -1,0 +1,52 @@
+{
+  "_what": "What Käyrä watches. Käyrä identifies whatever drives a set of measured process variables from logged data; this file says which signals those are, where they come from, and what role each plays. This instance is the proof of concept: a house heating stack. The same schema describes a process line, an HVAC plant or a cooling loop - swap the sources and signals.",
+  "process": {
+    "name": "Building heating stack (PoC)",
+    "kind": "thermal process, unknown controller stack",
+    "site": "Kouvola, Finland",
+    "timestep": "1h",
+    "controller_output_observed": false,
+    "note": "The controllers' outputs (supply water temperatures) are not logged. They are identified through the process."
+  },
+  "sources": [
+    {"id": "ha", "type": "home_assistant", "status": "connected", "read_only": true,
+     "how": "REST /api/states for live values, websocket recorder/statistics_during_period for history",
+     "env": ["HA_URL", "HA_URL_EXT", "HA_TOKEN"]},
+    {"id": "fmi", "type": "weather_service", "status": "connected", "read_only": true,
+     "how": "FMI open data WFS, station 101191 Kouvola Utti, hourly and 10-minute", "licence": "CC BY 4.0"},
+    {"id": "panel", "type": "manual_readings", "status": "connected", "read_only": true,
+     "how": "data/manual/ouman_readings.csv - spot readings off the controller panel; reference and optional anchors only"},
+    {"id": "opcua", "type": "opc_ua", "status": "planned", "read_only": true,
+     "how": "subscribe to node ids; historical access for history"},
+    {"id": "modbus", "type": "modbus_tcp", "status": "planned", "read_only": true,
+     "how": "poll holding/input registers with scaling"},
+    {"id": "mqtt", "type": "mqtt", "status": "planned", "read_only": true, "how": "subscribe to topics"},
+    {"id": "historian", "type": "csv_historian_export", "status": "planned", "read_only": true,
+     "how": "timestamp,tag,value exports from a plant historian"}
+  ],
+  "roles": {
+    "input": "measured disturbance or setpoint the controllers may act on (here: outdoor temperature)",
+    "output": "process variable the controllers act on (here: room temperatures)",
+    "aux": "signal used to tell disturbances apart (here: humidity)",
+    "reference": "observed controller output, used only to grade or anchor (here: panel supply readings)"
+  },
+  "signals": [
+    {"id": "T_out", "name": "Outdoor temperature", "role": "input", "unit": "°C", "source": "fmi", "tag": "fmisid:101191/TA_PT1H_AVG"},
+    {"id": "kitchen", "name": "Kitchen", "role": "output", "unit": "°C", "source": "ha", "tag": "sensor.keittio_lampotila", "group": "up"},
+    {"id": "kitchen_rh", "name": "Kitchen humidity", "role": "aux", "unit": "%RH", "source": "ha", "tag": "sensor.keittio_kosteus_2", "aux_of": "kitchen"},
+    {"id": "kitchen_2", "name": "Kitchen, second sensor", "role": "aux", "unit": "°C", "source": "ha", "tag": "sensor.keittio_lampotila_3", "aux_of": "kitchen", "note": "other height; never averaged"},
+    {"id": "fireplace", "name": "Fireplace room", "role": "output", "unit": "°C", "source": "ha", "tag": "sensor.takkahuone_lampotila_2", "group": "down"},
+    {"id": "fireplace_rh", "name": "Fireplace room humidity", "role": "aux", "unit": "%RH", "source": "ha", "tag": "sensor.takkahuone_kosteus_2", "aux_of": "fireplace"},
+    {"id": "tv", "name": "TV room", "role": "output", "unit": "°C", "source": "ha", "tag": "sensor.tv_huone_lampotila", "group": "down"},
+    {"id": "tv_rh", "name": "TV room humidity", "role": "aux", "unit": "%RH", "source": "ha", "tag": "sensor.tv_huone_kosteus", "aux_of": "tv"},
+    {"id": "L1_supply", "name": "Loop L1 supply (panel)", "role": "reference", "unit": "°C", "source": "panel", "tag": "l1_supply_c"},
+    {"id": "L2_supply", "name": "Loop L2 supply (panel)", "role": "reference", "unit": "°C", "source": "panel", "tag": "l2_supply_c"}
+  ],
+  "groups_from": "config/site.json (operator knowledge: which outputs share one controller)",
+  "planned": [
+    "Edit signals and groups in the panel; export this file",
+    "Connectors: OPC UA, Modbus TCP, MQTT, historian CSV",
+    "Structure catalogues per domain (thermal, flow, level, pressure) in the same no-literals language",
+    "Units and bounds per signal type, so parameter ranges follow the process, not the house"
+  ]
+}

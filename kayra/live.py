@@ -35,7 +35,8 @@ _cache: dict = {}
 
 
 def _env() -> dict:
-    return {**_env_file(), **os.environ}
+    """.env and environment, keys upper-cased (so HA_token and HA_TOKEN both work)."""
+    return {k.upper(): v for k, v in {**_env_file(), **os.environ}.items()}
 
 
 def fmi_now() -> tuple[datetime, float] | None:
@@ -68,9 +69,18 @@ def fmi_now() -> tuple[datetime, float] | None:
 def ha_now() -> dict | None:
     """Room temperature and humidity now, from HA's REST API. Skips unavailable states, never float()s them."""
     e = _env()
-    url, token = e.get("HA_URL", "").rstrip("/"), e.get("HA_TOKEN", "")
-    if not url or not token:
+    token = e.get("HA_TOKEN", "")
+    urls = [u.rstrip("/") for u in (e.get("HA_URL", ""), e.get("HA_URL_EXT", "")) if u]
+    if not urls or not token:
         return None
+    for url in urls:  # LAN first, then the external (Nabu Casa) URL
+        got = _ha_rooms(url, token)
+        if got:
+            return got
+    return None
+
+
+def _ha_rooms(url: str, token: str) -> dict | None:
     out = {}
     for room, (t_ent, h_ent) in ROOMS.items():
         vals = {}
@@ -78,12 +88,14 @@ def ha_now() -> dict | None:
             req = urllib.request.Request(f"{url}/api/states/{ent.replace('sensor_', 'sensor.', 1)}",
                                          headers={"Authorization": f"Bearer {token}"})
             try:
-                with urllib.request.urlopen(req, timeout=10, context=_ssl() if url.startswith("https") else None) as r:
+                with urllib.request.urlopen(req, timeout=6, context=_ssl() if url.startswith("https") else None) as r:
                     st = json.loads(r.read().decode("utf-8")).get("state")
                 vals[key] = None if st in (None, "", "unknown", "unavailable") else round(float(st), 2)
             except Exception:
                 vals[key] = None
         out[room] = vals
+        if not any(v.get("measured_c") is not None for v in out.values()) and room == "kitchen":
+            return None  # first room failed: this URL is not reachable, try the next one
     return out if any(v["measured_c"] is not None for v in out.values()) else None
 
 

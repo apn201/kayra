@@ -1,0 +1,125 @@
+{
+ "what": "identified curves vs configured curves, observed outdoor range only",
+ "notes": [
+  "HA-only level is loose by design; slope is the identifiable part.",
+  "FMI Utti reads 0.2-1.1 C cooler than the controller's own sensor in six checks; not corrected.",
+  "The fireplace-room curve is that room's equivalent curve, not a loop curve."
+ ],
+ "label_check": {
+  "sealed L1 vs panel L1 readings": {
+   "rmse_c": 0.46,
+   "n": 9
+  },
+  "sealed L1 vs panel L2 readings": {
+   "rmse_c": 7.5,
+   "n": 8
+  },
+  "sealed L2 vs panel L1 readings": {
+   "rmse_c": 7.32,
+   "n": 9
+  },
+  "sealed L2 vs panel L2 readings": {
+   "rmse_c": 0.49,
+   "n": 8
+  }
+ },
+ "assignment": {
+  "rooms kitchen vs sealed L1": {
+   "slope_error_c_per_c": 0.84,
+   "level_rmse_c": 9.45
+  },
+  "rooms kitchen vs sealed L2": {
+   "slope_error_c_per_c": 0.3,
+   "level_rmse_c": 1.93
+  },
+  "rooms fireplace+tv vs sealed L1": {
+   "slope_error_c_per_c": -0.25,
+   "level_rmse_c": 8.28
+  },
+  "rooms fireplace+tv vs sealed L2": {
+   "slope_error_c_per_c": -0.79,
+   "level_rmse_c": 4.28
+  }
+ },
+ "assignment_verdict": {
+  "by_slope": {
+   "Upstairs floor heating (kitchen)": "L2",
+   "Downstairs radiators (fireplace+tv)": "L1"
+  },
+  "slope_error_sum_best": 0.55,
+  "slope_error_sum_other": 1.63,
+  "margin_c_per_c": 1.08
+ },
+ "anchored": [
+  {
+   "mode": "HA-ONLY",
+   "k": 0,
+   "rmse_vs_L1_c": 15.93,
+   "inside_band_L1": "1/8",
+   "rmse_vs_L2_c": 12.88,
+   "inside_band_L2": "1/8"
+  },
+  {
+   "mode": "ANCHORED k=1",
+   "k": 1,
+   "rmse_vs_L1_c": 9.06,
+   "inside_band_L1": "0/8",
+   "rmse_vs_L2_c": 16.16,
+   "inside_band_L2": "0/8"
+  },
+  {
+   "mode": "ANCHORED k=2",
+   "k": 2,
+   "rmse_vs_L1_c": 7.42,
+   "inside_band_L1": "0/8",
+   "rmse_vs_L2_c": 14.58,
+   "inside_band_L2": "1/8"
+  },
+  {
+   "mode": "ANCHORED k=3",
+   "k": 3,
+   "rmse_vs_L1_c": 2.88,
+   "inside_band_L1": "0/8",
+   "rmse_vs_L2_c": 10.15,
+   "inside_band_L2": "0/8"
+  },
+  {
+   "mode": "ANCHORED k=4",
+   "k": 4,
+   "rmse_vs_L1_c": 2.5,
+   "inside_band_L1": "0/8",
+   "rmse_vs_L2_c": 9.8,
+   "inside_band_L2": "0/8"
+  }
+ ],
+ "curves": {
+  "L1": [
+   {
+    "outdoor_c": -20.0,
+    "supply_c": 51.0
+   },
+   {
+    "outdoor_c": 0.0,
+    "supply_c": 40.0
+   },
+   {
+    "outdoor_c": 20.0,
+    "supply_c": 23.0
+   }
+  ],
+  "L2": [
+   {
+    "outdoor_c": -20.0,
+    "supply_c": 32.0
+   },
+   {
+    "outdoor_c": 0.0,
+    "supply_c": 29.0
+   },
+   {
+    "outdoor_c": 20.0,
+    "supply_c": 23.0
+   }
+  ]
+ }
+}

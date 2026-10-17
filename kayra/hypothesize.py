@@ -75,7 +75,9 @@ class LLMProposer:
         for i, p in enumerate(p for p in props if isinstance(p, dict)):
             p["proposed_id"] = p.get("id")
             p["id"] = f"M{round_no}.{i + 1}{tag}"  # model ids never collide with catalogue or synthetic names
-            p["source"] = "model" if self.cfg["backend"] == "amd" else f"model ({client.status(self.cfg)})"
+            p["source"] = ("model (AMD)" if rep.backend == "amd" else
+                           f"model ({(self.cfg.get('fallback') or {}).get('label', 'fallback')})" if rep.backend == "fallback"
+                           else f"model ({client.status(self.cfg)})")
             p["prompt_hash"] = rep.prompt_hash
             out.append(p)
         return out

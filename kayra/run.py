@@ -149,31 +149,48 @@ def real(device: str, quick: bool) -> dict:
 
     simple = simple_view(f, device, n, iters, priors, site, catalogue)
 
-    # anchored mode: k spot readings of L1 pin the level of the room group the operator puts on L1
-    anchored = []
-    a_loop = site.get("anchor_loop", "L1")
-    a_rooms = [r for r in site.get("loops", {}).get(a_loop, {}).get("rooms", ["fireplace"]) if r in f.rooms]
-    pf = search.Problem(f, a_rooms if len(a_rooms) > 1 else a_rooms[0], device, season="cold",
-                        building=[priors[r]["bounds"] for r in a_rooms])
+    # anchored mode: k spot readings of panel loop L1 pin the curve level. Which floor L1 serves is
+    # unknown, so the readings are tried on every room group. The group whose own room data stay
+    # consistent with the L1 curve (smallest rise in held-out room error once anchored) is the
+    # data's answer to "which floor is L1". Reported with its margin; never assumed.
     s1 = next(s for s in catalogue if s["id"] == "S1")
     n_l1 = len([r for r in reference.readings() if r["l1_supply_c"] is not None])
-    for k in range(0, min(5, n_l1)):
-        anc, rest = reference.anchors(k)
-        r = search.search(pf, s1, n=n, iters=iters, anchors=anc, seed=7)
-        band = search.population_curve(pf, r)
-        b = {kk: torch.tensor([v], device=device) for kk, v in r["best_b"].items()}
-        th = {kk: torch.tensor([v], device=device) for kk, v in r["best_theta"].items()}
-        grid = sorted({x["outdoor_controller_c"] for x in rest})
-        cur = search.steady_curve(pf, r["prog"], th, b, grid=grid)[0].cpu().numpy()
-        errs = [float(cur[grid.index(x["outdoor_controller_c"])] - x["l1_supply_c"]) for x in rest]
-        i5 = band["grid_c"].index(4)
-        width = (band["p95"][i5] - band["p05"][i5]) if band["p95"][i5] is not None else None
-        anchored.append({"k": k, "mode": "HA-ONLY" if k == 0 else f"ANCHORED k={k}", "band": band,
+    anchored_by_group, loop_match = {}, {}
+    for gid, L in site.get("loops", {}).items():
+        g_rooms = [r for r in L["rooms"] if r in f.rooms]
+        if not g_rooms:
+            continue
+        pf = search.Problem(f, g_rooms if len(g_rooms) > 1 else g_rooms[0], device, season="cold",
+                            building=[priors[r]["bounds"] for r in g_rooms])
+        rows = []
+        for k in range(0, min(5, n_l1)):
+            anc, rest = reference.anchors(k)
+            r = search.search(pf, s1, n=n, iters=iters, anchors=anc, seed=7)
+            band = search.population_curve(pf, r)
+            b, th = search.best_tensors(pf, r)
+            grid = sorted({x["outdoor_controller_c"] for x in rest})
+            cur = search.steady_curve(pf, r["prog"], th, b, grid=grid)[0].cpu().numpy()
+            errs = [float(cur[grid.index(x["outdoor_controller_c"])] - x["l1_supply_c"]) for x in rest]
+            i5 = band["grid_c"].index(4)
+            width = (band["p95"][i5] - band["p05"][i5]) if band["p95"][i5] is not None else None
+            rows.append({"k": k, "mode": "HA-ONLY" if k == 0 else f"ANCHORED k={k}", "band": band,
                          "scored_on": len(rest),
                          "rmse_vs_panel_l1_c": round(float(np.sqrt(np.mean(np.square(errs)))), 2) if errs else None,
                          "band_width_at_4c": round(width, 2) if width is not None else None,
+                         "room_rmse_held_c": round(math.sqrt(r["held_mse"]), 3),
                          "theta": r["best_theta"]})
-        print(f"anchored k={k}: rmse vs panel {anchored[-1]['rmse_vs_panel_l1_c']}")
+            print(f"anchored {gid} k={k}: rmse vs panel {rows[-1]['rmse_vs_panel_l1_c']}, room {rows[-1]['room_rmse_held_c']}")
+        anchored_by_group[gid] = {"rooms": g_rooms, "name": L["name"], "rows": rows}
+        loop_match[gid] = round(rows[-1]["room_rmse_held_c"] - rows[0]["room_rmse_held_c"], 3)
+    best_g = min(loop_match, key=loop_match.get)
+    margin = round(sorted(loop_match.values())[1] - loop_match[best_g], 3) if len(loop_match) > 1 else None
+    anchored = anchored_by_group[best_g]["rows"]
+    a_rooms, a_loop = anchored_by_group[best_g]["rooms"], "L1"
+    l1_floor = {"room_error_rise_when_anchored_c": loop_match, "best_group": best_g,
+                "best_group_name": anchored_by_group[best_g]["name"], "margin_c": margin,
+                "verdict": (f"L1 panel readings fit {anchored_by_group[best_g]['name']} best; margin {margin} C of room error"
+                            + (" - weak, treat as unresolved" if margin is not None and margin < 0.02 else ""))}
+    print("L1 floor:", l1_floor["verdict"])
 
     # replay for the Live screen: last 21 days with room data, hour by hour
     last = max(i for i in range(len(f)) if not np.isnan(f.rooms["tv"][i]))
@@ -200,10 +217,13 @@ def real(device: str, quick: bool) -> dict:
         "site": site,
         "anchored_fireplace": anchored,   # key kept for the panel; the room is in anchored_rooms
         "anchored_rooms": a_rooms, "anchored_loop": a_loop,
+        "anchored_by_group": anchored_by_group, "l1_floor": l1_floor,
         "operator": [reference.operator_l2_belief(), reference.operator_tv_people(f)],
         "controller_vs_fmi": reference.controller_vs_fmi(f),
         "alerts": alerts,
     }
+    out["meta"]["llm"] = client.status(cfg)          # at the end: includes the AMD / fallback mix
+    out["meta"]["llm_calls"] = dict(client.STATS)
     _write("real.json", out)
     # panel readings for the curve chart, in the same order anchors() takes them (reference data)
     _write("readings.json", [{"t": r["timestamp_local"], "out": r["outdoor_controller_c"], "l1": r["l1_supply_c"],
@@ -303,6 +323,8 @@ def synthetic(device: str, quick: bool) -> dict:
     out = {"meta": _meta(device, {"candidates_per_iter": n, "iters": iters, "rounds": rounds}, client.status(cfg)),
            "label": "SYNTHETIC - real outdoor history and fitted real building, hidden test controllers",
            "building": building, "cases": cases}
+    out["meta"]["llm"] = client.status(cfg)
+    out["meta"]["llm_calls"] = dict(client.STATS)
     _write("synth.json", out)
     return out
 

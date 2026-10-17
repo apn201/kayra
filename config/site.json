@@ -1,23 +1,23 @@
 {
   "_what": "Site knowledge from the operator. Optional input. Rooms on one loop share one controller program in the fit; each room keeps its own building parameters. Facts here are what the operator says, not what the data showed - the fit tests them.",
-  "_history": "2026-10-12: operator first read L1 as downstairs radiators (hotter loop = radiators). 2026-10-18: operator corrected it - L1 is probably upstairs floor heating, L2 downstairs radiators; L1 is clearly the hotter loop. The blind evaluation of the earlier run leaned the same way by curve slope (margin 0.27 C/C, weak).",
+  "_history": "Which loop (L1 or L2 on the controller panel) serves which floor is NOT known (operator, 2026-10-18). The groups are named by floor only. The spot-reading fit tries the panel's L1 readings on both groups and reports which group they fit.",
   "loops": {
-    "L1": {
+    "up": {
       "name": "Upstairs floor heating",
       "rooms": ["kitchen"],
-      "operator_notes": "Floor heating, probably on L1 (operator, not 100 % sure). L1 runs clearly hotter than L2. Kitchen also gets warm air rising from downstairs through the open space and balcony."
+      "operator_notes": "Floor heating. Which panel loop (L1 or L2) is not known. Kitchen also gets warm air rising from downstairs through the open space and balcony."
     },
-    "L2": {
+    "down": {
       "name": "Downstairs radiators",
       "rooms": ["fireplace", "tv"],
-      "operator_notes": "Radiators, probably on L2. Most have no thermostatic valve. The TV room radiator has an analog thermostatic valve, almost closed."
+      "operator_notes": "Radiators. Which panel loop (L1 or L2) is not known. Most radiators have no thermostatic valve. The TV room radiator has an analog thermostatic valve, almost closed."
     }
   },
-  "anchor_loop": "L1",
+  "panel_loops": "L1 runs clearly hotter than L2 on the panel. Which floor each serves is unknown.",
   "rooms": {
-    "kitchen": "upstairs, floor heating (L1, per operator)",
-    "fireplace": "downstairs, radiators (L2, per operator), fireplace",
-    "tv": "downstairs, radiator (L2) with an analog thermostatic valve, almost closed"
+    "kitchen": "upstairs, floor heating",
+    "fireplace": "downstairs, radiators, fireplace",
+    "tv": "downstairs, radiator with an analog thermostatic valve, almost closed"
   },
   "expectations": [
     "TV room: small direct heating share (valve almost closed); a local room-feedback structure there would be a real thermostatic valve, not a false positive.",

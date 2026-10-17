@@ -1215,107 +1215,107 @@
   {
    "d": "2026-10-03",
    "out": 11.2,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.96,
+   "fireplace": 22.01,
+   "tv": 22.01
   },
   {
    "d": "2026-10-04",
    "out": 10.85,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.87,
+   "fireplace": 21.87,
+   "tv": 22.07
   },
   {
    "d": "2026-10-05",
    "out": 9.02,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 21.02,
+   "fireplace": 22.35,
+   "tv": 22.06
   },
   {
    "d": "2026-10-06",
    "out": 12.83,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 22.29,
+   "fireplace": 22.84,
+   "tv": 22.44
   },
   {
    "d": "2026-10-07",
    "out": 9.47,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 21.01,
+   "fireplace": 22.03,
+   "tv": 22.17
   },
   {
    "d": "2026-10-08",
    "out": 6.16,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.49,
+   "fireplace": 21.75,
+   "tv": 22.01
   },
   {
    "d": "2026-10-09",
    "out": 9.83,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.58,
+   "fireplace": 21.68,
+   "tv": 22.02
   },
   {
    "d": "2026-10-10",
    "out": 4.9,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.22,
+   "fireplace": 21.77,
+   "tv": 21.94
   },
   {
    "d": "2026-10-11",
    "out": 4.58,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 19.79,
+   "fireplace": 22.01,
+   "tv": 22.21
   },
   {
    "d": "2026-10-12",
    "out": 5.34,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 19.83,
+   "fireplace": 21.46,
+   "tv": 21.85
   },
   {
    "d": "2026-10-13",
    "out": 5.05,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.35,
+   "fireplace": 21.7,
+   "tv": 21.96
   },
   {
    "d": "2026-10-14",
    "out": 7.45,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.57,
+   "fireplace": 21.68,
+   "tv": 21.95
   },
   {
    "d": "2026-10-15",
    "out": 9.14,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.47,
+   "fireplace": 21.65,
+   "tv": 21.88
   },
   {
    "d": "2026-10-16",
    "out": 10.83,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "kitchen": 20.22,
+   "fireplace": 21.47,
+   "tv": 21.85
   },
   {
    "d": "2026-10-17",
-   "out": 10.9,
-   "kitchen": null,
-   "fireplace": null,
-   "tv": null
+   "out": 9.88,
+   "kitchen": 20.4,
+   "fireplace": 21.5,
+   "tv": 22.09
   }
  ]
 }

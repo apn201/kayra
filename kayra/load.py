@@ -26,15 +26,30 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 
-# room -> (temperature entity, humidity entity). Kitchen has two temperature
-# sensors at two heights (ceiling, wall above a window); `_3` is the second one.
-# They are never averaged. The product fits the first; the second is carried.
-ROOMS = {
-    "kitchen": ("sensor_keittio_lampotila", "sensor_keittio_kosteus_2"),
-    "fireplace": ("sensor_takkahuone_lampotila_2", "sensor_takkahuone_kosteus_2"),
-    "tv": ("sensor_tv_huone_lampotila", "sensor_tv_huone_kosteus"),
-}
-EXTRA = {"kitchen_2": "sensor_keittio_lampotila_3"}
+PROCESS = ROOT / "config" / "process.json"
+
+
+def _signals() -> tuple[dict, dict]:
+    """Outputs and their aux signals from config/process.json (what Käyrä watches).
+    Returns ({output_id: (tag, humidity_tag)}, {aux_id: tag}) with tags in file-name form."""
+    import json
+    cfg = json.loads(PROCESS.read_text(encoding="utf-8"))
+    sig = cfg["signals"]
+    fname = lambda tag: tag.replace(".", "_", 1)
+    outs, extra = {}, {}
+    for s in sig:
+        if s["role"] == "output" and s["source"] == "ha":
+            rh = next((a["tag"] for a in sig if a.get("aux_of") == s["id"] and a.get("unit") == "%RH"), None)
+            outs[s["id"]] = (fname(s["tag"]), fname(rh) if rh else None)
+    for s in sig:
+        if s["role"] == "aux" and s.get("unit") == "°C" and s["source"] == "ha":
+            extra[s["id"]] = fname(s["tag"])
+    return outs, extra
+
+
+# output -> (temperature series, humidity series), from config/process.json. The kitchen has two
+# temperature sensors at two heights; the second is carried as aux and never averaged.
+ROOMS, EXTRA = _signals()
 FMISID = 101191  # Kouvola Utti lentoasema
 
 
@@ -74,7 +89,9 @@ def helsinki(t: datetime) -> datetime:
 
 def _read_stats(name: str) -> tuple[dict[datetime, float], list[str]]:
     """All pulls of one HA entity, newest folder wins per hour."""
-    folders = sorted(p for p in RAW.iterdir() if p.is_dir() and p.name.startswith("ha_"))
+    # oldest pull first, so the newest wins per hour (ha_exports_20261003 sorts by its date too)
+    folders = sorted((p for p in RAW.iterdir() if p.is_dir() and p.name.startswith("ha_")),
+                     key=lambda p: p.name.replace("ha_exports_", "ha_"))
     values: dict[datetime, float] = {}
     used = []
     for folder in folders:
@@ -107,7 +124,7 @@ def _read_fmi() -> tuple[dict[datetime, float], str]:
 def load() -> Frame:
     fmi, fmi_src = _read_fmi()
     room_vals = {r: _read_stats(e[0]) for r, e in ROOMS.items()}
-    hum_vals = {r: _read_stats(e[1]) for r, e in ROOMS.items()}
+    hum_vals = {r: _read_stats(e[1]) if e[1] else ({}, []) for r, e in ROOMS.items()}
     extra_vals = {k: _read_stats(e) for k, e in EXTRA.items()}
 
     start = max(min(fmi), min(min(v[0]) for v in room_vals.values()))

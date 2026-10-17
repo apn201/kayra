@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_utc": "2026-10-17T15:52:08Z"
+  "generated_utc": "2026-10-17T19:14:06Z"
  },
  "what": "identical catalogue search, fireplace room, all windows",
  "runs": [
@@ -17,10 +17,10 @@
    },
    "programs": 8,
    "candidates": 163840,
-   "windows": 168,
-   "wall_s": 55.36,
-   "candidates_per_s": 2959.5,
-   "room_hours_simulated_per_s": 35797915
+   "windows": 182,
+   "wall_s": 56.32,
+   "candidates_per_s": 2908.9,
+   "room_hours_simulated_per_s": 38118740
   },
   {
    "device": "cpu",
@@ -35,10 +35,10 @@
    },
    "programs": 8,
    "candidates": 163840,
-   "windows": 168,
-   "wall_s": 35.29,
-   "candidates_per_s": 4642.4,
-   "room_hours_simulated_per_s": 56154327
+   "windows": 182,
+   "wall_s": 31.86,
+   "candidates_per_s": 5142.2,
+   "room_hours_simulated_per_s": 67383566
   }
  ],
  "gpu": {

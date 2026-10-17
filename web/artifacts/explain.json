@@ -1,103 +1,55 @@
 {
- "llm": "STAND-IN ENDPOINT (OpenRouter, not AMD)",
+ "llm": "ONLINE",
  "rooms": {
   "kitchen": {
    "template": [
-    "Best explanation: S0 No control (free-floating), held-out error 0.71 °C.",
-    "Runner-up S1 trails by ΔBIC 2.85.",
-    "Scored on 48 cold windows; the building time constant is 455.4 h."
+    "Best explanation: S0 No control (free-floating), held-out error 0.706 °C.",
+    "Runner-up S1 trails by ΔBIC 7.91.",
+    "Scored on 62 cold windows; the building time constant is 455.4 h."
    ],
    "lines": [
-    "No top program ties with the best: S1 has delta_bic 2.85, how much worse than the best program after a complexity penalty.",
-    "The best_expr is OFF, and heat_on_share_of_hours is 0.0, the fraction of hours the best program asks for heat.",
-    "The building time_constant_h is 455.4, how many hours the building takes to follow outdoor temperature.",
-    "The residual for S0 has corr_with_outdoor 0.046 and corr_with_humidity 0.303, correlations of the residual with those signals."
+    "No other program ties with S0, because every other program has a delta_bic above 2.",
+    "S0 has a held-out RMSE of 0.706 degrees C, and its best expression is OFF.",
+    "The residual for S0 has a heat_on_share_of_hours of 0.0, so the best program asks for heat in none of the hours.",
+    "The building time constant is 455.4 hours, so the room follows outdoor temperature very slowly."
    ],
-   "source": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+   "source": "ONLINE"
   },
   "fireplace": {
    "template": [
-    "Best explanation: S0 No control (free-floating), held-out error 0.372 °C.",
-    "Runner-up S1 trails by ΔBIC 4.76.",
-    "Scored on 48 cold windows; the building time constant is 1396.6 h."
+    "Best explanation: S0 No control (free-floating), held-out error 0.381 °C.",
+    "Runner-up S1 trails by ΔBIC 2.71.",
+    "Scored on 62 cold windows; the building time constant is 1396.6 h."
    ],
    "lines": [
-    "The best expression is OFF, and heat_on_share_of_hours is 0.0, the fraction of hours the best program asks for heat.",
-    "S0 and S1 do not tie: S1 Weather curve linear has delta_bic 4.76, where delta_bic measures how much worse than the best program after a complexity penalty.",
-    "The S0 residual has rmse_held_c 0.372, prediction error on held-out weeks in degrees C, and corr_with_outdoor 0.007, the correlation of the residual with outdoor signal.",
-    "The time_constant_h is 1396.6, how many hours the building takes to follow outdoor temperature."
+    "S1, Weather curve, linear, has delta_bic 2.71, which is not a tie with S0 because delta_bic under 2 is a tie.",
+    "The best expression is OFF, and heat_on_share_of_hours is 0.0, so the best program asks for heat in none of the hours.",
+    "The residual for S0 has rmse_held_c 0.381, and its mean_by_outdoor_band is -0.862 for the >20 band, meaning the room is colder than predicted when outdoor is above 20.",
+    "The time_constant_h is 1396.6, so the building takes that many hours to follow outdoor temperature."
    ],
-   "source": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+   "source": "ONLINE"
   },
   "tv": {
    "template": [
-    "Best explanation: S1 Weather curve, linear, held-out error 0.236 °C.",
-    "Runner-up S0 trails by ΔBIC 5.1.",
-    "Scored on 48 cold windows; the building time constant is 923.0 h."
+    "Best explanation: S4 PI control on room temperature, held-out error 0.211 °C.",
+    "Runner-up S1 trails by ΔBIC 2.67.",
+    "Scored on 62 cold windows; the building time constant is 886.9 h."
    ],
    "lines": [
-    "The top programs do not tie: S0, No control (free-floating), has delta_bic 5.1, and S5, On/off thermostat with hysteresis, has delta_bic 9.78.",
-    "S1's rmse_held_c is 0.236 C (prediction error on held-out weeks), and its best_expr is level + slope * T_out.",
-    "The residual mean_by_local_hour is 0.104 C at hour 4 and 0.117 C at hour 21 (mean measured minus predicted room temperature), and mean_by_outdoor_band for >20 is -0.27 C (same residual measure).",
-    "The time_constant_h is 923.0 hours (how many hours the building takes to follow outdoor temperature), and heat_on_share_of_hours is 1.0 (fraction of hours the best program asks for heat)."
+    "The top program is S4, PI control on room temperature, with delta_bic 0.0, which is how much worse than the best program after a complexity penalty.",
+    "No program ties with S4: every other program has tie_with_best false.",
+    "The residual for S4 has heat_on_share_of_hours 1.0, the fraction of hours the best program asks for heat, and corr_with_outdoor -0.161, the correlation of the residual with that signal.",
+    "The residual mean_by_outdoor_band is -0.278 for the >20 band and -0.172 for the 15-20 band, meaning the room is colder than predicted in those bands."
    ],
-   "source": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+   "source": "ONLINE"
   }
  },
  "next_observation": {
   "pick": "a fresh Home Assistant pull covering the heating season since the last pull",
-  "why": "The surviving pair is S0 versus S1 in every room, and the residual table is split by outdoor band. A season-long pull gives the outdoor coverage needed to tell a weather curve from free-floating.",
-  "source": "STAND-IN ENDPOINT (OpenRouter, not AMD)"
+  "why": "The top two hypotheses in kitchen and fireplace are S0 No control (free-floating) and S1 Weather curve, linear, with runner_up_delta_bic of 7.91 and 2.71, so more data across the season is needed to separate them. A longer pull adds the cold and warm outdoor bands that the residual_by_outdoor_band values show are missing.",
+  "source": "ONLINE"
  },
  "alerts": [
-  {
-   "t": "2026-09-13T17:00:00+00:00",
-   "room": "fireplace",
-   "rule": "cooking or shower",
-   "kind": "disturbance",
-   "numbers": {
-    "dT_c": 0.87,
-    "dRH": 16.3
-   },
-   "text": "cooking or shower in fireplace: disturbance.",
-   "source": "TEMPLATE"
-  },
-  {
-   "t": "2026-09-18T09:00:00+00:00",
-   "room": "fireplace",
-   "rule": "window open",
-   "kind": "disturbance",
-   "numbers": {
-    "dT_c": -0.37,
-    "dRH": -3.8
-   },
-   "text": "window open in fireplace: disturbance.",
-   "source": "TEMPLATE"
-  },
-  {
-   "t": "2026-09-22T10:00:00+00:00",
-   "room": "fireplace",
-   "rule": "fire",
-   "kind": "disturbance (masked)",
-   "numbers": {
-    "dT_c": 0.67,
-    "dRH": -1.0
-   },
-   "text": "fire in fireplace: disturbance (masked).",
-   "source": "TEMPLATE"
-  },
-  {
-   "t": "2026-09-24T15:00:00+00:00",
-   "room": "kitchen",
-   "rule": "cooking or shower",
-   "kind": "disturbance",
-   "numbers": {
-    "dT_c": 0.38,
-    "dRH": 4.7
-   },
-   "text": "cooking or shower in kitchen: disturbance.",
-   "source": "TEMPLATE"
-  },
   {
    "t": "2026-09-27T10:00:00+00:00",
    "room": "fireplace",
@@ -157,27 +109,111 @@
    },
    "text": "fire in fireplace: disturbance (masked).",
    "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-05T18:00:00+00:00",
+   "room": "kitchen",
+   "rule": "cooking or shower",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": 0.3,
+    "dRH": 6.8
+   },
+   "text": "cooking or shower in kitchen: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-05T18:00:00+00:00",
+   "room": "fireplace",
+   "rule": "cooking or shower",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": 4.38,
+    "dRH": 18.9
+   },
+   "text": "cooking or shower in fireplace: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-06T12:00:00+00:00",
+   "room": "kitchen",
+   "rule": "window open",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": -0.4,
+    "dRH": -2.9
+   },
+   "text": "window open in kitchen: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-08T12:00:00+00:00",
+   "room": "kitchen",
+   "rule": "cooking or shower",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": 0.48,
+    "dRH": 3.8
+   },
+   "text": "cooking or shower in kitchen: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-08T14:00:00+00:00",
+   "room": "kitchen",
+   "rule": "cooking or shower",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": 0.39,
+    "dRH": 2.8
+   },
+   "text": "cooking or shower in kitchen: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-10T19:00:00+00:00",
+   "room": "fireplace",
+   "rule": "window open",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": -0.9,
+    "dRH": -4.9
+   },
+   "text": "window open in fireplace: disturbance.",
+   "source": "TEMPLATE"
+  },
+  {
+   "t": "2026-10-13T08:00:00+00:00",
+   "room": "fireplace",
+   "rule": "cooking or shower",
+   "kind": "disturbance",
+   "numbers": {
+    "dT_c": 0.38,
+    "dRH": 12.4
+   },
+   "text": "cooking or shower in fireplace: disturbance.",
+   "source": "TEMPLATE"
   }
  ],
  "dropped": [
   {
-   "line": "The top-ranked program is S0, No control (free-floating), with prob 0.7884, the share of belief among the programs tried, and rmse_held_c 0.71, prediction error on held-out weeks in degrees C.",
+   "line": "The top program is S0, No control (free-floating), with a probability of 0.9775 and a delta_bic of 0.0.",
    "ungrounded": [
-    "0.7884"
+    "0.9775"
    ],
    "where": "diagnosis kitchen"
   },
   {
-   "line": "The top-ranked program is S0, No control (free-floating), with prob 0.9089, where prob is the share of belief among the programs tried from the penalised scores.",
+   "line": "The top program is S0, No control (free-floating), with prob 0.7602 and delta_bic 0.0.",
    "ungrounded": [
-    "0.9089"
+    "0.7602"
    ],
    "where": "diagnosis fireplace"
   },
   {
-   "line": "The best ranked program is S1, Weather curve, linear, with delta_bic 0.0 (how much worse than the best program after a complexity penalty) and prob 0.9174 (share of belief among the programs tried).",
+   "line": "S4 has prob 0.6978, the share of belief among the programs tried, and rmse_held_c 0.211, the prediction error on held-out weeks in degrees C.",
    "ungrounded": [
-    "0.9174"
+    "0.6978"
    ],
    "where": "diagnosis tv"
   }

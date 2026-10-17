@@ -31,6 +31,7 @@ function sourceTag(src) {
 
 function llmShort(s) {
   s = String(s || "");
+  if (s.startsWith("ONLINE") && s.includes("fallback")) return ["AMD+FALLBACK", ""];
   if (s.startsWith("ONLINE")) return ["ONLINE", ""];
   if (s.startsWith("ARCHIVE")) return ["ARCHIVE", ""];
   if (s.startsWith("STAND-IN")) return ["STAND-IN", "cell-warn"];
@@ -40,7 +41,7 @@ function llmShort(s) {
 function setStatus() {
   const llm = A.real?.meta?.llm || A.explain?.llm || "OFFLINE";
   const [l, cls] = llmShort(llm);
-  $("#st-llm").innerHTML = `<span class="${cls}" title="${esc(llm)}">${esc(l === "STAND-IN" ? "STAND-IN (not AMD)" : l === "ONLINE" ? "AMD TOKEN FACTORY" : l)}</span>`;
+  $("#st-llm").innerHTML = `<span class="${cls}" title="${esc(llm)}">${esc(l === "STAND-IN" ? "STAND-IN (not AMD)" : l === "ONLINE" ? "AMD TOKEN FACTORY" : l === "AMD+FALLBACK" ? "AMD + FALLBACK" : l)}</span>`;
   const dev = A.real?.meta?.device;
   const onAmd = dev && dev.hip;
   $("#st-amd").innerHTML = onAmd ? "AMD GPU" : `<span title="AMD GPU not available for this run; same PyTorch code on ${esc(dev?.device || "cpu")}">CPU</span>`;
@@ -165,10 +166,20 @@ function S_curve() {
   const ys = [...b.p05, ...b.p95, ...readings.map((r) => r.l1)].filter((v) => v !== null);
   let [y0, y1] = range(ys.length ? ys : [20, 50], 2);
   y0 = Math.max(y0, 0);
-  const ev = A.eval?.curve;
+  const ev = A.showCfg && A.eval && A.eval.curves ? (A.eval.curves.L1 || null) : null;
   const aRooms = (A.real.anchored_rooms || ["fireplace"]).map((r) => ROOMS[r]).join(" + ");
   let h = `<h2>Spot readings · ${esc(A.real.anchored_loop || "L1")} · ${esc(aRooms)}</h2><p class="lede">Supply the identified law asks for at steady outdoor temperature. Band = likelihood-weighted 5-95 % of the search population. HA-only uses room data alone; anchored adds k panel readings of the loop, which are then excluded from scoring.</p>`;
   h += `<div class="controls">Spot readings ${an.map((x) => `<button aria-pressed="${x.k === curveK}" data-k="${x.k}">k=${x.k}</button>`).join("")}</div>`;
+  if (A.real.l1_floor) {
+    const lf = A.real.l1_floor, av = A.eval && A.eval.assignment_verdict;
+    h += `<p class="note">Which floor does panel loop L1 serve? Nobody knows, so the L1 readings were tried on every room group. ${esc(lf.verdict)}. Rise in held-out room error when anchored: ${Object.entries(lf.room_error_rise_when_anchored_c).map(([g, v]) => `${esc((A.real.anchored_by_group[g] || {}).name || g)} ${fmt(v, 3)} °C`).join(", ")}.`;
+    if (av) {
+      const evL1 = Object.entries(av.by_slope).find(([, l]) => l === "L1");
+      const agrees = evL1 && evL1[0].startsWith(lf.best_group_name);
+      h += ` The blind evaluation against the configured curves (by slope, margin ${fmt(av.margin_c_per_c, 2)} °C/°C) puts L1 on ${esc(evL1 ? evL1[0] : "-")}${agrees ? " - the two agree." : " - the two tests disagree, so the data do not settle it. Cheapest next observation: feel which floor's supply pipe is hotter."}`;
+    }
+    h += `</p>`;
+  }
   h += `<div class="readout"><div><label>Mode</label><span class="big">${a.k ? "ANCH " + a.k : "HA"}</span></div><div><label>Error vs other panel readings</label><span class="big">${fmt(a.rmse_vs_panel_l1_c, 1)}<span class="unit">°C</span></span></div><div><label>Band width at 4 °C outdoor</label><span class="big">${fmt(a.band_width_at_4c, 1)}<span class="unit">°C</span></span></div><div><label>Scored on</label><span class="big">${a.scored_on}</span></div></div>`;
   h += chart({
     x0: -10, x1: 20, y0, y1, xTicks: [-10, -5, 0, 5, 10, 15, 20], yTicks: ticks(y0, y1), xLabel: "outdoor °C (FMI Utti)", yLabel: "supply °C",
@@ -188,7 +199,7 @@ function S_curve() {
   });
   if (a.rmse_vs_panel_l1_c !== null && a.band_width_at_4c !== null && a.rmse_vs_panel_l1_c > a.band_width_at_4c)
     h += `<p class="note">The error against the panel readings is larger than the band. The band is the spread of the search population and does not capture how loosely room data pin the level. In this mode treat the curve level as not identified; the slope is the usable part.</p>`;
-  h += `<p class="lede">Line: p50. Shaded: band. Rings: panel L1 readings (reference, scored). Filled: readings used as anchors. Squares: panel L2 (floor circuit, not modelled). ${ev ? "Dashed: configured curve from the sealed file (evaluate.py)." : "The configured curve stays sealed until <code>evaluate.py</code> runs."} No extrapolation below the observed outdoor range.</p>`;
+  h += `<p class="lede">Line: p50. Shaded: band. Rings: panel L1 readings (reference, scored). Filled: readings used as anchors. Squares: panel L2 (floor circuit, not modelled). ${ev ? "Dashed: configured L1 curve (shown after the blind evaluation)." : "The configured curve is hidden; after evaluate.py has run it can be switched on from the Curve screen."} No extrapolation below the observed outdoor range.</p>`;
   h += `<h3>Spot readings against error</h3><div class="scroll"><table><thead><tr><th>Mode</th><th>Error vs remaining readings °C</th><th>Band at 4 °C</th><th>Scored on</th></tr></thead><tbody>${an.map((x) => `<tr><td>${x.mode}</td><td class="n">${fmt(x.rmse_vs_panel_l1_c, 2)}</td><td class="n">${fmt(x.band_width_at_4c, 2)}</td><td class="n">${x.scored_on}</td></tr>`).join("")}</tbody></table></div>`;
   h += `<p class="lede">Controller outdoor sensor against FMI Utti: ${A.real.controller_vs_fmi.map((c) => `${c.offset_c > 0 ? "+" : ""}${c.offset_c}`).join(", ")} °C. Carried as uncertainty, not as a correction.</p>`;
   return h;
@@ -282,7 +293,10 @@ function S_bench() {
     const cell = (x) => x.status ? `<span class="tag pending">not run</span>` : `${esc(x.best)} · ${fmt(x.rmse_held_c, 3)} · ${x.right_mechanism ? "<b>yes</b>" : "no"}${x.fits ? " · " + x.fits.toLocaleString("en") : ""}`;
     for (const c of S.cases) h += `<tr><td>${c.id}</td><td>${esc(c.hidden)}</td><td>${cell(c.arms.A)}</td><td>${cell(c.arms.B)}</td><td>${cell(c.arms.C)}</td></tr>`;
     const tot = (k) => S.cases.filter((c) => c.arms[k] && c.arms[k].right_mechanism).length;
-    h += `<tr class="lead"><td></td><td>Right mechanism</td><td>${tot("A")} / ${S.cases.length}</td><td>${tot("B")} / ${S.cases.length}</td><td>${tot("C")} / ${S.cases.length}</td></tr></tbody></table></div>`;
+    h += `<tr class="lead"><td></td><td>Right mechanism (checklist fixed before the runs)</td><td>${tot("A")} / ${S.cases.length}</td><td>${tot("B")} / ${S.cases.length}</td><td>${tot("C")} / ${S.cases.length}</td></tr>`;
+    const low = (k) => S.cases.filter((c) => !c.arms[k].status && c.arms[k].rmse_held_c <= Math.min(...["A", "B", "C"].filter((j) => !c.arms[j].status).map((j) => c.arms[j].rmse_held_c))).length;
+    h += `<tr class="lead"><td></td><td>Lowest held-out error (ties count for each)</td><td>${low("A")} / ${S.cases.length}</td><td>${low("B")} / ${S.cases.length}</td><td>${low("C")} / ${S.cases.length}</td></tr></tbody></table></div>`;
+    h += `<p class="lede">Some of the language model's wins come from month() terms that follow seasonal drift rather than the hidden mechanism. On H6 it wrote the thermostat with explicit room thresholds instead of the hysteresis operator, which the literal checklist does not count.</p>`;
     h += `<p class="lede">Arm C model: ${esc(S.meta.llm)}.</p>`;
   }
   return h;
@@ -388,7 +402,7 @@ function S_home() {
   const vs = L.vs_no_control;
 
   let h = `<div class="simple"><div>`;
-  h += `<div class="controls">${ids.map((id) => `<button aria-pressed="${id === loopId}" data-loop="${id}">${esc(id)} ${esc(simple[id].name)}</button>`).join("")}</div>`;
+  h += `<div class="controls">${ids.map((id) => `<button aria-pressed="${id === loopId}" data-loop="${id}">${esc(simple[id].name)}</button>`).join("")}</div>`;
 
   // top: supply curve. Outdoor axis runs +20 to -20, the way heating curves are printed.
   const X0 = 20, X1 = -20, grid = [];
@@ -399,10 +413,15 @@ function S_home() {
       let s = "";
       if (moved) s += `<path class="fit" d="${path(grid.map((t) => [t, curveAt(fitted, t)]), X, Y)}"/>`;
       s += `<path class="curve" d="${path(grid.map((t) => [t, curveAt(user, t)]), X, Y)}"/>`;
+      if (A.showCfg && A.eval && A.eval.curves) for (const [lp, pts] of Object.entries(A.eval.curves)) {
+        s += `<path class="line2" d="${path(pts.map((q) => [q.outdoor_c, q.supply_c]), X, Y)}"/>`;
+        const last = pts[pts.length - 1];
+        s += `<text x="${X(last.outdoor_c) - 4}" y="${Y(last.supply_c) - 6}" text-anchor="end">configured ${esc(lp)}</text>`;
+      }
       s += `<line class="grid" x1="${X(user.cutoff)}" x2="${X(user.cutoff)}" y1="${Y(80)}" y2="${Y(20)}" stroke-dasharray="2 3"/><text x="${X(user.cutoff) + 3}" y="${Y(77)}">stop ${fmt(user.cutoff, 1)}</text>`;
       for (const r of A.readings || []) {
-        const v = loopId === "L1" ? r.l1 : r.l2;
-        if (v !== null && v !== undefined) s += `<circle class="pt" cx="${X(r.out)}" cy="${Y(v)}" r="3.5"><title>panel reading ${v} °C at ${r.out} °C (reference)</title></circle>`;
+        if (r.l1 !== null && r.l1 !== undefined) s += `<circle class="pt" cx="${X(r.out)}" cy="${Y(r.l1)}" r="3.5"><title>panel L1 ${r.l1} °C at ${r.out} °C (reference)</title></circle>`;
+        if (r.l2 !== null && r.l2 !== undefined) s += `<rect class="pt" x="${X(r.out) - 3}" y="${Y(r.l2) - 3}" width="6" height="6"><title>panel L2 ${r.l2} °C at ${r.out} °C (reference)</title></rect>`;
       }
       if (row) {
         const S = curveAt(user, row.outdoor_c);
@@ -429,7 +448,7 @@ function S_home() {
       });
       return s;
     } });
-  h += `<div class="legend">${L.rooms.map((r, i) => `<span><i style="background:var(--room-${"abc"[i]})"></i>${ROOMS[r]}: dots are days, line is predicted under the curve above</span>`).join("")}<span>ring: this hour (${esc((A.dataLabel || "REPLAY").toLowerCase())})</span>${(A.liveHist || []).length ? `<span>squares: ${A.liveHist.length} logged live hours</span>` : ""}<span>top rings: panel readings, reference only</span></div>`;
+  h += `<div class="legend">${L.rooms.map((r, i) => `<span><i style="background:var(--room-${"abc"[i]})"></i>${ROOMS[r]}: dots are days, line is predicted under the curve above</span>`).join("")}<span>ring: this hour (${esc((A.dataLabel || "REPLAY").toLowerCase())})</span>${(A.liveHist || []).length ? `<span>squares: ${A.liveHist.length} logged live hours</span>` : ""}<span>top: panel readings, rings L1, squares L2 (reference only; which floor each loop serves is unknown)</span></div>`;
   h += `</div><div class="sliders">`;
 
   // right column: the controls and what they predict
@@ -440,7 +459,7 @@ function S_home() {
   }
   const sl = (k, label, lo, hi, step, unit) => `<div><label for="sl-${k}">${label}<span>${fmt(user[k], step < 0.1 ? 2 : 1)} ${unit}</span></label><input id="sl-${k}" type="range" min="${lo}" max="${hi}" step="${step}" value="${user[k]}" data-param="${k}"></div>`;
   h += sl("level", "Supply at 0 °C outdoor", 15, 80, 0.5, "°C") + sl("slope", "Slope", -3, 0, 0.05, "°C/°C") + sl("cutoff", "Summer stop above", 5, 25, 0.5, "°C");
-  h += `<div class="controls"><button class="key" data-fit="1">Fit</button>${moved ? `<span class="tag standin">your curve</span>` : `<span class="tag">fitted</span>`}</div>`;
+  h += `<div class="controls"><button class="key" data-fit="1">Fit</button>${A.eval && A.eval.curves ? `<button class="key" data-cfg="1" aria-pressed="${!!A.showCfg}">${A.showCfg ? "Hide" : "Show"} configured curves</button>` : ""}${moved ? `<span class="tag standin">your curve</span>` : `<span class="tag">fitted</span>`}</div>`;
   const hi0 = heatIndex(L, fitted), hi1 = heatIndex(L, user);
   h += `<div class="readout" style="flex-direction:column;gap:8px">`;
   if (row) {
@@ -501,7 +520,33 @@ function S_ai() {
   return h;
 }
 
-const SCREENS = { ai: S_ai, home: S_home, box: S_box, notebook: S_notebook, curve: S_curve, live: S_live, model: S_model, bench: S_bench, alert: S_alert, replace: S_replace, doc: S_doc };
+// ------------------------------------------------------------------ process setup
+// What Käyrä watches: sources, signals, roles, groups. Read from config/process.json and
+// config/site.json. This PoC is a house heating stack; the same schema describes any process.
+function S_setup() {
+  const P = A.process, S = A.site;
+  if (!P) return `<p class="note">config/process.json not found.</p>`;
+  const st = (x) => x === "connected" ? `<span class="tag">connected</span>` : `<span class="tag pending">planned</span>`;
+  let h = `<h2>Process setup</h2><p class="note">Proof of concept: ${esc(P.process.name)}. Käyrä itself is not about houses. It identifies whatever drives a set of measured process variables, from logged data, with the controller's output ${P.process.controller_output_observed ? "observed" : "not observed"}. Swap the sources and signals below and the same fitter, structure language and model loop run on a process line, an HVAC plant or a cooling loop. Editing here is planned; today the setup is the file <code>config/process.json</code>.</p>`;
+  h += `<h3>Sources</h3><div class="scroll"><table><thead><tr><th>Source</th><th>Type</th><th>Status</th><th>How</th></tr></thead><tbody>`;
+  for (const x of P.sources) h += `<tr><td>${esc(x.id)}</td><td>${esc(x.type.replace(/_/g, " "))}</td><td>${st(x.status)}</td><td>${esc(x.how)}${x.read_only ? " · read-only" : ""}</td></tr>`;
+  h += `</tbody></table></div>`;
+  h += `<div class="controls"><button class="key" disabled title="planned">Add source</button><button class="key" disabled title="planned">Add signal</button><button class="key" disabled title="planned">Export config</button><span class="tag pending">planned</span></div>`;
+  h += `<h3>Signals</h3><div class="scroll"><table><thead><tr><th>Id</th><th>Name</th><th>Role</th><th>Unit</th><th>Source · tag</th><th>Group / links</th></tr></thead><tbody>`;
+  for (const x of P.signals) h += `<tr><td><code>${esc(x.id)}</code></td><td>${esc(x.name)}</td><td title="${esc(P.roles[x.role] || "")}">${esc(x.role)}</td><td>${esc(x.unit)}</td><td>${esc(x.source)} · <code>${esc(x.tag)}</code></td><td>${x.group ? "group " + esc(x.group) : ""}${x.aux_of ? "aux of " + esc(x.aux_of) : ""}${x.note ? " · " + esc(x.note) : ""}</td></tr>`;
+  h += `</tbody></table></div>`;
+  h += `<h3>Roles</h3>` + Object.entries(P.roles).map(([k, v]) => `<p><b>${esc(k)}</b> - ${esc(v)}</p>`).join("");
+  if (S) {
+    h += `<h3>Groups (outputs that share one controller)</h3><div class="scroll"><table><thead><tr><th>Group</th><th>Name</th><th>Outputs</th><th>Operator notes</th></tr></thead><tbody>`;
+    for (const [gid, g] of Object.entries(S.loops || {})) h += `<tr><td>${esc(gid)}</td><td>${esc(g.name)}</td><td>${g.rooms.map(esc).join(", ")}</td><td>${esc(g.operator_notes || "")}</td></tr>`;
+    h += `</tbody></table></div>`;
+    if (S._history) h += `<p class="lede">${esc(S._history)}</p>`;
+  }
+  h += `<h3>Planned</h3>` + P.planned.map((x) => `<p>- ${esc(x)}</p>`).join("");
+  return h;
+}
+
+const SCREENS = { setup: S_setup, ai: S_ai, home: S_home, box: S_box, notebook: S_notebook, curve: S_curve, live: S_live, model: S_model, bench: S_bench, alert: S_alert, replace: S_replace, doc: S_doc };
 
 function render() {
   document.querySelectorAll("nav.keys button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.s === screen)));
@@ -518,6 +563,7 @@ document.addEventListener("click", (e) => {
   if (t.dataset.k !== undefined) curveK = Number(t.dataset.k);
   if (t.dataset.loop) loopId = t.dataset.loop;
   if (t.dataset.fit) user = null;
+  if (t.dataset.cfg) A.showCfg = !A.showCfg;
   render();
 });
 
@@ -526,6 +572,9 @@ async function boot() {
     get("real.json"), get("synth.json"), get("benchmark.json"), get("replay.json"), get("explain.json"), get("eval.json"), get("document.md"), get("readings.json"), get("points.json"), get("context.json"), get("writeup.json"),
   ]);
   Object.assign(A, { real, synth, benchmark, replay, explain, eval: ev, document: doc, readings, points, context, writeup });
+  for (const k of ["process", "site"]) {
+    try { const r = await fetch(`config/${k}.json`, { cache: "no-store" }); if (r.ok) A[k] = await r.json(); } catch {}
+  }
   if (!real) { $("#screen").innerHTML = `<p class="note">No artifacts found. Run <code>python -m kayra.run all</code>, then <code>python tools/dev_server.py</code>.</p>`; return; }
   const h = location.hash.slice(1);
   if (SCREENS[h]) screen = h;

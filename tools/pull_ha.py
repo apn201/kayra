@@ -26,11 +26,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-ENTITIES = [
-    "sensor.keittio_lampotila", "sensor.keittio_lampotila_3", "sensor.keittio_kosteus_2",
-    "sensor.takkahuone_lampotila_2", "sensor.takkahuone_kosteus_2",
-    "sensor.tv_huone_lampotila", "sensor.tv_huone_kosteus",
-]
+def _entities() -> list[str]:
+    """Every Home Assistant signal in config/process.json (outputs and aux)."""
+    cfg = json.loads((ROOT / "config" / "process.json").read_text(encoding="utf-8"))
+    return [x["tag"] for x in cfg["signals"] if x["source"] == "ha"]
+
+
+ENTITIES = _entities()
 
 
 def env() -> dict:
@@ -41,7 +43,7 @@ def env() -> dict:
             if "=" in line and not line.lstrip().startswith("#"):
                 k, v = line.split("=", 1)
                 e[k.strip()] = v.strip()
-    return {**e, **os.environ}
+    return {k.upper(): v for k, v in {**e, **os.environ}.items()}  # HA_token and HA_TOKEN both work
 
 
 def ts(v) -> str:
@@ -56,12 +58,27 @@ def main() -> int:
     ap.add_argument("--extra", nargs="*", default=[], help="more entity ids, e.g. the zigbee climate sensor")
     a = ap.parse_args()
     e = env()
-    url, token = e.get("HA_URL", "").rstrip("/"), e.get("HA_TOKEN", "")
-    if not url or not token:
-        raise SystemExit("Set HA_URL and HA_TOKEN in .env (token never printed).")
+    token = e.get("HA_TOKEN", "")
+    urls = [u.rstrip("/") for u in (e.get("HA_URL", ""), e.get("HA_URL_EXT", "")) if u]
+    if not urls or not token:
+        raise SystemExit("Set HA_URL (LAN) and/or HA_URL_EXT (external) and HA_TOKEN in .env (token never printed).")
+    import ssl
     import websocket  # websocket-client
-
-    ws = websocket.create_connection(url.replace("http", "ws", 1) + "/api/websocket", timeout=60)
+    try:
+        import certifi
+        sslopt = {"ca_certs": certifi.where()}
+    except ImportError:
+        sslopt = {}
+    ws = None
+    for url in urls:  # LAN first, then the external URL
+        try:
+            ws = websocket.create_connection(url.replace("http", "ws", 1) + "/api/websocket", timeout=60, sslopt=sslopt)
+            print(f"connected to {url.split('//')[1].split('/')[0]}")
+            break
+        except Exception as exc:
+            print(f"could not connect to {url.split('//')[1].split('/')[0]}: {type(exc).__name__}")
+    if ws is None:
+        raise SystemExit("No Home Assistant URL reachable.")
     json.loads(ws.recv())
     ws.send(json.dumps({"type": "auth", "access_token": token}))
     if json.loads(ws.recv()).get("type") != "auth_ok":

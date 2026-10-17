@@ -60,7 +60,20 @@ def config() -> dict:
         "label": env.get("KAYRA_LLM_LABEL", ""),
         "timeout_s": float(env.get("KAYRA_LLM_TIMEOUT_S", "240")),
         "max_tokens": int(env.get("KAYRA_LLM_MAX_TOKENS", "8000")),
+        # fallback endpoint for when the primary (AMD) times out or is rate-limited
+        "fallback": {
+            "backend": "fallback",
+            "base_url": env.get("KAYRA_LLM_FALLBACK_BASE_URL", "").rstrip("/"),
+            "api_key": env.get("KAYRA_LLM_FALLBACK_API_KEY", ""),
+            "model": env.get("KAYRA_LLM_FALLBACK_MODEL", ""),
+            "label": env.get("KAYRA_LLM_FALLBACK_LABEL", "fallback, not AMD"),
+        } if env.get("KAYRA_LLM_FALLBACK_BASE_URL") else None,
     }
+
+
+# which endpoint actually answered, per process - goes into artifact metadata
+STATS = {"amd": 0, "other": 0, "fallback": 0, "archive": 0}
+_PRIMARY_DOWN_UNTIL = 0.0
 
 
 def list_models(cfg: dict | None = None) -> list[str]:
@@ -79,8 +92,11 @@ def list_models(cfg: dict | None = None) -> list[str]:
 
 def status(cfg: dict | None = None) -> str:
     cfg = cfg or config()
-    return {"amd": "ONLINE", "other": f"STAND-IN ENDPOINT ({cfg['label'] or 'not AMD'})",
+    base = {"amd": "ONLINE", "other": f"STAND-IN ENDPOINT ({cfg['label'] or 'not AMD'})",
             "archive": "ARCHIVE", "none": "OFFLINE"}.get(cfg["backend"], "OFFLINE")
+    if cfg["backend"] == "amd" and STATS["fallback"]:
+        base += f" (AMD {STATS['amd']} calls, {cfg['fallback']['label']} {STATS['fallback']} calls)"
+    return base
 
 
 class LLMError(RuntimeError):
@@ -103,23 +119,50 @@ def prompt_hash(system: str, user: str) -> str:
 
 def chat(system: str, user: str, *, purpose: str, cfg: dict | None = None, role: str = "code",
          model: str | None = None, _retry: bool = True) -> Reply:
+    """One call to the primary endpoint; on timeout or rate limit, the fallback endpoint (labelled)."""
+    global _PRIMARY_DOWN_UNTIL
     cfg = dict(cfg or config())
+    fb = cfg.get("fallback")
+    if cfg["backend"] == "amd" and fb and fb["base_url"]:
+        if time.time() >= _PRIMARY_DOWN_UNTIL:
+            try:
+                return _chat(system, user, purpose=purpose, cfg=dict(cfg, timeout_s=min(cfg["timeout_s"], 90)),
+                             role=role, model=model, _retry=_retry, waits=[10])
+            except LLMError as exc:
+                _PRIMARY_DOWN_UNTIL = time.time() + 600  # skip AMD for ten minutes, then try again
+                why = str(exc)[:120]
+        else:
+            why = "primary skipped (failed in the last ten minutes)"
+        fcfg = dict(cfg, **fb, model_code=fb["model"], model_text=fb["model"])
+        rep_ = _chat(system, user, purpose=f"{purpose} [fallback: {why}]", cfg=fcfg, role=role, model=fb["model"],
+                     _retry=_retry, waits=[15, 30])
+        return rep_
+    return _chat(system, user, purpose=purpose, cfg=cfg, role=role, model=model, _retry=_retry)
+
+
+def _chat(system: str, user: str, *, purpose: str, cfg: dict, role: str = "code",
+          model: str | None = None, _retry: bool = True, waits: list | None = None) -> Reply:
+    cfg = dict(cfg)
     cfg["model"] = model or cfg.get(f"model_{role}") or cfg["model"]
     ph = prompt_hash(system, user)
     if cfg["backend"] == "archive":
+        STATS["archive"] += 1
         return _from_archive(ph)
-    if cfg["backend"] not in ("amd", "other"):
+    if cfg["backend"] not in ("amd", "other", "fallback"):
         raise LLMError("no language model configured (KAYRA_LLM_BACKEND=none)")
     if not cfg["base_url"] or not cfg["model"]:
         raise LLMError("KAYRA_LLM_BASE_URL and KAYRA_LLM_MODEL must be set")
-    body = json.dumps({"model": cfg["model"], "max_tokens": cfg["max_tokens"], "temperature": cfg["temperature"],
-                       "messages": [{"role": "system", "content": system},
-                                    {"role": "user", "content": user}]}).encode("utf-8")
+    payload = {"model": cfg["model"], "max_tokens": cfg["max_tokens"], "temperature": cfg["temperature"],
+               "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+    if "openrouter.ai" in cfg["base_url"]:
+        # cap the hidden reasoning so a reasoning model always gets to the answer
+        payload["reasoning"] = {"max_tokens": int(os.environ.get("KAYRA_LLM_REASONING_MAX", "3000"))}
+    body = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(cfg["base_url"] + "/chat/completions", data=body, method="POST",
                                  headers={"Content-Type": "application/json",
                                           "Authorization": f"Bearer {cfg['api_key']}"})
     t0 = time.time()
-    waits = [15, 30, 60, 90]  # rate limits and timeouts on a shared endpoint: back off, then give up
+    waits = list(waits if waits is not None else [15, 30, 60, 90])  # back off on a shared endpoint, then give up
     while True:
         try:
             with urllib.request.urlopen(req, timeout=cfg["timeout_s"], context=_ssl()) as r:
@@ -149,12 +192,13 @@ def chat(system: str, user: str, *, purpose: str, cfg: dict | None = None, role:
                   "content": "", "reasoning_content": reasoning[-2000:], "usage": data.get("usage") or {},
                   "latency_s": round(time.time() - t0, 2)})
         cfg["max_tokens"] *= 2
-        return chat(system, user + "\n\nKeep your reasoning short and give the final answer.", purpose=purpose,
-                    cfg=cfg, role=role, model=cfg["model"], _retry=False)
+        return _chat(system, user + "\n\nKeep your reasoning short and give the final answer.", purpose=purpose,
+                     cfg=cfg, role=role, model=cfg["model"], _retry=False, waits=waits)
     text, source = (content, "content") if content else (reasoning, "reasoning_content")
     if not text:
         raise LLMError(f"empty reply from {cfg['model']} (finish_reason {(data.get('choices') or [{}])[0].get('finish_reason')})")
     rep = Reply(text, source, data.get("model", cfg["model"]), cfg["backend"], ph, data.get("usage") or {})
+    STATS[cfg["backend"]] = STATS.get(cfg["backend"], 0) + 1
     _archive({"t": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(t0)), "purpose": purpose, "role": role,
               "backend": cfg["backend"], "label": cfg["label"], "base_url": cfg["base_url"],
               "model": rep.model, "prompt_hash": ph, "system": system, "user": user,

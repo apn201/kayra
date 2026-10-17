@@ -17,3 +17,9 @@ for name in FILES:
     if (SRC / name).is_file():
         shutil.copy2(SRC / name, DST / name)
         print("copied", name)
+
+# configuration the panel's Process setup screen shows
+(ROOT / "web" / "config").mkdir(exist_ok=True)
+for name in ("process.json", "site.json"):
+    shutil.copy2(ROOT / "config" / name, ROOT / "web" / "config" / name)
+    print("copied config/" + name)
