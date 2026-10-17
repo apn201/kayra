@@ -1,57 +1,62 @@
 {
- "llm": "ONLINE",
+ "llm": "ONLINE (AMD 5 calls, no fallback)",
  "model": "DeepSeek-V4.1-Flash",
  "sections": [
   {
    "key": "what_it_does",
    "title": "What the controllers do, as found",
    "lines": [
-    "The upstairs floor heating loop follows a curve with supply 25.9 C at 0 C outdoor and slope 0.02 C per C, with a summer stop above 54.1 C outdoor.",
-    "The downstairs radiator loop follows a curve with supply 33.3 C at 0 C outdoor and slope -1.07 C per C, with a summer stop above 13.8 C outdoor.",
-    "The upstairs loop explains the kitchen room data better than no control by a delta_bic_curve_over_no_control of 28.5, and the downstairs loop scores -6.0 on the same measure.",
-    "On cold weeks the downstairs loop's best model is S0 No control (free-floating), with runner-up delta_bic 9.69, and the heating share by room is 0.886 for fireplace and 0.114 for tv.",
-    "The data could not separate the two loops' curves from the site context programs: each program tested on up or down is worse than the blind best, with delta_bic_vs_blind_best from 14.4 to 23.62.",
-    "The data could not tell whether the TV room warms on evenings from the people in it, and the operator belief that L2 is the same curve as L1 with a flat reduction is refuted because the gap widens as it gets colder."
+    "The upstairs floor heating loop fits a curve with supply 25.9 C at 0 C outdoor and a slope of 0.02 C per C, with a summer stop above 54.1 C outdoor.",
+    "The downstairs radiators loop fits a curve with supply 33.3 C at 0 C outdoor and a slope of -1.07 C per C, with a summer stop above 13.8 C outdoor.",
+    "The kitchen room responds to the upstairs loop with a held-out error of 0.687 C, and the fireplace and TV rooms respond to the downstairs loop with held-out errors of 0.359 C and 0.263 C.",
+    "The data could not separate the downstairs loop's direct heating coupling between the fireplace and TV rooms, as the heating shares are 0.886 and 0.114 but the best model on cold weeks is no control with a runner-up delta BIC of 6.97.",
+    "The data could not separate whether the TV room warms on evenings from the people in it, as the operator belief is not supported by the room data alone.",
+    "All findings are from logged data and simulation, not from changes or tests on the building."
    ]
   },
   {
    "key": "evidence",
    "title": "How sure we are",
    "lines": [
-    "Held-out prediction error on weeks the fit never saw was 0.687 C for kitchen, 0.359 C for fireplace, and 0.263 C for tv; this is held_out_error_c.",
-    "The curve-over-no-control score was 28.5 upstairs and -6.0 downstairs; this is a model-comparison score, not energy and not degrees.",
-    "The spot readings changed the error vs other panel readings not used in the fit: with 0 readings used it was 12.33 C, with 1 it was 7.09 C, with 2 it was 6.03 C, with 3 it was 2.19 C, with 4 it was 2.23 C.",
-    "Operator belief that L2 is the same curve as L1 with a flat reduction was refuted because the gap widens as it gets colder and L2 runs its own curve; the belief that the TV room warms on evenings from the people in it was not supported by the room data alone.",
-    "Site context programs were all worse than the blind best, with delta_bic_vs_blind_best 18.0, 15.68, 23.62, 16.89, 15.54, 14.4, and 18.28; positive means worse than the best program found without site context, over 2 is a real difference, and all of this is from logged data and simulation, not a controller change or building test."
+    "On weeks the fit never saw, the upstairs floor heating curve predicted kitchen temperature with a held-out error of 0.687 C, and the downstairs radiators curve predicted fireplace and tv temperatures with held-out errors of 0.359 C and 0.263 C.",
+    "The upstairs curve scored 28.5 on the model-comparison score against no control, which is strong, while the downstairs curve scored -6.0, which is not better than no control.",
+    "The spot readings changed with the number of readings used: the error against other panel readings was 12.33 C with 0 readings used, 7.09 C with 1, 6.03 C with 2, 2.19 C with 3, and 2.23 C with 4.",
+    "The operator belief that L2 is the same curve as L1 with a flat reduction was refuted because the gap widens as it gets colder, and the belief that the TV room warms on evenings from the people in it was not supported by the room data alone.",
+    "The site context programs all scored worse than the blind best, with delta_bic_vs_blind_best values of 9.69, 14.14, 16.27, 10.98, 12.07, 18.37, and 22.6, and one target 'L眼见1' was unknown.",
+    "The controller's own outdoor sensor minus the weather station ranged from 0.2 C to 1.1 C across the six values 0.2, 0.7, 0.7, 1.1, 0.4, 0.4.",
+    "The data could not tell whether the controller was changed or tested on the building; everything is from logged data and simulation.",
+    "The next observation is a fresh Home Assistant pull covering the heating season since the last pull."
    ]
   },
   {
    "key": "unknowns",
    "title": "What the data cannot tell yet",
    "lines": [
-    "Outdoor data only covers -1.6 C to 28.8 C, so the data cannot tell how either loop behaves below -1.6 C or above 28.8 C.",
-    "The fitted Upstairs floor heating curve has slope 0.02 C per C and supply at 0 C outdoor of 25.9 C; the Downstairs radiators curve has slope -1.07 C per C and supply at 0 C outdoor of 33.3 C, but over this outdoor range the data cannot tell whether a level change or a slope change is the right description outside it.",
-    "On cold weeks the Downstairs radiators best program was S0 No control (free-floating), with runner-up delta_bic 9.69, a model-comparison score, so a heating mechanism that fits all weeks is not supported on cold weeks.",
-    "The belief that the TV room warms on evenings from the people in it is not supported by the room data alone."
+    "The outdoor data covers only -1.6 C to 28.8 C, so the curve is unobserved outside that range.",
+    "The data cannot separate a level change from a slope change in the curves.",
+    "Some mechanisms fit the data but are not supported: the TV room warming from people is not supported by the room data alone.",
+    "The synthetic benchmark used 6 cases and each arm got the right mechanism 1 time, so it cannot confirm any mechanism on this building.",
+    "Everything here is from logged data and simulation, not from any change or test on the building."
    ]
   },
   {
    "key": "next",
    "title": "Next observation",
    "lines": [
-    "The next observation is a fresh Home Assistant pull covering the heating season since the last pull. It would settle whether the logged room and supply data over that season match the fitted curves."
+    "The next observation is a fresh Home Assistant pull covering the heating season since the last pull.",
+    "It would settle whether the logged weeks used here still represent the season as a whole."
    ]
   },
   {
    "key": "fi",
    "title": "Yhteenveto huoltomiehelle (suomeksi)",
    "lines": [
-    "Yläkerran lattialämmityksen käyrä antaa menoveden 25.9 °C, kun ulkona on 0 °C, ja käyrän jyrkkyys on 0.02 °C per °C.",
-    "Alakerran patterien käyrä antaa menoveden 33.3 °C, kun ulkona on 0 °C, ja sen jyrkkyys on -1.07 °C per °C.",
-    "Kesäpysäytys on yläkerrassa 54.1 °C ja alakerrassa 13.8 °C.",
-    "Ennustevirhe näkemättömillä viikoilla on keittiössä 0.687 °C, takkahuoneessa 0.359 °C ja tv-huoneessa 0.263 °C.",
-    "Alakerran kylmillä viikoilla paras malli oli 'S0 No control (free-floating)' ja seuraavan mallin mallivertailueron arvo oli 9.69.",
-    "Paneelin pistelukemien virhe muihin paneelilukemiin verrattuna oli 2.19 °C, kun lukemia oli käytössä 3; seuraava halvin tarkistus on tuore Home Assistant -lataus, joka kattaa viimeisen latauksen jälkeisen lämmityskauden."
+    "Yläkerran lattialämmitys (keittiö) noudattaa käyrää: menovesi 25.9 °C ulkolämpötilassa 0 °C, kulmakerroin 0.02 °C/°C, kesäpysäytys yli 54.1 °C.",
+    "Alakerran patterit (takka, tv) noudattavat eri käyrää: menovesi 33.3 °C ulkolämpötilassa 0 °C, kulmakerroin -1.07 °C/°C, kesäpysäytys yli 13.8 °C.",
+    "Kylmien viikkojen aineistossa alakerran paras malli oli 'S0 No control (free-floating)', joten säätimen vaikutus ei ole varma.",
+    "Säätimen oma ulkoanturi näyttää 0.2–1.1 °C enemmän kuin FMI Kouvola Utti lentoasema (fmisid 101191).",
+    "Paneelilta kannattaa seuraavaksi lukea menoveden lämpötila ja ulkolämpötila, ja verrata niitä yllä oleviin lukuihin.",
+    "Seuraava tarkistus on uusi Home Assistant -haku, joka kattaa lämmityskauden edellisen haun jälkeen."
    ]
   }
  ],
@@ -106,7 +111,7 @@
      "tv": 0.114
     },
     "best_on_cold_weeks": "S0 No control (free-floating)",
-    "runner_up_delta_bic": 9.69
+    "runner_up_delta_bic": 6.97
    }
   },
   "spot_readings": [
@@ -166,46 +171,52 @@
   "next_observation": "a fresh Home Assistant pull covering the heating season since the last pull",
   "site_context_programs": [
    {
-    "from": "L1 supply setpoint breakdown screen: Curve value, Autumn drying, Outdoor temperature delay, Max limit, Min limit",
+    "from": "Curve value",
+    "target": "L1 (tested on up, down; best on up)",
+    "verdict": "worse than the blind best",
+    "delta_bic_vs_blind_best": 9.69
+   },
+   {
+    "from": "Max limit",
+    "target": "L眼见1",
+    "verdict": "unknown target 'L眼见1'",
+    "delta_bic_vs_blind_best": null
+   },
+   {
+    "from": "Min limit",
+    "target": "L1 (tested on up, down; best on up)",
+    "verdict": "worse than the blind best",
+    "delta_bic_vs_blind_best": 14.14
+   },
+   {
+    "from": "Autumn drying (a correction term)",
     "target": "L1 (tested on up, down; best on down)",
     "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 18.0
+    "delta_bic_vs_blind_best": 16.27
    },
    {
-    "from": "L1 supply setpoint breakdown screen: Curve value, Max limit, Min limit",
+    "from": "Outdoor temperature delay (a correction term)",
     "target": "L1 (tested on up, down; best on up)",
     "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 15.68
-   },
-   {
-    "from": "L1 supply setpoint breakdown screen: Autumn drying",
-    "target": "L1 (tested on up, down; best on up)",
-    "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 23.62
-   },
-   {
-    "from": "L1 supply setpoint breakdown screen: Outdoor temperature delay",
-    "target": "L1 (tested on up, down; best on up)",
-    "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 16.89
+    "delta_bic_vs_blind_best": 10.98
    },
    {
     "from": "Two heating circuits, L1 and L2, one outdoor sensor",
     "target": "L2 (tested on up, down; best on up)",
     "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 15.54
+    "delta_bic_vs_blind_best": 12.07
    },
    {
-    "from": "Floor heating. Which panel loop (L1 or L2) is not known.",
-    "target": "up",
-    "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 14.4
-   },
-   {
-    "from": "Radiators. Which panel loop (L1 or L2) is not known. Most radiators have no thermostatic valve.",
+    "from": "Radiators. Most radiators have no thermostatic valve. The TV room radiator has an analog thermostatic valve, almost closed.",
     "target": "down",
     "verdict": "worse than the blind best",
-    "delta_bic_vs_blind_best": 18.28
+    "delta_bic_vs_blind_best": 18.37
+   },
+   {
+    "from": "Floor heating. Kitchen also gets warm air rising from downstairs through the open space and balcony.",
+    "target": "up",
+    "verdict": "worse than the blind best",
+    "delta_bic_vs_blind_best": 22.6
    }
   ],
   "synthetic_benchmark": {

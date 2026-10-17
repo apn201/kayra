@@ -1,0 +1,547 @@
+{
+ "generated_utc": "2026-10-17T21:41:28Z",
+ "endpoint": "AMD token factory",
+ "base_url": "https://developer.amd.com.cn/radeon/api/v1",
+ "repeats": 2,
+ "wall_s": "about 1500 (stopped: two models were still timing out)",
+ "note": "Qwen3.8-27B and GLM-5.3-Flash timed out on the programs task (3 tries x 300 s); the run was stopped and their remaining calls are counted as not completed.",
+ "tasks": [
+  "programs (validator)",
+  "operator note -> program (validator + T_room)",
+  "prose (guardrails)"
+ ],
+ "models": [
+  {
+   "model": "DeepSeek-V4.1-Flash",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.88,
+   "operator_pass_rate": 1.0,
+   "grounded_prose_share": 1.0,
+   "score": 0.958,
+   "median_latency_s": 13.0,
+   "median_tokens_per_s": 19.5,
+   "cost_usd_per_call": 0.00027,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 79.7,
+     "tokens": 761,
+     "cost": 0.0004817008,
+     "left": "0.95550520",
+     "returned": 4,
+     "valid": 4
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 13.3,
+     "tokens": 289,
+     "cost": 0.00032396,
+     "left": "0.95331522",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 3.8,
+     "tokens": 59,
+     "cost": 7.588e-05,
+     "left": "0.95157935",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 29.6,
+     "tokens": 763,
+     "cost": 0.0004828208,
+     "left": "0.95100997",
+     "returned": 4,
+     "valid": 3
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 12.7,
+     "tokens": 273,
+     "cost": 0.0001745072,
+     "left": "0.95025100",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 3.9,
+     "tokens": 68,
+     "cost": 8.092e-05,
+     "left": "0.95007649",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "MiMo-V2.6-Flash",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.88,
+   "operator_pass_rate": 1.0,
+   "grounded_prose_share": 1.0,
+   "score": 0.958,
+   "median_latency_s": 14.4,
+   "median_tokens_per_s": 36.3,
+   "cost_usd_per_call": 0.000419,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 35.4,
+     "tokens": 1528,
+     "cost": 0.0005628,
+     "left": "0.95550520",
+     "returned": 4,
+     "valid": 3
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 16.4,
+     "tokens": 695,
+     "cost": 0.00027622,
+     "left": "0.95439295",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 8.7,
+     "tokens": 235,
+     "cost": 8.806e-05,
+     "left": "0.95411673",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 137.4,
+     "tokens": 4898,
+     "cost": 0.001374688,
+     "left": "0.95331522",
+     "returned": 4,
+     "valid": 4
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 12.4,
+     "tokens": 457,
+     "cost": 0.0001393336,
+     "left": "0.94564944",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 8.8,
+     "tokens": 234,
+     "cost": 7.02184e-05,
+     "left": "0.94088073",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "DeepSeek-V4-Flash",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.25,
+   "operator_pass_rate": 1.0,
+   "grounded_prose_share": 1.0,
+   "score": 0.75,
+   "median_latency_s": 8.5,
+   "median_tokens_per_s": 21.1,
+   "cost_usd_per_call": 0.000142,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 34.4,
+     "tokens": 733,
+     "cost": 0.00033824,
+     "left": "0.95550520",
+     "returned": 4,
+     "valid": 1
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 7.5,
+     "tokens": 156,
+     "cost": 8.94768e-05,
+     "left": "0.95516696",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 4.6,
+     "tokens": 80,
+     "cost": 4.368e-05,
+     "left": "0.95499943",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 29.0,
+     "tokens": 729,
+     "cost": 0.0002317504,
+     "left": "0.95495575",
+     "returned": 4,
+     "valid": 1
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 9.5,
+     "tokens": 207,
+     "cost": 0.0001037568,
+     "left": "0.95388498",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 4.8,
+     "tokens": 85,
+     "cost": 4.508e-05,
+     "left": "0.95321146",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "Gemma-4-31B-IT",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.71,
+   "operator_pass_rate": 0.5,
+   "grounded_prose_share": 1.0,
+   "score": 0.738,
+   "median_latency_s": 17.1,
+   "median_tokens_per_s": 13.7,
+   "cost_usd_per_call": 2.8e-05,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 25.6,
+     "tokens": 590,
+     "cost": 7.80549e-05,
+     "left": "0.95550520",
+     "returned": 4,
+     "valid": 3
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 68.9,
+     "tokens": 161,
+     "cost": 3.24149e-05,
+     "left": "0.95077558",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 3.0,
+     "tokens": 49,
+     "cost": 9.3485e-06,
+     "left": "0.95074317",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 43.6,
+     "tokens": 484,
+     "cost": 3.46542e-05,
+     "left": "0.95073382",
+     "returned": 3,
+     "valid": 2
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 8.6,
+     "tokens": 149,
+     "cost": 1.0892e-05,
+     "left": "0.94996092",
+     "pass": false
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 4.4,
+     "tokens": 49,
+     "cost": 3.5861e-06,
+     "left": "0.94864292",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "Qwen3.8-Flash-Next",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.0,
+   "operator_pass_rate": 1.0,
+   "grounded_prose_share": 1.0,
+   "score": 0.667,
+   "median_latency_s": 70.5,
+   "median_tokens_per_s": 34.9,
+   "cost_usd_per_call": 0.002105,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 223.7,
+     "tokens": 8000,
+     "cost": 0.00462938,
+     "left": "0.95550520",
+     "returned": 1,
+     "valid": 0
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 78.2,
+     "tokens": 2619,
+     "cost": 0.0014917,
+     "left": "0.94102006",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 18.0,
+     "tokens": 632,
+     "cost": 0.00036386,
+     "left": "0.93870081",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 225.5,
+     "tokens": 8000,
+     "cost": 0.0044888872,
+     "left": "0.93833695",
+     "returned": 0,
+     "valid": 0
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 62.9,
+     "tokens": 2177,
+     "cost": 0.0011766328,
+     "left": "0.92674261",
+     "pass": true
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 28.6,
+     "tokens": 894,
+     "cost": 0.0004808776,
+     "left": "0.92467155",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "MiniCPM5-2B",
+   "calls": 6,
+   "failed": 0,
+   "valid_program_share": 0.38,
+   "operator_pass_rate": 0.0,
+   "grounded_prose_share": 1.0,
+   "score": 0.458,
+   "median_latency_s": 47.0,
+   "median_tokens_per_s": 85.0,
+   "cost_usd_per_call": 0.000285,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": true,
+     "s": 77.7,
+     "tokens": 6573,
+     "cost": 0.0004935,
+     "left": "0.95550520",
+     "returned": 4,
+     "valid": 1
+    },
+    {
+     "task": "operator",
+     "rep": 0,
+     "ok": true,
+     "s": 83.7,
+     "tokens": 8000,
+     "cost": 0.0005619908,
+     "left": "0.95100997",
+     "pass": false
+    },
+    {
+     "task": "prose",
+     "rep": 0,
+     "ok": true,
+     "s": 6.0,
+     "tokens": 481,
+     "cost": 3.927e-05,
+     "left": "0.94807734",
+     "lines": 3,
+     "grounded": 3
+    },
+    {
+     "task": "programs",
+     "rep": 1,
+     "ok": true,
+     "s": 55.8,
+     "tokens": 5295,
+     "cost": 0.0003716608,
+     "left": "0.94803808",
+     "returned": 4,
+     "valid": 2
+    },
+    {
+     "task": "operator",
+     "rep": 1,
+     "ok": true,
+     "s": 38.1,
+     "tokens": 3253,
+     "cost": 0.0002286032,
+     "left": "0.94043885",
+     "pass": false
+    },
+    {
+     "task": "prose",
+     "rep": 1,
+     "ok": true,
+     "s": 3.8,
+     "tokens": 244,
+     "cost": 1.77408e-05,
+     "left": "0.94021025",
+     "lines": 3,
+     "grounded": 3
+    }
+   ],
+   "not_completed": 0
+  },
+  {
+   "model": "Qwen3.8-27B",
+   "calls": 1,
+   "failed": 1,
+   "valid_program_share": 0,
+   "operator_pass_rate": 0,
+   "grounded_prose_share": 0,
+   "score": 0.0,
+   "median_latency_s": null,
+   "median_tokens_per_s": null,
+   "cost_usd_per_call": null,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": false,
+     "error": "TimeoutError",
+     "s": 902.6
+    }
+   ],
+   "not_completed": 5
+  },
+  {
+   "model": "GLM-5.3-Flash",
+   "calls": 1,
+   "failed": 1,
+   "valid_program_share": 0,
+   "operator_pass_rate": 0,
+   "grounded_prose_share": 0,
+   "score": 0.0,
+   "median_latency_s": null,
+   "median_tokens_per_s": null,
+   "cost_usd_per_call": null,
+   "runs": [
+    {
+     "task": "programs",
+     "rep": 0,
+     "ok": false,
+     "error": "TimeoutError",
+     "s": 902.5
+    }
+   ],
+   "not_completed": 5
+  }
+ ],
+ "same_model_amd_vs_fallback": {
+  "amd": {
+   "calls": 40,
+   "median_latency_s": 42.0
+  },
+  "fallback": {
+   "calls": 55,
+   "median_latency_s": 95.1
+  }
+ },
+ "pick": {
+  "code": "DeepSeek-V4.1-Flash",
+  "text": "DeepSeek-V4-Flash"
+ }
+}

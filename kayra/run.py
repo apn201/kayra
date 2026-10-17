@@ -367,8 +367,9 @@ def bench(quick: bool) -> dict:
     out = {"meta": {"generated_utc": _now()}, "what": "identical catalogue search, fireplace room, all windows",
            "runs": runs}
     if not torch.cuda.is_available():
-        out["gpu"] = {"status": "NOT MEASURED - no GPU on this machine. Run `python -m kayra.run bench` on the "
-                                "AMD Developer Cloud droplet to fill this in. No estimate is given."}
+        out["gpu"] = {"status": "NOT MEASURED - no AMD GPU was available for this build. The fitter is PyTorch and picks a "
+                                "ROCm device when one exists; no estimate is given. The AMD workload in this version is "
+                                "inference on the AMD token factory (tools/amd_bench.py)."}
     _write("benchmark.json", out)
     return out
 

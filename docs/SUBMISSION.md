@@ -18,7 +18,7 @@ Käyrä does it from data the site already logs. I work as director of IT securi
 
 Each hypothesis about the controller is a short program in a small language: weather curve, curve with summer stop, PI control, thermostat, night setback. The language has no numbers. The model writes the shape and the fitter finds every value, thousands of parameter sets at a time as tensors in PyTorch. So no number in the output comes from the language model.
 
-The language model runs on the AMD token factory (DeepSeek-V4.1-Flash, picked by scoring the endpoint's models on Käyrä's own tasks). It reads what the best program fails to explain and proposes new mechanisms. Every proposal, score and verdict goes into a lab notebook. Operator beliefs are tested the same way. The first entry was mine, "L2 is L1 minus a few degrees", and the panel's own readings refute it.
+The language model runs on the AMD token factory. I benchmarked every chat model on it with Käyrä's own tasks, graded by code: valid hypothesis programs, an operator note turned into a program, and number-grounded prose. DeepSeek-V4.1-Flash and MiMo-V2.6-Flash scored best (0.96); every model could write grounded prose, few could write valid programs. DeepSeek-V4.1-Flash runs the loop. It reads what the best program fails to explain and proposes new mechanisms. Every proposal, score and verdict goes into a lab notebook. Operator beliefs are tested the same way. The first entry was mine, "L2 is L1 minus a few degrees", and the panel's own readings refute it.
 
 The model also reads what a plant has lying around. From the labels on the controller's menus (no values) and a few operator notes it wrote the controller's actual setpoint structure as a program: a curve on delayed outdoor temperature with autumn drying and min and max limits. The fitter then says whether the data support it. At the end the model writes the as-found specification, with a summary in Finnish for the technician. Every number in its text is checked against the computed evidence.
 
@@ -30,7 +30,7 @@ The panel is live: Home Assistant and FMI are read now, and you can move the cur
 
 ## Technology tags
 
-AMD token factory, DeepSeek-V4.1-Flash, PyTorch, ROCm, Python, Home Assistant, FMI open data, system identification, LLM agents
+AMD token factory, AMD Developer Cloud, DeepSeek-V4.1-Flash, MiMo-V2.6-Flash, PyTorch, ROCm, Python, Home Assistant, FMI open data, system identification, LLM agents
 
 ## Category tags
 

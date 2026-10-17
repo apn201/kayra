@@ -8,12 +8,12 @@
     "Scored on 62 cold windows; the building time constant is 455.4 h."
    ],
    "lines": [
-    "No other program ties with S0, because every other program has a delta_bic above 2.",
-    "S0 has a held-out RMSE of 0.706 degrees C, and its best expression is OFF.",
-    "The residual for S0 has a heat_on_share_of_hours of 0.0, so the best program asks for heat in none of the hours.",
-    "The building time constant is 455.4 hours, so the room follows outdoor temperature very slowly."
+    "The top program is S0, No control (free-floating), with a held-out prediction error rmse_held_c of 0.706 degrees C.",
+    "No program ties with S0: the next best, S1, has delta_bic 7.91, and delta_bic under 2 is a tie.",
+    "The residual for S0 has corr_with_outdoor -0.023 talents and corr_with_humidity 0.309, so the leftover error tracks humidity more than outdoor temperature.",
+    "The residual mean_by_outdoor_band is -1.482 degrees C in the >20 band and -0.65 degrees C in the 15-20 band, so the room runs colder than predicted when it is warm outside."
    ],
-   "source": "ONLINE"
+   "source": "ONLINE (AMD 1 calls, no fallback)"
   },
   "fireplace": {
    "template": [
@@ -22,12 +22,12 @@
     "Scored on 62 cold windows; the building time constant is 1396.6 h."
    ],
    "lines": [
-    "S1, Weather curve, linear, has delta_bic 2.71, which is not a tie with S0 because delta_bic under 2 is a tie.",
-    "The best expression is OFF, and heat_on_share_of_hours is 0.0, so the best program asks for heat in none of the hours.",
-    "The residual for S0 has rmse_held_c 0.381, and its mean_by_outdoor_band is -0.862 for the >20 band, meaning the room is colder than predicted when outdoor is above 20.",
-    "The time_constant_h is 1396.6, so the building takes that many hours to follow outdoor temperature."
+    "S1, Weather curve, linear, does not tie with the best because its delta_bic is 2.71, which is above the tie threshold of 2.",
+    "S0 has a rmse_held_c of 0.381, which is prediction error on held-out weeks in degrees C.",
+    "The best program asks for heat on a heat_on_share_of_hours of 0.0, so no heating is called for.",
+    "The residual for S0 has a corr_with_outdoor of -0.078 and a corr_with_humidity of 0.159."
    ],
-   "source": "ONLINE"
+   "source": "ONLINE (AMD 2 calls, no fallback)"
   },
   "tv": {
    "template": [
@@ -36,18 +36,18 @@
     "Scored on 62 cold windows; the building time constant is 886.9 h."
    ],
    "lines": [
-    "The top program is S4, PI control on room temperature, with delta_bic 0.0, which is how much worse than the best program after a complexity penalty.",
-    "No program ties with S4: every other program has tie_with_best false.",
-    "The residual for S4 has heat_on_share_of_hours 1.0, the fraction of hours the best program asks for heat, and corr_with_outdoor -0.161, the correlation of the residual with that signal.",
-    "The residual mean_by_outdoor_band is -0.278 for the >20 band and -0.172 for the 15-20 band, meaning the room is colder than predicted in those bands."
+    "S4 is not a tie with the best because delta_bic is 0.0, and no other program has delta_bic under 2.",
+    "S4 has rmse_held_c 0.211, the prediction error on held-out weeks in degrees C.",
+    "The residual for S4 has mean_by_outdoor_band of -0.278 for >20 and -0.172 for 15-20, meaning the room runs colder than predicted when it is warm outside.",
+    "heat_on_share_of_hours is 1.0, so the best program asks for heat in every hour."
    ],
-   "source": "ONLINE"
+   "source": "ONLINE (AMD 3 calls, no fallback)"
   }
  },
  "next_observation": {
   "pick": "a fresh Home Assistant pull covering the heating season since the last pull",
-  "why": "The top two hypotheses in kitchen and fireplace are S0 No control (free-floating) and S1 Weather curve, linear, with runner_up_delta_bic of 7.91 and 2.71, so more data across the season is needed to separate them. A longer pull adds the cold and warm outdoor bands that the residual_by_outdoor_band values show are missing.",
-  "source": "ONLINE"
+  "why": "The top two programs for kitchen and fireplace are separated by runner_up_delta_bic of 7.91 and 2.71, and the residual_by_outdoor_band values for those rooms are largest at the >20 band (-1.482 and -0.862). A fresh pull covering the heating season would add more data across outdoor bands to separate the surviving hypotheses.",
+  "source": "ONLINE (AMD 4 calls, no fallback)"
  },
  "alerts": [
   {
@@ -197,23 +197,23 @@
  ],
  "dropped": [
   {
-   "line": "The top program is S0, No control (free-floating), with a probability of 0.9775 and a delta_bic of 0.0.",
+   "line": "S0's share of belief prob is 0.9791, and its best_expr is OFF, with heat_on_share_of_hours 0.0.",
    "ungrounded": [
-    "0.9775"
+    "0.9791"
    ],
    "where": "diagnosis kitchen"
   },
   {
-   "line": "The top program is S0, No control (free-floating), with prob 0.7602 and delta_bic 0.0.",
+   "line": "The top program is S0, No control (free-floating), with a prob of 0.7732 and a delta_bic of 0.0.",
    "ungrounded": [
-    "0.7602"
+    "0.7732"
    ],
    "where": "diagnosis fireplace"
   },
   {
-   "line": "S4 has prob 0.6978, the share of belief among the programs tried, and rmse_held_c 0.211, the prediction error on held-out weeks in degrees C.",
+   "line": "The top program is S4, PI control on room temperature, with prob 0.6971, the share of belief among the programs tried.",
    "ungrounded": [
-    "0.6978"
+    "0.6971"
    ],
    "where": "diagnosis tv"
   }

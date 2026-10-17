@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC, DST = ROOT / "artifacts", ROOT / "web" / "artifacts"
-FILES = ["real.json", "synth.json", "benchmark.json", "replay.json", "explain.json", "readings.json", "points.json", "context.json", "writeup.json", "model_check.json",
+FILES = ["real.json", "synth.json", "benchmark.json", "replay.json", "explain.json", "readings.json", "points.json", "context.json", "writeup.json", "model_check.json", "amd_bench.json",
          "document.md", "llm_archive.jsonl", "eval.json"]
 
 DST.mkdir(parents=True, exist_ok=True)

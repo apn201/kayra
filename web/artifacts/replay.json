@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_utc": "2026-10-17T18:26:48Z",
+  "generated_utc": "2026-10-17T21:43:59Z",
   "device": {
    "device": "cpu",
    "torch": "2.14.1+cpu",
@@ -13,7 +13,16 @@
    "candidates_per_iter": 2048,
    "iters": 6
   },
-  "llm": "ONLINE"
+  "llm": "ONLINE (AMD 13 calls, no fallback)",
+  "llm_calls": {
+   "amd": 13,
+   "other": 0,
+   "fallback": 0,
+   "archive": 0,
+   "amd_cost_usd": 0.01192,
+   "amd_completion_tokens": 11009,
+   "amd_daily_usd_left": 0.91299196
+  }
  },
  "source": "REPLAY of recorded Home Assistant history",
  "rows": [

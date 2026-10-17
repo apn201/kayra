@@ -31,7 +31,7 @@ function sourceTag(src) {
 
 function llmShort(s) {
   s = String(s || "");
-  if (s.startsWith("ONLINE") && s.includes("fallback")) return ["AMD+FALLBACK", ""];
+  if (s.startsWith("ONLINE") && /fallback, not AMD [1-9]/.test(s)) return ["AMD+FALLBACK", ""];
   if (s.startsWith("ONLINE")) return ["ONLINE", ""];
   if (s.startsWith("ARCHIVE")) return ["ARCHIVE", ""];
   if (s.startsWith("STAND-IN")) return ["STAND-IN", "cell-warn"];
@@ -278,6 +278,18 @@ function S_model() {
 
 function S_bench() {
   let h = `<h2>Benchmark</h2>`;
+  const AB = A.amdBench;
+  if (AB) {
+    const best = Math.max(...AB.models.map((m) => m.score));
+    h += `<h3>AMD token factory: every chat model on Käyrä's own tasks</h3><p class="lede">Graded by code, not by another model: hypothesis programs through the structure-language validator, an operator note into a program that must use the room temperature, and prose through the number guardrails. ${AB.repeats} repeats per task, all models in parallel, wall time ${typeof AB.wall_s === "number" ? AB.wall_s + " s" : esc(AB.wall_s) + " s"}.${AB.note ? " " + esc(AB.note) : ""} Picked: <b>${esc(AB.pick.code)}</b> for programs, <b>${esc(AB.pick.text)}</b> for prose.</p>`;
+    h += `<div class="scroll"><table><thead><tr><th>Model</th><th>Score</th><th>Valid programs</th><th>Operator note</th><th>Grounded prose</th><th>Median s</th><th>Tokens/s</th><th>$ / call</th><th>Failed</th></tr></thead><tbody>`;
+    for (const m of AB.models) h += `<tr class="${m.score === best ? "lead" : ""}"><td>${esc(m.model)}</td><td class="n"><span class="bar" style="width:${Math.round((m.score / Math.max(best, 0.01)) * 60)}px"></span> ${fmt(m.score, 2)}</td><td class="n">${fmt(m.valid_program_share * 100, 0)} %</td><td class="n">${fmt(m.operator_pass_rate * 100, 0)} %</td><td class="n">${fmt(m.grounded_prose_share * 100, 0)} %</td><td class="n">${fmt(m.median_latency_s, 1)}</td><td class="n">${fmt(m.median_tokens_per_s, 0)}</td><td class="n">${m.cost_usd_per_call === null ? "-" : m.cost_usd_per_call.toFixed(5)}</td><td class="n">${m.failed}</td></tr>`;
+    h += `</tbody></table></div>`;
+    const vs = AB.same_model_amd_vs_fallback || {};
+    if (vs.amd && vs.fallback) h += `<p class="lede">Same model (DeepSeek-V4.1-Flash), real Käyrä calls from the archive: AMD median ${fmt(vs.amd.median_latency_s, 1)} s over ${vs.amd.calls} calls, OpenRouter fallback median ${fmt(vs.fallback.median_latency_s, 1)} s over ${vs.fallback.calls} calls.</p>`;
+    if (A.real && A.real.meta && A.real.meta.llm_calls) { const c = A.real.meta.llm_calls; h += `<p class="lede">Real-data run: ${esc(A.real.meta.llm)}${c.amd_cost_usd !== undefined ? `, AMD cost $${c.amd_cost_usd.toFixed(4)}, ${c.amd_completion_tokens} completion tokens` : ""}.</p>`; }
+  }
+  h += `<h3>Fitter</h3>`;
   const B = A.benchmark;
   if (B) {
     const max = Math.max(...B.runs.map((r) => r.room_hours_simulated_per_s));
@@ -568,10 +580,10 @@ document.addEventListener("click", (e) => {
 });
 
 async function boot() {
-  const [real, synth, benchmark, replay, explain, ev, doc, readings, points, context, writeup] = await Promise.all([
-    get("real.json"), get("synth.json"), get("benchmark.json"), get("replay.json"), get("explain.json"), get("eval.json"), get("document.md"), get("readings.json"), get("points.json"), get("context.json"), get("writeup.json"),
+  const [real, synth, benchmark, replay, explain, ev, doc, readings, points, context, writeup, amdBench] = await Promise.all([
+    get("real.json"), get("synth.json"), get("benchmark.json"), get("replay.json"), get("explain.json"), get("eval.json"), get("document.md"), get("readings.json"), get("points.json"), get("context.json"), get("writeup.json"), get("amd_bench.json"),
   ]);
-  Object.assign(A, { real, synth, benchmark, replay, explain, eval: ev, document: doc, readings, points, context, writeup });
+  Object.assign(A, { real, synth, benchmark, replay, explain, eval: ev, document: doc, readings, points, context, writeup, amdBench });
   for (const k of ["process", "site"]) {
     try { const r = await fetch(`config/${k}.json`, { cache: "no-store" }); if (r.ok) A[k] = await r.json(); } catch {}
   }

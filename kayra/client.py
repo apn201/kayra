@@ -74,6 +74,7 @@ def config() -> dict:
 # which endpoint actually answered, per process - goes into artifact metadata
 STATS = {"amd": 0, "other": 0, "fallback": 0, "archive": 0}
 _PRIMARY_DOWN_UNTIL = 0.0
+_LAST_HEADERS: dict = {}
 
 
 def list_models(cfg: dict | None = None) -> list[str]:
@@ -96,6 +97,8 @@ def status(cfg: dict | None = None) -> str:
             "archive": "ARCHIVE", "none": "OFFLINE"}.get(cfg["backend"], "OFFLINE")
     if cfg["backend"] == "amd" and STATS["fallback"]:
         base += f" (AMD {STATS['amd']} calls, {cfg['fallback']['label']} {STATS['fallback']} calls)"
+    elif cfg["backend"] == "amd" and STATS["amd"]:
+        base += f" (AMD {STATS['amd']} calls, no fallback)"
     return base
 
 
@@ -123,16 +126,17 @@ def chat(system: str, user: str, *, purpose: str, cfg: dict | None = None, role:
     global _PRIMARY_DOWN_UNTIL
     cfg = dict(cfg or config())
     fb = cfg.get("fallback")
-    if cfg["backend"] == "amd" and fb and fb["base_url"]:
-        if time.time() >= _PRIMARY_DOWN_UNTIL:
-            try:
-                return _chat(system, user, purpose=purpose, cfg=dict(cfg, timeout_s=min(cfg["timeout_s"], 90)),
-                             role=role, model=model, _retry=_retry, waits=[10])
-            except LLMError as exc:
-                _PRIMARY_DOWN_UNTIL = time.time() + 600  # skip AMD for ten minutes, then try again
-                why = str(exc)[:120]
-        else:
-            why = "primary skipped (failed in the last ten minutes)"
+    if cfg["backend"] == "amd":
+        # AMD first, patiently: long reasoning calls take minutes and the API allows 20 requests a
+        # minute per user. Measured 2026-10-18: a full hypothesis call costs about $0.0005-0.00075
+        # of the $1 daily allowance, so time, not money, is the constraint.
+        try:
+            return _chat(system, user, purpose=purpose, cfg=dict(cfg, timeout_s=max(cfg["timeout_s"], 300)),
+                         role=role, model=model, _retry=_retry, waits=[20, 40])
+        except LLMError as exc:
+            if not (fb and fb["base_url"]):
+                raise
+            why = str(exc)[:120]
         fcfg = dict(cfg, **fb, model_code=fb["model"], model_text=fb["model"])
         rep_ = _chat(system, user, purpose=f"{purpose} [fallback: {why}]", cfg=fcfg, role=role, model=fb["model"],
                      _retry=_retry, waits=[15, 30])
@@ -167,6 +171,8 @@ def _chat(system: str, user: str, *, purpose: str, cfg: dict, role: str = "code"
         try:
             with urllib.request.urlopen(req, timeout=cfg["timeout_s"], context=_ssl()) as r:
                 data = json.loads(r.read().decode("utf-8"))
+                _LAST_HEADERS.clear()
+                _LAST_HEADERS.update({k.lower(): v for k, v in r.headers.items() if "ratelimit" in k.lower()})
             break
         except urllib.error.HTTPError as exc:
             if exc.code in (429, 502, 503, 504) and waits:
@@ -198,6 +204,12 @@ def _chat(system: str, user: str, *, purpose: str, cfg: dict, role: str = "code"
     if not text:
         raise LLMError(f"empty reply from {cfg['model']} (finish_reason {(data.get('choices') or [{}])[0].get('finish_reason')})")
     rep = Reply(text, source, data.get("model", cfg["model"]), cfg["backend"], ph, data.get("usage") or {})
+    if cfg["backend"] == "amd":
+        u = data.get("usage") or {}
+        STATS["amd_cost_usd"] = round(STATS.get("amd_cost_usd", 0.0) + float(u.get("cost") or 0), 6)
+        STATS["amd_completion_tokens"] = STATS.get("amd_completion_tokens", 0) + int(u.get("completion_tokens") or 0)
+        if _LAST_HEADERS.get("x-ratelimit-remaining-user-daily-usd"):
+            STATS["amd_daily_usd_left"] = float(_LAST_HEADERS["x-ratelimit-remaining-user-daily-usd"])
     STATS[cfg["backend"]] = STATS.get(cfg["backend"], 0) + 1
     _archive({"t": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(t0)), "purpose": purpose, "role": role,
               "backend": cfg["backend"], "label": cfg["label"], "base_url": cfg["base_url"],

@@ -36,7 +36,7 @@
 <script>
 (async () => {
   const get = async (n) => { try { const r = await fetch("artifacts/" + n); return r.ok ? r.json() : null; } catch { return null; } };
-  const [real, synth, bench, ctx, ev, writeup] = await Promise.all(["real.json", "synth.json", "benchmark.json", "context.json", "eval.json", "writeup.json"].map(get));
+  const [real, synth, bench, ctx, ev, writeup, ab] = await Promise.all(["real.json", "synth.json", "benchmark.json", "context.json", "eval.json", "writeup.json", "amd_bench.json"].map(get));
   const f = (v, d = 1) => (v === null || v === undefined ? "-" : Number(v).toFixed(d));
   const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   const S = [];
@@ -98,6 +98,17 @@
       </tbody></table></div>`);
   }
 
+  if (ab) {
+    const top = ab.models.slice(0, 6);
+    const c = (real.meta && real.meta.llm_calls) || {};
+    slide(`<h2>AMD token factory: which model can do this job?</h2>
+      <p>Every chat model on the endpoint, on Käyrä's own tasks, graded by code: programs through the validator, an operator note into a program, prose through the number guardrails.</p>
+      <div class="lcd" style="font-size:26px;padding:26px 36px"><table><thead><tr><th>Model</th><th>Score</th><th>Valid programs</th><th>Operator</th><th>Grounded prose</th><th>Median s</th><th>$ / call</th></tr></thead><tbody>
+      ${top.map((m) => `<tr><td>${esc(m.model)}</td><td>${f(m.score, 2)}</td><td>${f(m.valid_program_share * 100, 0)} %</td><td>${f(m.operator_pass_rate * 100, 0)} %</td><td>${f(m.grounded_prose_share * 100, 0)} %</td><td>${f(m.median_latency_s, 1)}</td><td>${m.cost_usd_per_call === null ? "-" : m.cost_usd_per_call.toFixed(5)}</td></tr>`).join("")}
+      </tbody></table>
+      <p style="font:26px var(--f-label);margin-top:18px">Picked: ${esc(ab.pick.code)} for programs, ${esc(ab.pick.text)} for prose. Real-data run on AMD: ${esc(real.meta.llm || "")}${c.amd_cost_usd !== undefined ? `, total AMD cost $${Number(c.amd_cost_usd).toFixed(4)}` : ""}.</p></div>`);
+  }
+
   const tot = (k) => synth ? synth.cases.filter((c) => c.arms[k] && c.arms[k].right_mechanism).length : 0;
   const n = synth ? synth.cases.length : 0;
   const low = (k) => synth ? synth.cases.filter((c) => !c.arms[k].status && c.arms[k].rmse_held_c <= Math.min(...["A", "B", "C"].filter((j) => !c.arms[j].status).map((j) => c.arms[j].rmse_held_c))).length : 0;
@@ -109,7 +120,7 @@
 
   const cpu = bench ? bench.runs[bench.runs.length - 1] : null;
   slide(`<h2>AMD and what is next</h2><ul>
-    <li>Language model: AMD token factory, DeepSeek-V4.1-Flash, picked by scoring the endpoint's models on Käyrä's own tasks. OpenRouter fallback when AMD rate-limits or times out, labelled per call: ${esc(real.meta.llm)}.</li>
+    <li>Language model: AMD token factory for every hypothesis, the site-context programs and the write-up. Model picked by the AMD benchmark above. Run: ${esc(real.meta.llm)}.</li>
     <li>Fitter: PyTorch, ${cpu ? `${cpu.candidates.toLocaleString("en")} candidates in ${cpu.wall_s} s on a laptop CPU` : "CPU"}. AMD GPU: not measured, no estimate given.</li>
     <li>Next: OPC UA, Modbus and historian connectors, domain catalogues, the replacement controller, editing the setup in the panel.</li></ul>
     <p style="margin-top:auto">github.com/apn201/kayra</p>`);

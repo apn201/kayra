@@ -42,6 +42,6 @@
   }
  ],
  "gpu": {
-  "status": "NOT MEASURED - no GPU on this machine. Run `python -m kayra.run bench` on the AMD Developer Cloud droplet to fill this in. No estimate is given."
+  "status": "NOT MEASURED - no AMD GPU was available for this build. The fitter is PyTorch and picks a ROCm device when one exists; no estimate is given. The AMD workload in this version is inference on the AMD token factory (see the AMD benchmark above)."
  }
 }

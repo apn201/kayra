@@ -1,6 +1,6 @@
 # As-found specification - heating controller stack
 
-Generated 2026-10-17T18:26:48Z on `cpu` (torch 2.14.1+cpu). Language model: **ONLINE (AMD 11 calls, OpenRouter fallback, not AMD 21 calls)**.
+Generated 2026-10-17T21:43:59Z on `cpu` (torch 2.14.1+cpu). Language model: **ONLINE (AMD 13 calls, no fallback)**.
 
 ## Data
 
@@ -22,7 +22,7 @@ Scored on 62 cold windows (mean outdoor under 12 °C), 11 held out. Building los
 | 1 | S0 No control (free-floating) | catalogue | 0.706 | 0.0 | 0.98 |
 | 2 | S1 Weather curve, linear | catalogue | 0.716 | 7.91 | 0.02 |
 | 3 | S7 Weather curve plus night setback | catalogue | 0.673 | 14.3 | 0.00 |
-| 4 | M2.2  | model (OpenRouter fallback, not AMD) | 0.712 | 14.51 | 0.00 |
+| 4 | S5 On/off thermostat with hysteresis | catalogue | 0.756 | 15.01 | 0.00 |
 
 Best: `OFF`.
 
@@ -32,10 +32,10 @@ Scored on 62 cold windows (mean outdoor under 12 °C), 11 held out. Building los
 
 | Rank | Program | Source | Held-out RMSE °C | ΔBIC | P |
 |---|---|---|---|---|---|
-| 1 | S0 No control (free-floating) | catalogue | 0.381 | 0.0 | 0.76 |
+| 1 | S0 No control (free-floating) | catalogue | 0.381 | 0.0 | 0.77 |
 | 2 | S1 Weather curve, linear | catalogue | 0.357 | 2.71 | 0.20 |
-| 3 | M2.1  | model (OpenRouter fallback, not AMD) | 0.364 | 7.52 | 0.02 |
-| 4 | S7 Weather curve plus night setback | catalogue | 0.331 | 8.25 | 0.01 |
+| 3 | S7 Weather curve plus night setback | catalogue | 0.331 | 8.25 | 0.01 |
+| 4 | M1.1  | model (AMD) | 0.35 | 8.36 | 0.01 |
 
 Best: `OFF`.
 
@@ -60,7 +60,7 @@ Rooms on one loop share one controller program; each room keeps its own building
 
 Operator: Radiators. Which panel loop (L1 or L2) is not known. Most radiators have no thermostatic valve. The TV room radiator has an analog thermostatic valve, almost closed.
 
-Best: S0 No control (free-floating) (`OFF`), held-out RMSE 0.34 °C, ΔBIC to runner-up 9.69.
+Best: S0 No control (free-floating) (`OFF`), held-out RMSE 0.34 °C, ΔBIC to runner-up 6.97.
 
 | Room | Heating share | RMSE in loop °C | RMSE fitted alone °C |
 |---|---|---|---|

@@ -1,248 +1,229 @@
 {
- "llm": "ONLINE (AMD 0 calls, OpenRouter fallback, not AMD 1 calls)",
- "answered_by": "fallback",
- "model": "deepseek/deepseek-v4.1-flash",
+ "llm": "ONLINE (AMD 5 calls, no fallback)",
+ "answered_by": "amd",
+ "model": "self-dploy/DeepSeek-V4.1-Flash",
  "labels_file": "config/menu_labels.md",
  "programs": [
   {
    "id": "C1",
-   "target": "L1 (tested on up, down; best on down)",
-   "from_text": "L1 supply setpoint breakdown screen: Curve value, Autumn drying, Outdoor temperature delay, Max limit, Min limit",
-   "expr": "clip(slope * lag(T_out, p) + where(month() >= month_n, delta_c, delta_c - delta_c), mn, mx)",
+   "target": "L1 (tested on up, down; best on up)",
+   "from_text": "Curve value",
+   "expr": "base + slope * T_out",
    "params": {
-    "slope": "slope",
-    "p": "hours",
-    "month_n": "month_n",
-    "delta_c": "delta_c",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "base": "temp_c",
+    "slope": "slope"
    },
-   "mechanism": "Weather curve on delayed outdoor temperature, with an autumn drying correction active from month_n onward, and min/max supply limits.",
-   "refute": "Fitted slope is zero, or the autumn correction is zero, or the min/max limits are never active, or the delay p is zero.",
-   "source": "site context (fallback)",
+   "mechanism": "weather-compensated supply curve: supply setpoint falls as outdoor temperature rises",
+   "refute": "fitted slope is zero or positive, or the curve alone explains no more variance than a constant supply",
+   "source": "site context (AMD)",
    "per_group_delta_bic": {
-    "up": 24.03,
-    "down": 18.0
+    "up": 9.69,
+    "down": 20.82
    },
-   "rmse_held_c": 0.322,
-   "bic": -82.54,
+   "rmse_held_c": 0.736,
+   "bic": 4.22,
    "blind_best": "S0",
-   "delta_bic_vs_blind_best": 18.0,
+   "delta_bic_vs_blind_best": 9.69,
    "theta": {
-    "slope": -3.439183235168457,
-    "p": 43.584930419921875,
-    "month_n": 11.629351615905762,
-    "delta_c": 15.298942565917969,
-    "mn": 64.522705078125,
-    "mx": 29.15731430053711
+    "base": 49.164756774902344,
+    "slope": -3.8087074756622314
    },
    "verdict": "worse than the blind best"
   },
   {
    "id": "C2",
-   "target": "L1 (tested on up, down; best on up)",
-   "from_text": "L1 supply setpoint breakdown screen: Curve value, Max limit, Min limit",
-   "expr": "clip(level + slope * T_out, mn, mx)",
+   "target": "L眼见1",
+   "from_text": "Max limit",
+   "expr": "min(base + slope * T_out, mx)",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "mn": "temp_c",
     "mx": "temp_c"
    },
-   "mechanism": "Weather curve with offset and slope, bounded by min and max supply limits.",
-   "refute": "Limits never active, or slope zero.",
-   "source": "site context (fallback)",
-   "per_group_delta_bic": {
-    "up": 15.68,
-    "down": 23.67
-   },
-   "rmse_held_c": 0.725,
-   "bic": 10.21,
-   "blind_best": "S0",
-   "delta_bic_vs_blind_best": 15.68,
-   "theta": {
-    "level": 34.071929931640625,
-    "slope": -2.745323657989502,
-    "mn": 22.879627227783203,
-    "mx": 29.306987762451172
-   },
-   "verdict": "worse than the blind best"
+   "mechanism": "weather curve with an upper cap on supply water temperature",
+   "refute": "the fitted cap lies above every supply value the curve reaches, so it never binds",
+   "source": "site context (AMD)",
+   "verdict": "unknown target 'L眼见1'"
   },
   {
    "id": "C3",
    "target": "L1 (tested on up, down; best on up)",
-   "from_text": "L1 supply setpoint breakdown screen: Autumn drying",
-   "expr": "clip(level + slope * T_out + where(month() >= month_n, delta_c, delta_c - delta_c), mn, mx)",
+   "from_text": "Min limit",
+   "expr": "max(base + slope * T_out, mn)",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "month_n": "month_n",
-    "delta_c": "delta_c",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "mn": "temp_c"
    },
-   "mechanism": "Weather curve plus a month-triggered autumn drying correction, with min/max limits.",
-   "refute": "Autumn correction zero or month_n outside 1-12, or limits never active.",
-   "source": "site context (fallback)",
+   "mechanism": "weather curve with a lower floor on supply water temperature",
+   "refute": "the fitted floor lies below every supply value the curve reaches, so it never binds",
+   "source": "site context (AMD)",
    "per_group_delta_bic": {
-    "up": 23.62,
-    "down": 62.57
+    "up": 14.14,
+    "down": 16.46
    },
-   "rmse_held_c": 0.735,
-   "bic": 18.15,
+   "rmse_held_c": 0.746,
+   "bic": 8.67,
    "blind_best": "S0",
-   "delta_bic_vs_blind_best": 23.62,
+   "delta_bic_vs_blind_best": 14.14,
    "theta": {
-    "level": 13.616527557373047,
-    "slope": -2.1745834350585938,
-    "month_n": 1.2154914140701294,
-    "delta_c": 22.136510848999023,
-    "mn": 5.6718597412109375,
-    "mx": 62.27928161621094
+    "base": 37.511932373046875,
+    "slope": -2.13555908203125,
+    "mn": -2.7564163208007812
    },
    "verdict": "worse than the blind best"
   },
   {
    "id": "C4",
-   "target": "L1 (tested on up, down; best on up)",
-   "from_text": "L1 supply setpoint breakdown screen: Outdoor temperature delay",
-   "expr": "clip(level + slope * lag(T_out, p), mn, mx)",
+   "target": "L1 (tested on up, down; best on down)",
+   "from_text": "Autumn drying (a correction term)",
+   "expr": "base + slope * T_out + where(month() >= dry, boost, OFF)",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "p": "hours",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "boost": "delta_c",
+    "dry": "month_n"
    },
-   "mechanism": "Weather curve using delayed outdoor temperature, with min/max limits.",
-   "refute": "Delay p is zero or lag is identical to current T_out, or limits never active.",
-   "source": "site context (fallback)",
+   "mechanism": "seasonal autumn-drying boost added to the weather curve during and after the drying month",
+   "refute": "the fitted boost is zero, or the fitted month places the boost outside the heating season",
+   "source": "site context (AMD)",
    "per_group_delta_bic": {
-    "up": 16.89,
-    "down": 28.6
+    "up": 16.66,
+    "down": 16.27
    },
-   "rmse_held_c": 0.7,
-   "bic": 11.42,
+   "rmse_held_c": 0.339,
+   "bic": -84.27,
    "blind_best": "S0",
-   "delta_bic_vs_blind_best": 16.89,
+   "delta_bic_vs_blind_best": 16.27,
    "theta": {
-    "level": 41.25990295410156,
-    "slope": -2.6663148403167725,
-    "p": 26.524555206298828,
-    "mn": 83.45088958740234,
-    "mx": -28.325685501098633
+    "base": -24.059253692626953,
+    "slope": -3.78428316116333,
+    "boost": 7.901728630065918,
+    "dry": 8.834606170654297
    },
    "verdict": "worse than the blind best"
   },
   {
    "id": "C5",
-   "target": "L2 (tested on up, down; best on up)",
-   "from_text": "Two heating circuits, L1 and L2, one outdoor sensor",
-   "expr": "clip(level + slope * T_out, mn, mx)",
+   "target": "L1 (tested on up, down; best on up)",
+   "from_text": "Outdoor temperature delay (a correction term)",
+   "expr": "base + slope * lag(T_out, delay)",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "delay": "hours"
    },
-   "mechanism": "Second heating circuit weather curve with min/max limits, using the shared outdoor sensor.",
-   "refute": "Same fitted parameters as L1, or limits never active.",
-   "source": "site context (fallback)",
+   "mechanism": "weather curve driven by a delayed outdoor temperature, representing building mass or sensor lag",
+   "refute": "the fitted delay is zero, or delaying T_out does not reduce held-out error versus the undelayed curve",
+   "source": "site context (AMD)",
    "per_group_delta_bic": {
-    "up": 15.54,
-    "down": 24.45
+    "up": 10.98,
+    "down": 21.96
    },
-   "rmse_held_c": 0.723,
-   "bic": 10.07,
+   "rmse_held_c": 0.712,
+   "bic": 5.51,
    "blind_best": "S0",
-   "delta_bic_vs_blind_best": 15.54,
+   "delta_bic_vs_blind_best": 10.98,
    "theta": {
-    "level": 47.1048583984375,
-    "slope": -4.2106781005859375,
-    "mn": 41.369041442871094,
-    "mx": 29.240558624267578
+    "base": 57.976966857910156,
+    "slope": -5.0,
+    "delay": 26.465171813964844
    },
    "verdict": "worse than the blind best"
   },
   {
    "id": "C6",
-   "target": "up",
-   "from_text": "Floor heating. Which panel loop (L1 or L2) is not known.",
-   "expr": "clip(level + slope * T_out, mn, mx)",
+   "target": "L2 (tested on up, down; best on up)",
+   "from_text": "Two heating circuits, L1 and L2, one outdoor sensor",
+   "expr": "base + slope * T_out + offset",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "offset": "delta_c"
    },
-   "mechanism": "Floor heating circuit weather curve with min/max limits; lower supply temperatures expected.",
-   "refute": "Fitted slope and level match radiator circuit, or limits never active.",
-   "source": "site context (fallback)",
-   "rmse_held_c": 0.711,
-   "bic": 8.93,
+   "mechanism": "second heating circuit shares the outdoor sensor but has its own parallel weather curve with a fixed offset",
+   "refute": "the fitted offset is zero, or L2 supply is better explained by the same curve as L1",
+   "source": "site context (AMD)",
+   "per_group_delta_bic": {
+    "up": 12.07,
+    "down": 19.17
+   },
+   "rmse_held_c": 0.723,
+   "bic": 6.6,
    "blind_best": "S0",
-   "blind_best_rmse_c": 0.706,
-   "delta_bic_vs_blind_best": 14.4,
+   "delta_bic_vs_blind_best": 12.07,
    "theta": {
-    "level": 34.16033172607422,
-    "slope": -2.499854564666748,
-    "mn": 23.69220733642578,
-    "mx": 32.11012649536133
+    "base": 38.95995330810547,
+    "slope": -3.5186614990234375,
+    "offset": 6.6584343910217285
    },
    "verdict": "worse than the blind best"
   },
   {
    "id": "C7",
    "target": "down",
-   "from_text": "Radiators. Which panel loop (L1 or L2) is not known. Most radiators have no thermostatic valve.",
-   "expr": "clip(level + slope * T_out, mn, mx)",
+   "from_text": "Radiators. Most radiators have no thermostatic valve. The TV room radiator has an analog thermostatic valve, almost closed.",
+   "expr": "base + slope * T_out + gain * (sp - T_room)",
    "params": {
-    "level": "temp_c",
+    "base": "temp_c",
     "slope": "slope",
-    "mn": "temp_c",
-    "mx": "temp_c"
+    "gain": "gain",
+    "sp": "temp_c"
    },
-   "mechanism": "Radiator circuit weather curve with min/max limits; higher supply temperatures expected.",
-   "refute": "Fitted slope and level match floor heating circuit, or limits never active.",
-   "source": "site context (fallback)",
+   "mechanism": "radiator circuit weather curve plus room-temperature feedback; the nearly closed TV valve appears as a small effective gain",
+   "refute": "the fitted room feedback gain is zero, or the TV room is no better fit with feedback than without",
+   "source": "site context (AMD)",
    "rmse_held_c": 0.344,
-   "bic": -82.26,
+   "bic": -82.17,
    "blind_best": "S0",
    "blind_best_rmse_c": 0.34,
-   "delta_bic_vs_blind_best": 18.28,
+   "delta_bic_vs_blind_best": 18.37,
    "theta": {
-    "level": 4.4894866943359375,
-    "slope": -0.2909555435180664,
-    "mn": 26.40332794189453,
-    "mx": 29.329700469970703
+    "base": 29.643295288085938,
+    "slope": -0.567662239074707,
+    "gain": 4.182852268218994,
+    "sp": 23.92364501953125
+   },
+   "verdict": "worse than the blind best"
+  },
+  {
+   "id": "C8",
+   "target": "up",
+   "from_text": "Floor heating. Kitchen also gets warm air rising from downstairs through the open space and balcony.",
+   "expr": "max(base + slope * T_out, mn) + gain * (sp - T_room)",
+   "params": {
+    "base": "temp_c",
+    "slope": "slope",
+    "mn": "temp_c",
+    "gain": "gain",
+    "sp": "temp_c"
+   },
+   "mechanism": "floor-heating weather curve with a minimum supply floor and room feedback; the rising warm air from downstairs acts as an unmodelled heat input that the room feedback partially compensates",
+   "refute": "the fitted minimum floor never binds, or the kitchen is no better explained with room feedback than by the curve alone",
+   "source": "site context (AMD)",
+   "rmse_held_c": 0.763,
+   "bic": 17.13,
+   "blind_best": "S0",
+   "blind_best_rmse_c": 0.706,
+   "delta_bic_vs_blind_best": 22.6,
+   "theta": {
+    "base": 22.206478118896484,
+    "slope": -1.3220741748809814,
+    "mn": 10.605228424072266,
+    "gain": 10.267616271972656,
+    "sp": 23.858169555664062
    },
    "verdict": "worse than the blind best"
   }
  ],
  "not_expressible": [
   {
-   "from_text": "Kitchen also gets warm air rising from downstairs through the open space and balcony.",
-   "why": "The language has no signal for another room's temperature or air flow, so cross-floor heat transfer cannot be written as a controller program."
+   "from_text": "Indirect district heating substation; domestic hot water outside this controller",
+   "why": "This describes plant topology and a heat source outside the controller. The language has no district-heating, substation, or DHW state, so it cannot be written as a control law for any target."
   },
   {
-   "from_text": "The TV room radiator has an analog thermostatic valve, almost closed.",
-   "why": "A local thermostatic valve is not a central supply-temperature control mechanism; the language has no valve position or room-level heat emission model."
-  },
-  {
-   "from_text": "Most radiators have no thermostatic valve.",
-   "why": "This is a plant characteristic, not a controller mechanism."
-  },
-  {
-   "from_text": "Which panel loop (L1 or L2) is not known.",
-   "why": "This is a target-assignment uncertainty, not a control mechanism; it is handled by testing L1/L2 programs on every group."
-  },
-  {
-   "from_text": "Indirect district heating substation; domestic hot water outside this controller.",
-   "why": "Plant context, not a supply-temperature control mechanism for the heating circuits."
-  },
-  {
-   "from_text": "Two heating circuits, L1 and L2, one outdoor sensor",
-   "why": "This implies both circuits use the same outdoor sensor, which is already expressed by L1 and L2 programs using T_out; no additional control mechanism."
+   "from_text": "L1 Menovesi - L1 supply water temperature; L2 Menovesi - L2 supply water temperature; Ulkolämpö - outdoor temperature",
+   "why": "These are measurement labels, not control mechanisms. They name signals already available in the language and imply no setpoint action."
   }
  ],
  "repaired": 0,

@@ -10,9 +10,26 @@ AMD Developer Hackathon ACT III, Track 1 Intelligent Industry. Live panel: [fill
 
 ## What runs where
 
-- **Language model: AMD token factory**, DeepSeek-V4.1-Flash, chosen by `tools/llm_check.py` (scores the endpoint's models on Käyrä's own tasks, graded by code). When AMD times out or rate-limits, the call falls back to the same model on OpenRouter. Every call is archived with the endpoint that actually answered, and the panel shows the mix.
+- **Language model: AMD token factory** for every hypothesis round, every site-context program, the explanations and the as-found document. DeepSeek-V4.1-Flash, chosen by the AMD benchmark below. The client paces itself to the API's limits (20 requests a minute per user, $1 a day) and reads cost and remaining budget from AMD's own response headers. OpenRouter exists only as a last resort after three AMD failures; every call is archived with the endpoint that answered.
 - **Fitter: PyTorch.** Device picked at runtime (`cuda` on ROCm, else CPU). No AMD GPU was available for this build, so the numbers are from a laptop CPU. The GPU row of the benchmark says NOT MEASURED; no estimate is given.
 - **Live data:** the panel server reads Home Assistant now (LAN first, then the external URL) and FMI now. The status line says LIVE, LIVE OUTDOOR or REPLAY, whichever is true.
+
+## AMD benchmark: which model can do this job
+
+`tools/amd_bench.py` runs every chat model on the AMD token factory through Käyrä's own tasks, graded by code, not by another model: hypothesis programs through the structure-language validator, an operator note into a program that must use the room temperature, and prose through the number guardrails. Two repeats per task, models in parallel. Result 2026-10-18 (`artifacts/amd_bench.json`, also on the panel's AMD screen):
+
+| Model | Score | Valid programs | Operator note | Grounded prose | Median s | $ / call |
+|---|---|---|---|---|---|---|
+| DeepSeek-V4.1-Flash | 0.96 | 88 % | 100 % | 100 % | 13.0 | 0.00027 |
+| MiMo-V2.6-Flash | 0.96 | 88 % | 100 % | 100 % | 14.4 | 0.00042 |
+| DeepSeek-V4-Flash | 0.75 | 25 % | 100 % | 100 % | 8.5 | 0.00014 |
+| Gemma-4-31B-IT | 0.74 | 71 % | 50 % | 100 % | 17.1 | 0.00003 |
+| Qwen3.8-Flash-Next | 0.67 | 0 % | 100 % | 100 % | 70.5 | 0.00211 |
+| MiniCPM5-2B | 0.46 | 38 % | 0 % | 100 % | 47.0 | 0.00029 |
+| Qwen3.8-27B | - | timed out | | | | |
+| GLM-5.3-Flash | - | timed out | | | | |
+
+Writing programs in a strict language is what separates them: every model can write grounded prose, few can write valid hypotheses. Qwen3.8-Flash-Next reasons until it runs out of tokens. Same model (DeepSeek-V4.1-Flash) on real Käyrä calls from the archive: AMD median 42 s, OpenRouter 95 s (different hours, different load).
 
 ## Run it
 
