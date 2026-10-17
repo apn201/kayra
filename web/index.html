@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
+<script>
+  // Served under a subpath (e.g. /kayra): without the trailing slash, relative URLs like panel.css
+  // resolve against the site root. Add the slash before anything else loads.
+  if (!location.pathname.endsWith("/") && !/\.[a-z0-9]+$/i.test(location.pathname))
+    location.replace(location.pathname + "/" + location.search + location.hash);
+</script>
 <title>Käyrä</title>
 <meta name="description" content="Identify an undocumented controller from the process data a site already logs.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
