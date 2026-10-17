@@ -166,7 +166,8 @@ function S_curve() {
   let [y0, y1] = range(ys.length ? ys : [20, 50], 2);
   y0 = Math.max(y0, 0);
   const ev = A.eval?.curve;
-  let h = `<h2>Equivalent curve · fireplace room</h2><p class="lede">Supply the identified law asks for at steady outdoor temperature. Band = likelihood-weighted 5-95 % of the search population. HA-only uses room data alone; anchored adds k panel readings of L1, which are then excluded from scoring.</p>`;
+  const aRooms = (A.real.anchored_rooms || ["fireplace"]).map((r) => ROOMS[r]).join(" + ");
+  let h = `<h2>Spot readings · ${esc(A.real.anchored_loop || "L1")} · ${esc(aRooms)}</h2><p class="lede">Supply the identified law asks for at steady outdoor temperature. Band = likelihood-weighted 5-95 % of the search population. HA-only uses room data alone; anchored adds k panel readings of the loop, which are then excluded from scoring.</p>`;
   h += `<div class="controls">Spot readings ${an.map((x) => `<button aria-pressed="${x.k === curveK}" data-k="${x.k}">k=${x.k}</button>`).join("")}</div>`;
   h += `<div class="readout"><div><label>Mode</label><span class="big">${a.k ? "ANCH " + a.k : "HA"}</span></div><div><label>Error vs other panel readings</label><span class="big">${fmt(a.rmse_vs_panel_l1_c, 1)}<span class="unit">°C</span></span></div><div><label>Band width at 4 °C outdoor</label><span class="big">${fmt(a.band_width_at_4c, 1)}<span class="unit">°C</span></span></div><div><label>Scored on</label><span class="big">${a.scored_on}</span></div></div>`;
   h += chart({

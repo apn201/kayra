@@ -14,8 +14,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ART = ROOT / "artifacts"
-ROOM_NAMES = {"kitchen": "Kitchen (upstairs, floor heating)", "fireplace": "Fireplace room (downstairs, radiators)",
-              "tv": "TV room (downstairs, radiator with thermostatic valve almost closed)"}
+ROOM_NAMES = {"kitchen": "Kitchen (upstairs, floor heating, L1 per operator)", "fireplace": "Fireplace room (downstairs, radiators, L2 per operator)",
+              "tv": "TV room (downstairs, radiator with thermostatic valve almost closed, L2)"}
 
 
 def _load(name):
@@ -79,7 +79,7 @@ def build() -> str:
                 for r in Lp["rooms"]:
                     L.append(f"| {r} | {Lp['heating_share'][r]:.0%} | {Lp['held_rmse_rooms'][r]} | {Lp['held_rmse_rooms_fitted_alone'][r]} |")
                 L.append("")
-        L += ["## Equivalent curve, fireplace room", "",
+        L += [f"## Equivalent curve with spot readings ({real.get('anchored_loop', 'L1')}: {', '.join(real.get('anchored_rooms', ['fireplace']))})", "",
               "HA-only, then anchored with k panel readings of L1. Band = likelihood-weighted 5-95 % of the "
               "search population. Curve is identified over the observed outdoor range only.", ""]
         for a in real["anchored_fireplace"]:

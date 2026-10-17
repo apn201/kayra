@@ -149,10 +149,12 @@ def real(device: str, quick: bool) -> dict:
 
     simple = simple_view(f, device, n, iters, priors, site, catalogue)
 
-    # anchored mode, fireplace room (radiators, L1): k spot readings pin the level
+    # anchored mode: k spot readings of L1 pin the level of the room group the operator puts on L1
     anchored = []
-    prior = search.summer_prior(f, "fireplace", device, n=n, iters=iters)
-    pf = search.Problem(f, "fireplace", device, season="cold", building=prior["bounds"])
+    a_loop = site.get("anchor_loop", "L1")
+    a_rooms = [r for r in site.get("loops", {}).get(a_loop, {}).get("rooms", ["fireplace"]) if r in f.rooms]
+    pf = search.Problem(f, a_rooms if len(a_rooms) > 1 else a_rooms[0], device, season="cold",
+                        building=[priors[r]["bounds"] for r in a_rooms])
     s1 = next(s for s in catalogue if s["id"] == "S1")
     n_l1 = len([r for r in reference.readings() if r["l1_supply_c"] is not None])
     for k in range(0, min(5, n_l1)):
@@ -196,7 +198,8 @@ def real(device: str, quick: bool) -> dict:
         "loops": loops,
         "simple": simple,
         "site": site,
-        "anchored_fireplace": anchored,
+        "anchored_fireplace": anchored,   # key kept for the panel; the room is in anchored_rooms
+        "anchored_rooms": a_rooms, "anchored_loop": a_loop,
         "operator": [reference.operator_l2_belief(), reference.operator_tv_people(f)],
         "controller_vs_fmi": reference.controller_vs_fmi(f),
         "alerts": alerts,

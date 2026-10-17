@@ -58,7 +58,7 @@ def config() -> dict:
         "model_text": env.get("KAYRA_LLM_MODEL_TEXT", "") or env.get("KAYRA_LLM_MODEL", ""),
         "temperature": float(env.get("KAYRA_LLM_TEMPERATURE", "0.4")),
         "label": env.get("KAYRA_LLM_LABEL", ""),
-        "timeout_s": float(env.get("KAYRA_LLM_TIMEOUT_S", "120")),
+        "timeout_s": float(env.get("KAYRA_LLM_TIMEOUT_S", "240")),
         "max_tokens": int(env.get("KAYRA_LLM_MAX_TOKENS", "8000")),
     }
 
@@ -119,13 +119,23 @@ def chat(system: str, user: str, *, purpose: str, cfg: dict | None = None, role:
                                  headers={"Content-Type": "application/json",
                                           "Authorization": f"Bearer {cfg['api_key']}"})
     t0 = time.time()
-    try:
-        with urllib.request.urlopen(req, timeout=cfg["timeout_s"], context=_ssl()) as r:
-            data = json.loads(r.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        raise LLMError(f"HTTP {exc.code} from {cfg['base_url']}: {exc.read()[:300]!r}") from None
-    except (urllib.error.URLError, TimeoutError) as exc:
-        raise LLMError(f"could not reach {cfg['base_url']}: {exc}") from None
+    waits = [15, 30, 60, 90]  # rate limits and timeouts on a shared endpoint: back off, then give up
+    while True:
+        try:
+            with urllib.request.urlopen(req, timeout=cfg["timeout_s"], context=_ssl()) as r:
+                data = json.loads(r.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            if exc.code in (429, 502, 503, 504) and waits:
+                ra = exc.headers.get("Retry-After") if exc.headers else None
+                time.sleep(float(ra) if ra and ra.replace(".", "").isdigit() else waits.pop(0))
+                continue
+            raise LLMError(f"HTTP {exc.code} from {cfg['base_url']}: {exc.read()[:500]!r}") from None
+        except (urllib.error.URLError, TimeoutError) as exc:
+            if waits:
+                time.sleep(waits.pop(0))
+                continue
+            raise LLMError(f"could not reach {cfg['base_url']}: {exc}") from None
     msg = (data.get("choices") or [{}])[0].get("message") or {}
     content = (msg.get("content") or "").strip()
     reasoning = (msg.get("reasoning_content") or msg.get("reasoning") or "").strip()
