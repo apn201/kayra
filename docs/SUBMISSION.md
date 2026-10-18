@@ -30,7 +30,11 @@ The panel is live: Home Assistant and FMI are read now, and you can move the cur
 
 ## Technology tags
 
-AMD token factory, AMD Developer Cloud, DeepSeek-V4.1-Flash, MiMo-V2.6-Flash, PyTorch, ROCm, Python, Home Assistant, FMI open data, system identification, LLM agents
+Only names from https://lablab.ai/tech (checked 2026-10-18), exactly as written there:
+
+amd, Token Factory, Deepseek, Github, Openclaw, Claude Code
+
+Add Cloudflare only if the helppox deploy runs through a Cloudflare tunnel. Not used on purpose: AMD ROCm and AMD Developer Cloud (the fitter is ROCm-ready but never ran on an AMD GPU), Qwen3 and Gemma (benchmarked only). PyTorch, Python, Home Assistant and FMI open data are not on the list; they are named in the long description.
 
 ## Category tags
 
