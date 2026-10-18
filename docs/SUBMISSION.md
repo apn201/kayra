@@ -38,8 +38,8 @@ Intelligent Industry, Industrial AI, OT, building automation, predictive mainten
 
 ## Links
 
-- Live application: [fill: public URL from the helppox deploy]
+- Live application: https://www.helppox.com/kayra/
 - Repository: https://github.com/apn201/kayra
-- Video: [fill: YouTube URL]
+- Video: https://youtu.be/CvaaIRTwZ1k
 - Slides: docs/slides.pdf in the repository
 - Cover image: docs/img/cover.png (1920x1080)

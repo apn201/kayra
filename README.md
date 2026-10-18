@@ -4,7 +4,7 @@ Käyrä works out what an undocumented controller is doing from data a site alre
 
 Factories and buildings are full of controllers nobody has documentation for. The proof of concept here is a real district heating substation (two heating loops, one commercial controller) on a real building in Kouvola, Finland. Home Assistant room sensors and FMI outdoor temperature in. The controllers' outputs are never logged, so they are identified through the building.
 
-AMD Developer Hackathon ACT III, Track 1 Intelligent Industry. Live panel: [fill: public URL]. Video: [fill: YouTube URL].
+AMD Developer Hackathon ACT III, Track 1 Intelligent Industry. Live panel: https://www.helppox.com/kayra/ Video: https://youtu.be/CvaaIRTwZ1k
 
 ![Käyrä panel](docs/img/home.png)
 
